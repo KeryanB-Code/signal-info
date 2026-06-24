@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
+import { ScrollProgress, CustomCursor } from "./components/animations/ScrollProgress.jsx";
+import PageTransition from "./components/animations/PageTransition.jsx";
 import Home from "./pages/Home.jsx";
 import Boutique from "./pages/Boutique.jsx";
 import Product from "./pages/Product.jsx";
@@ -15,7 +17,7 @@ import Capsule from "./pages/Capsule.jsx";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useState(() => { window.scrollTo(0, 0); }, [pathname]);
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
   return null;
 }
 
@@ -125,23 +127,27 @@ function AppInner() {
 
   return (
     <>
+      <CustomCursor />
+      <ScrollProgress />
       <ScrollToTop />
       <Navbar cartCount={cart.length} />
-      <Routes>
-        <Route path="/" element={<Home onAddToCart={addToCart} />} />
-        <Route path="/boutique" element={<Boutique onAddToCart={addToCart} />} />
-        <Route path="/produit/:id" element={<Product onAddToCart={addToCart} />} />
-        <Route path="/diagnostic" element={<Diagnostic onAddToCart={addToCart} />} />
-        <Route path="/conseil" element={<Conseil />} />
-        <Route path="/boutiques" element={<Boutiques />} />
-        <Route path="/sav" element={<SAV />} />
-        <Route path="/magazine" element={<Magazine />} />
-        <Route path="/magazine/:id" element={<Magazine />} />
-        <Route path="/compte" element={<Compte />} />
-        <Route path="/panier" element={<Panier items={cart} onRemove={removeFromCart} />} />
-        <Route path="/capsule" element={<Capsule onAddToCart={addToCart} />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <PageTransition>
+        <Routes>
+          <Route path="/" element={<Home onAddToCart={addToCart} />} />
+          <Route path="/boutique" element={<Boutique onAddToCart={addToCart} />} />
+          <Route path="/produit/:id" element={<Product onAddToCart={addToCart} />} />
+          <Route path="/diagnostic" element={<Diagnostic onAddToCart={addToCart} />} />
+          <Route path="/conseil" element={<Conseil />} />
+          <Route path="/boutiques" element={<Boutiques />} />
+          <Route path="/sav" element={<SAV />} />
+          <Route path="/magazine" element={<Magazine />} />
+          <Route path="/magazine/:id" element={<Magazine />} />
+          <Route path="/compte" element={<Compte />} />
+          <Route path="/panier" element={<Panier items={cart} onRemove={removeFromCart} />} />
+          <Route path="/capsule" element={<Capsule onAddToCart={addToCart} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </PageTransition>
       <Footer />
     </>
   );
