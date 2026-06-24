@@ -1,5 +1,13 @@
 export const BRANDS = ["Cartier", "Fred", "Gucci", "Saint Laurent", "Miu Miu", "Céline", "John Dalia"];
 
+// Helper: returns [worn, product, detail] image paths for a product id
+// Swap these with real brand images (from partner portals) before going live.
+const img = (id) => [
+  `/images/${id}-1.svg`,
+  `/images/${id}-2.svg`,
+  `/images/${id}-3.svg`,
+];
+
 export const PRODUCTS = [
   {
     id: "cartier-santos-dumont",
@@ -13,11 +21,7 @@ export const PRODUCTS = [
     materials: ["Titane", "Acier"],
     colors: ["Or", "Argent"],
     description: "La Santos-Dumont perpétue l'héritage de l'aviation pionnière. Légèreté extrême en titane, pontet riveté signature Cartier. La monture la plus sous-estimée du catalogue 2025.",
-    images: [
-      "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=800&q=85",
-      "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=800&q=85",
-      "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=800&q=85",
-    ],
+    images: img("cartier-santos-dumont"),
     rating: 4.9,
     reviewCount: 34,
     inStock: true,
@@ -37,11 +41,7 @@ export const PRODUCTS = [
     materials: ["Acétate"],
     colors: ["Écaille", "Noir", "Havane"],
     description: "L'audace felline dans toute sa splendeur. Forme cat-eye affirmée, finitions laquées, verres minéraux enveloppants.",
-    images: [
-      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&q=85",
-      "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=800&q=85",
-      "https://images.unsplash.com/photo-1562714984-83b3b9a63bf5?w=800&q=85",
-    ],
+    images: img("cartier-panthere"),
     rating: 4.8,
     reviewCount: 27,
     inStock: true,
@@ -60,11 +60,7 @@ export const PRODUCTS = [
     materials: ["Acier", "Câble marin"],
     colors: ["Acier brossé", "Or rose"],
     description: "Née de l'univers nautique, la Force 10 intègre le câble marin emblématique de Fred. Légèreté, résistance et élégance en mer comme en ville.",
-    images: [
-      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&q=85",
-      "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=800&q=85",
-      "https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?w=800&q=85",
-    ],
+    images: img("fred-force-10"),
     rating: 4.7,
     reviewCount: 19,
     inStock: true,
@@ -83,11 +79,7 @@ export const PRODUCTS = [
     materials: ["Acétate"],
     colors: ["Noir", "Brun", "Bordeaux"],
     description: "Double G entrelacés sur les branches, verres ronds légèrement oversized. L'esthétique Gucci dans sa forme la plus pure.",
-    images: [
-      "https://images.unsplash.com/photo-1502767089025-6572583495b9?w=800&q=85",
-      "https://images.unsplash.com/photo-1520367445093-50dc08a59d9d?w=800&q=85",
-      "https://images.unsplash.com/photo-1504194104404-433180773017?w=800&q=85",
-    ],
+    images: img("gucci-gg0010s"),
     rating: 4.6,
     reviewCount: 52,
     inStock: true,
@@ -106,11 +98,7 @@ export const PRODUCTS = [
     materials: ["Acétate"],
     colors: ["Noir mat", "Écaille claire", "Ivoire"],
     description: "La quintessence du minimalisme YSL. Rectangle géométrique, finitions brossées, le luxe dans la retenue.",
-    images: [
-      "https://images.unsplash.com/photo-1541233349642-6e425fe6190e?w=800&q=85",
-      "https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?w=800&q=85",
-      "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=800&q=85",
-    ],
+    images: img("ysl-sl-467"),
     rating: 4.8,
     reviewCount: 41,
     inStock: true,
@@ -129,11 +117,7 @@ export const PRODUCTS = [
     materials: ["Acétate", "Métal"],
     colors: ["Blanc", "Rose poudré", "Écaille"],
     description: "Butterfly signature Miu Miu, ornements métalliques sur les branches. La pièce statement de la saison printemps.",
-    images: [
-      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&q=85",
-      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&q=85",
-      "https://images.unsplash.com/photo-1562714984-83b3b9a63bf5?w=800&q=85",
-    ],
+    images: img("miumiu-mu-01vv"),
     rating: 4.7,
     reviewCount: 38,
     inStock: true,
@@ -153,11 +137,7 @@ export const PRODUCTS = [
     materials: ["Acétate"],
     colors: ["Noir", "Écaille", "Havane clair"],
     description: "La référence Céline post-Slimane. Carré légèrement oversize, monture épaisse, la sophistication dans la simplicité.",
-    images: [
-      "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=800&q=85",
-      "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=800&q=85",
-      "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=800&q=85",
-    ],
+    images: img("celine-cl-40130u"),
     rating: 4.9,
     reviewCount: 29,
     inStock: true,
@@ -176,11 +156,7 @@ export const PRODUCTS = [
     materials: ["Titane beta"],
     colors: ["Gun", "Or brossé", "Platine"],
     description: "La maison française confidentielle. Elba en titane bêta, légèreté de 4 grammes, finitions à la main dans l'atelier parisien.",
-    images: [
-      "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=800&q=85",
-      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&q=85",
-      "https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?w=800&q=85",
-    ],
+    images: img("john-dalia-elba"),
     rating: 4.8,
     reviewCount: 16,
     inStock: true,
@@ -199,11 +175,7 @@ export const PRODUCTS = [
     materials: ["Métal doré", "Cuir"],
     colors: ["Or jaune", "Or rose"],
     description: "Double logo C entrelacés en or 18 carats. Verres teintés gris, pontet vissé artisanal. L'incarnation du luxe discret.",
-    images: [
-      "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=800&q=85",
-      "https://images.unsplash.com/photo-1502767089025-6572583495b9?w=800&q=85",
-      "https://images.unsplash.com/photo-1541233349642-6e425fe6190e?w=800&q=85",
-    ],
+    images: img("cartier-c-decor"),
     rating: 5.0,
     reviewCount: 11,
     inStock: true,
@@ -222,11 +194,7 @@ export const PRODUCTS = [
     materials: ["Métal", "Acétate"],
     colors: ["Or", "Gun", "Noir"],
     description: "Ovale fin en métal, branches slim, double pontet discret. L'équilibre entre modernité et héritage.",
-    images: [
-      "https://images.unsplash.com/photo-1520367445093-50dc08a59d9d?w=800&q=85",
-      "https://images.unsplash.com/photo-1504194104404-433180773017?w=800&q=85",
-      "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=800&q=85",
-    ],
+    images: img("gucci-gg1158s"),
     rating: 4.5,
     reviewCount: 63,
     inStock: true,
@@ -245,11 +213,7 @@ export const PRODUCTS = [
     materials: ["TR90", "Titane"],
     colors: ["Blanc", "Gris", "Bleu glacier"],
     description: "La monture d'origine ski repensée pour la ville. Câble marin intégré dans les branches, verre athermique. Sport et élégance confondus.",
-    images: [
-      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&q=85",
-      "https://images.unsplash.com/photo-1562714984-83b3b9a63bf5?w=800&q=85",
-      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&q=85",
-    ],
+    images: img("fred-b1-wm"),
     rating: 4.6,
     reviewCount: 22,
     inStock: false,
@@ -268,11 +232,7 @@ export const PRODUCTS = [
     materials: ["Acétate"],
     colors: ["Noir mat", "Havane"],
     description: "Carré rigoureux, branches slim, logo YSL gravé. L'intellectuel dandy revisité pour 2025.",
-    images: [
-      "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=800&q=85",
-      "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=800&q=85",
-      "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=800&q=85",
-    ],
+    images: img("ysl-sl-m116"),
     rating: 4.7,
     reviewCount: 33,
     inStock: true,

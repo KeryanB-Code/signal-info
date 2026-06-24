@@ -49,7 +49,7 @@ export default function Home({ onAddToCart }) {
             y: heroY,
             position: "absolute",
             inset: "-20%",
-            backgroundImage: "url('https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=1600&q=80')",
+            backgroundImage: "url('/images/hero-bg.svg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             willChange: "transform",
@@ -192,7 +192,7 @@ export default function Home({ onAddToCart }) {
 
             <div style={{ position: "relative" }}>
               <ImageReveal
-                src="https://images.unsplash.com/photo-1508296695146-257a814070b4?w=800&q=85"
+                src="/images/editorial-conseil.svg"
                 alt="Opticien conseil"
                 style={{ aspectRatio: "4/5" }}
               />

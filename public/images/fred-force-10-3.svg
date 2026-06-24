@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="35%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#2A2520"/>
+      <stop offset="100%" stop-color="#1A1614"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="40%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#C4A882" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#C4A882" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="340" cy="290" rx="320" ry="260" fill="url(#glow)"/>
+  <!-- Glasses, slightly larger (scale 1.15 from center) -->
+  <g transform="translate(400,300) scale(1.18) translate(-400,-300)">
+  <defs>
+    <filter id="sh"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-opacity="0.17"/></filter>
+  </defs>
+  <!-- Left lens -->
+  <rect x="115" y="260" width="225" height="120" rx="12" ry="12" fill="rgba(140,140,140,0.18)" stroke="#8C8C8C" stroke-width="4.5" filter="url(#sh)"/>
+  <!-- Right lens -->
+  <rect x="460" y="260" width="225" height="120" rx="12" ry="12" fill="rgba(140,140,140,0.18)" stroke="#8C8C8C" stroke-width="4.5" filter="url(#sh)"/>
+  <!-- Bridge -->
+  <rect x="340" y="306" width="120" height="8" rx="4" fill="#8C8C8C"/>
+  <!-- Left temple with cable wire detail -->
+  <line x1="115" y1="315" x2="35" y2="325" stroke="#8C8C8C" stroke-width="4.5" stroke-linecap="round"/>
+  <line x1="100" y1="308" x2="35" y2="316" stroke="#8C8C8C" stroke-width="1.5" stroke-opacity="0.5" stroke-linecap="round" stroke-dasharray="4,3"/>
+  <!-- Right temple -->
+  <line x1="685" y1="315" x2="765" y2="325" stroke="#8C8C8C" stroke-width="4.5" stroke-linecap="round"/>
+  <line x1="700" y1="308" x2="765" y2="316" stroke="#8C8C8C" stroke-width="1.5" stroke-opacity="0.5" stroke-linecap="round" stroke-dasharray="4,3"/>
+  <!-- Reflection -->
+  <line x1="140" y1="276" x2="195" y2="273" stroke="white" stroke-width="1.5" stroke-opacity="0.55" stroke-linecap="round"/>
+  <line x1="485" y1="276" x2="540" y2="273" stroke="white" stroke-width="1.5" stroke-opacity="0.55" stroke-linecap="round"/></g>
+  <!-- Brand signature bottom right -->
+  <text x="740" y="576" text-anchor="end" font-family="Garamond, Georgia, serif" font-size="10" letter-spacing="0.35em" fill="#C4A882" opacity="0.6" font-weight="300">FRED</text>
+</svg>
