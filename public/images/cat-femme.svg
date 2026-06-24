@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
+  <defs>
+    <radialGradient id="bgF" cx="65%" cy="20%" r="80%">
+      <stop offset="0%" stop-color="#231810"/>
+      <stop offset="100%" stop-color="#060404"/>
+    </radialGradient>
+    <radialGradient id="lightF" cx="68%" cy="14%" r="52%">
+      <stop offset="0%" stop-color="#F5E2C0" stop-opacity="0.36"/>
+      <stop offset="65%" stop-color="#C4945A" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#060404" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="skinF" cx="58%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#EDD4A0"/>
+      <stop offset="45%" stop-color="#D4A060"/>
+      <stop offset="100%" stop-color="#A87030"/>
+    </radialGradient>
+    <linearGradient id="shadowLF" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#060404" stop-opacity="0.7"/>
+      <stop offset="48%" stop-color="#060404" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#060404" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="hlF" cx="62%" cy="36%" r="30%">
+      <stop offset="0%" stop-color="#FFF0D8" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#FFF0D8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldF" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8CE7A"/>
+      <stop offset="30%" stop-color="#C9A84C"/>
+      <stop offset="70%" stop-color="#9A7428"/>
+      <stop offset="100%" stop-color="#C0983E"/>
+    </linearGradient>
+    <radialGradient id="lensF" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#1A2820" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#0A1210" stop-opacity="0.95"/>
+    </radialGradient>
+    <radialGradient id="vignF" cx="50%" cy="45%" r="62%">
+      <stop offset="0%" stop-color="#060404" stop-opacity="0"/>
+      <stop offset="72%" stop-color="#060404" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#060404" stop-opacity="0.88"/>
+    </radialGradient>
+    <linearGradient id="textBgF" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#060404" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#060404" stop-opacity="0.75"/>
+    </linearGradient>
+    <filter id="softF" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="1.1"/>
+    </filter>
+    <filter id="hairF" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="2.2"/>
+    </filter>
+    <filter id="glassShF">
+      <feDropShadow dx="0" dy="3" stdDeviation="7" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="800" fill="url(#bgF)"/>
+  <ellipse cx="390" cy="140" rx="310" ry="245" fill="url(#lightF)"/>
+
+  <!-- Clothing / shoulders -->
+  <path d="M 0,715 Q 118,628 300,642 Q 482,628 600,715 L 600,800 L 0,800 Z" fill="#0B0806"/>
+  <path d="M 0,752 Q 122,680 300,693 Q 478,680 600,752 L 600,800 L 0,800 Z" fill="#060404"/>
+
+  <!-- Neck -->
+  <rect x="262" y="586" width="78" height="94" rx="39" fill="#C08850" filter="url(#softF)"/>
+  <rect x="262" y="586" width="30" height="94" rx="18" fill="#906430" opacity="0.42"/>
+
+  <!-- Face shape -->
+  <ellipse cx="303" cy="375" rx="152" ry="196" fill="url(#skinF)" filter="url(#softF)"/>
+  <ellipse cx="303" cy="375" rx="152" ry="196" fill="url(#shadowLF)"/>
+  <!-- Cheek highlight -->
+  <ellipse cx="390" cy="415" rx="56" ry="44" fill="url(#hlF)"/>
+  <!-- Forehead highlight -->
+  <ellipse cx="318" cy="253" rx="85" ry="44" fill="#FFF0D8" opacity="0.07"/>
+
+  <!-- Hair — back layer -->
+  <path d="M 150,295 Q 122,152 303,118 Q 484,152 458,295 Q 435,180 394,152 Q 348,125 303,119 Q 258,125 212,152 Q 166,180 150,295 Z" fill="#100805" filter="url(#hairF)"/>
+  <!-- Left side hair -->
+  <path d="M 148,354 Q 115,275 132,188 Q 160,118 303,118 Q 232,133 192,172 Q 145,222 148,354 Z" fill="#0B0604"/>
+  <!-- Right side hair -->
+  <path d="M 458,354 Q 492,275 474,188 Q 447,118 303,118 Q 374,133 414,172 Q 460,222 458,354 Z" fill="#0B0604"/>
+  <!-- Long flowing hair - left -->
+  <path d="M 148,354 Q 100,465 108,594 Q 136,678 198,716" fill="none" stroke="#0B0604" stroke-width="30" stroke-linecap="round" filter="url(#hairF)"/>
+  <!-- Long flowing hair - right -->
+  <path d="M 458,354 Q 502,465 492,594 Q 466,678 400,716" fill="none" stroke="#0B0604" stroke-width="24" stroke-linecap="round" filter="url(#hairF)"/>
+  <!-- Crown top -->
+  <path d="M 150,258 Q 138,152 303,118 Q 468,152 458,258 Q 420,150 362,128 Q 332,118 303,116 Q 274,118 244,128 Q 180,150 150,258 Z" fill="#0E0705"/>
+
+  <!-- Forehead skin visible -->
+  <ellipse cx="303" cy="256" rx="124" ry="50" fill="#D8A860" opacity="0.48" filter="url(#softF)"/>
+
+  <!-- Nose -->
+  <path d="M 298,395 Q 294,428 279,444 Q 292,452 303,454 Q 314,452 327,444 Q 312,428 308,395 Z" fill="#906030" opacity="0.24"/>
+
+  <!-- Lips -->
+  <path d="M 268,500 Q 286,492 303,494 Q 320,492 338,500 Q 326,510 314,514 Q 305,516 296,516 Q 286,516 274,514 Q 262,510 268,500 Z" fill="#B87050" opacity="0.58"/>
+  <path d="M 270,500 Q 287,495 303,497 Q 319,495 336,500" fill="none" stroke="#905030" stroke-width="0.8" opacity="0.38"/>
+
+  <!-- CAT-EYE GLASSES -->
+  <g filter="url(#glassShF)">
+    <!-- Left lens — rotated -11° → outer (left) corner sweeps up: cat-eye shape -->
+    <ellipse cx="213" cy="342" rx="82" ry="58" transform="rotate(-11,213,342)" fill="url(#lensF)" stroke="url(#goldF)" stroke-width="4.5"/>
+    <!-- Right lens — rotated +11° → outer (right) corner sweeps up -->
+    <ellipse cx="393" cy="342" rx="82" ry="58" transform="rotate(11,393,342)" fill="url(#lensF)" stroke="url(#goldF)" stroke-width="4.5"/>
+    <!-- Bridge -->
+    <path d="M 297,334 Q 303,324 309,334" fill="none" stroke="url(#goldF)" stroke-width="3.8" stroke-linecap="round"/>
+    <!-- Left temple -->
+    <line x1="143" y1="328" x2="108" y2="336" stroke="url(#goldF)" stroke-width="3.8" stroke-linecap="round"/>
+    <!-- Right temple -->
+    <line x1="463" y1="328" x2="498" y2="336" stroke="url(#goldF)" stroke-width="3.8" stroke-linecap="round"/>
+    <!-- Nose pads -->
+    <ellipse cx="287" cy="349" rx="4" ry="6" fill="#C9A84C" opacity="0.92"/>
+    <ellipse cx="319" cy="349" rx="4" ry="6" fill="#C9A84C" opacity="0.92"/>
+    <!-- Lens reflections -->
+    <path d="M 157,317 Q 182,309 214,315" fill="none" stroke="white" stroke-width="1.2" stroke-opacity="0.2" stroke-linecap="round"/>
+    <path d="M 338,314 Q 365,306 396,312" fill="none" stroke="white" stroke-width="1.2" stroke-opacity="0.2" stroke-linecap="round"/>
+    <!-- Top rim metallic highlight -->
+    <path d="M 109,315 Q 158,301 286,310" fill="none" stroke="#E8D090" stroke-width="1.5" stroke-opacity="0.44" stroke-linecap="round"/>
+    <path d="M 310,310 Q 438,301 489,315" fill="none" stroke="#E8D090" stroke-width="1.5" stroke-opacity="0.44" stroke-linecap="round"/>
+    <!-- Inner lens subtle glow -->
+    <ellipse cx="195" cy="338" rx="28" ry="18" fill="rgba(255,255,255,0.025)"/>
+    <ellipse cx="373" cy="338" rx="28" ry="18" fill="rgba(255,255,255,0.025)"/>
+  </g>
+
+  <!-- VIGNETTE -->
+  <rect width="600" height="800" fill="url(#vignF)"/>
+
+</svg>
