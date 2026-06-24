@@ -9,6 +9,11 @@ const NAV_LINKS = [
   { to: "/magazine", label: "Magazine" },
 ];
 
+const BRAND_LIST = [
+  "Cartier", "Fred", "Dita", "John Dalia",
+  "Miu Miu", "Céline", "Gucci", "Saint Laurent",
+];
+
 export default function Navbar({ cartCount = 0 }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -26,25 +31,9 @@ export default function Navbar({ cartCount = 0 }) {
 
   return (
     <>
-      {/* Live TikTok banner */}
-      <div className="live-banner">
-        <div className="live-banner-inner">
-          <span className="live-pill">
-            <span className="live-dot" />
-            Live
-          </span>
-          <span style={{ fontSize: "0.78rem" }}>
-            Prochain live TikTok — Présentation exclusive Capsule Été · Jeudi 19h
-          </span>
-          <a
-            href="https://tiktok.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ fontSize: "0.72rem", textDecoration: "underline", opacity: 0.8 }}
-          >
-            Me notifier →
-          </a>
-        </div>
+      {/* Bandeau revendeur officiel */}
+      <div className="authorized-banner">
+        Revendeur officiel agréé&nbsp;·&nbsp;Livraison offerte dès 250€&nbsp;·&nbsp;Paiement 4× sans frais
       </div>
 
       <nav className="navbar" style={{ boxShadow: scrolled ? "0 2px 20px rgba(0,0,0,0.06)" : "none" }}>
@@ -54,6 +43,29 @@ export default function Navbar({ cartCount = 0 }) {
           </Link>
 
           <div className="navbar-nav">
+            {/* Dropdown Marques */}
+            <div className="brand-nav-dropdown">
+              <Link
+                to="/boutique"
+                style={{
+                  fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase",
+                  fontWeight: 400, color: "var(--gray)", transition: "color .2s",
+                }}
+              >
+                Marques
+              </Link>
+              <div className="brand-nav-dropdown-menu">
+                {BRAND_LIST.map((brand) => (
+                  <Link
+                    key={brand}
+                    to={`/boutique?brand=${encodeURIComponent(brand)}`}
+                  >
+                    {brand}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {NAV_LINKS.map((l) => (
               <Link
                 key={l.to}
@@ -111,7 +123,17 @@ export default function Navbar({ cartCount = 0 }) {
             </button>
           </div>
           <nav>
-            {NAV_LINKS.map((l) => (
+            <Link to="/boutique">Boutique</Link>
+            {BRAND_LIST.map((brand) => (
+              <Link
+                key={brand}
+                to={`/boutique?brand=${encodeURIComponent(brand)}`}
+                style={{ fontSize: "1.1rem", paddingLeft: 16 }}
+              >
+                {brand}
+              </Link>
+            ))}
+            {NAV_LINKS.slice(1).map((l) => (
               <Link key={l.to} to={l.to}>{l.label}</Link>
             ))}
             <Link to="/sav">SAV & Retours</Link>

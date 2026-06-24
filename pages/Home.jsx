@@ -133,6 +133,45 @@ export default function Home({ onAddToCart }) {
         )} />
       </div>
 
+      {/* ─── NOS MARQUES PARTENAIRES ─── */}
+      <section style={{ padding: "56px 0", borderBottom: "1px solid var(--border)" }}>
+        <div className="container">
+          <div className="label" style={{ textAlign: "center", marginBottom: 32 }}>Revendeur Officiel Agréé</div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 32 }}>
+            {["Cartier", "Fred", "Dita", "John Dalia"].map((brand) => (
+              <Link
+                key={brand}
+                to={`/boutique?brand=${encodeURIComponent(brand)}`}
+                style={{
+                  textAlign: "center",
+                  fontFamily: "var(--serif)",
+                  fontSize: "1.3rem",
+                  letterSpacing: ".15em",
+                  textTransform: "uppercase",
+                  color: "var(--dark-2)",
+                  opacity: 0.7,
+                  padding: "20px",
+                  border: "1px solid var(--border)",
+                  transition: "all 0.3s",
+                  textDecoration: "none",
+                  display: "block",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.opacity = "1";
+                  e.currentTarget.style.background = "#F5F0E8";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.opacity = "0.7";
+                  e.currentTarget.style.background = "transparent";
+                }}
+              >
+                {brand}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── STATS animées ─── */}
       <FadeUpWhenVisible>
         <section style={{ padding: "56px 0", background: "var(--dark)" }}>
