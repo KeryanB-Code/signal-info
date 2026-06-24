@@ -23,8 +23,19 @@ const COLOR_MAP = {
   'Bordeaux': '#5C1B2B',
   'Blanc': '#E8E0D5', 'Ivoire': '#EDE5D8',
   'Rose poudré': '#D4A0A8',
-  'Gun': '#555560', 'Platine': '#D8D6D2',
+  'Gun': '#555560', 'Gunmetal': '#555560', 'Platine': '#D8D6D2',
   'Bleu glacier': '#8AB0C4',
+  'Corne brune': '#6B4226', 'Corne brune / Or': '#6B4226',
+  'Corne blanche / Or': '#C8B89A',
+  'Or / Fumé': '#C9A84C', 'Platine / Gris': '#AFAFAF',
+  'Or / Écaille': '#C9A84C', 'Or / Blanc': '#C9A84C', 'Or / Gris': '#C9A84C',
+  'Palladium / Noir': '#A0A0A8', 'Noir / Or': '#1C1C1E',
+  'Argent / Noir / Bleu': '#AFAFAF',
+  'Noir / Écaille': '#1C1C1E', 'Havane clair / Or': '#8B5A3A',
+  'Gunmetal / Écaille': '#555560',
+  'Or / Fumé': '#C9A84C', 'Noir / Gris': '#1C1C1E',
+  'Ink Swirl / Or': '#2C2C40', 'Crystal Clear / Or': '#DDDDE8',
+  'Titane / Fumé': '#B0B0B8',
 };
 
 function frameColor(colorsArr) {
@@ -269,6 +280,76 @@ function frameMarine(fc, lc) {
   <line x1="485" y1="276" x2="540" y2="273" stroke="white" stroke-width="1.5" stroke-opacity="0.55" stroke-linecap="round"/>`;
 }
 
+function frameSquareThick(fc, lc) {
+  // John Dalia Project 01 — épais acétate 8mm, charnière titane visible
+  return `
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${fc}" stop-opacity="1"/>
+      <stop offset="100%" stop-color="${fc}" stop-opacity="0.8"/>
+    </linearGradient>
+    <filter id="sh"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-opacity="0.22"/></filter>
+  </defs>
+  <!-- Left lens (square thick) -->
+  <rect x="118" y="255" width="220" height="175" rx="4" ry="4" fill="${lc}" stroke="url(#lg)" stroke-width="13" filter="url(#sh)"/>
+  <!-- Right lens -->
+  <rect x="462" y="255" width="220" height="175" rx="4" ry="4" fill="${lc}" stroke="url(#lg)" stroke-width="13" filter="url(#sh)"/>
+  <!-- Bridge (slim) -->
+  <rect x="338" y="326" width="124" height="10" rx="4" fill="${fc}" opacity="0.9"/>
+  <!-- Charnière titane gauche (barre métallique) -->
+  <rect x="107" y="330" width="22" height="8" rx="2" fill="#B0B0B8" opacity="0.95"/>
+  <!-- Charnière titane droite -->
+  <rect x="671" y="330" width="22" height="8" rx="2" fill="#B0B0B8" opacity="0.95"/>
+  <!-- Left temple -->
+  <line x1="119" y1="338" x2="35" y2="348" stroke="${fc}" stroke-width="11" stroke-linecap="round"/>
+  <!-- Right temple -->
+  <line x1="681" y1="338" x2="765" y2="348" stroke="${fc}" stroke-width="11" stroke-linecap="round"/>
+  <!-- Lens reflection -->
+  <line x1="146" y1="272" x2="205" y2="269" stroke="white" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>
+  <line x1="490" y1="272" x2="549" y2="269" stroke="white" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>`;
+}
+
+function frameMachBrow(fc, lc) {
+  // Dita Mach-Six — titanium aérospatial, double barre de sourcil, vis hexagonales
+  return `
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${fc}" stop-opacity="1"/>
+      <stop offset="100%" stop-color="${fc}" stop-opacity="0.7"/>
+    </linearGradient>
+    <filter id="sh"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-opacity="0.14"/></filter>
+  </defs>
+  <!-- Left lens (rectangular narrow) -->
+  <rect x="125" y="278" width="215" height="95" rx="3" ry="3" fill="${lc}" stroke="url(#lg)" stroke-width="2.5" filter="url(#sh)"/>
+  <!-- Right lens -->
+  <rect x="460" y="278" width="215" height="95" rx="3" ry="3" fill="${lc}" stroke="url(#lg)" stroke-width="2.5" filter="url(#sh)"/>
+  <!-- Double brow bar top gauche -->
+  <rect x="125" y="262" width="215" height="5" rx="2" fill="${fc}"/>
+  <!-- Double brow bar top droit -->
+  <rect x="460" y="262" width="215" height="5" rx="2" fill="${fc}"/>
+  <!-- Double brow bar secondaire (légèrement en dessous) -->
+  <rect x="125" y="271" width="215" height="3" rx="1" fill="${fc}" opacity="0.55"/>
+  <rect x="460" y="271" width="215" height="3" rx="1" fill="${fc}" opacity="0.55"/>
+  <!-- Bridge fin -->
+  <rect x="340" y="292" width="120" height="4" rx="2" fill="${fc}"/>
+  <!-- Vis hexagonales gauche (jonction charnière) -->
+  <polygon points="128,278 136,273 144,278 144,287 136,292 128,287" fill="none" stroke="${fc}" stroke-width="1.5"/>
+  <circle cx="136" cy="283" r="2" fill="${fc}"/>
+  <!-- Vis hexagonales droit -->
+  <polygon points="656,278 664,273 672,278 672,287 664,292 656,287" fill="none" stroke="${fc}" stroke-width="1.5"/>
+  <circle cx="664" cy="283" r="2" fill="${fc}"/>
+  <!-- Left temple (très fin) -->
+  <line x1="127" y1="320" x2="38" y2="330" stroke="${fc}" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Right temple -->
+  <line x1="673" y1="320" x2="762" y2="330" stroke="${fc}" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Nose pads precision -->
+  <ellipse cx="350" cy="302" rx="4" ry="6" fill="${fc}" opacity="0.7"/>
+  <ellipse cx="450" cy="302" rx="4" ry="6" fill="${fc}" opacity="0.7"/>
+  <!-- Reflection -->
+  <line x1="150" y1="288" x2="198" y2="285" stroke="white" stroke-width="1.5" stroke-opacity="0.55" stroke-linecap="round"/>
+  <line x1="485" y1="288" x2="533" y2="285" stroke="white" stroke-width="1.5" stroke-opacity="0.55" stroke-linecap="round"/>`;
+}
+
 const FRAME_RENDERERS = {
   'rectangular-slim': frameRectangularSlim,
   'cat-eye': frameCatEye,
@@ -279,22 +360,29 @@ const FRAME_RENDERERS = {
   'double-bridge': frameDoubleBridge,
   'sport-shield': frameSportShield,
   'marine': frameMarine,
+  'square-thick': frameSquareThick,
+  'mach-brow': frameMachBrow,
 };
 
 // ── Product definitions ────────────────────────────────────────────────────
 const PRODUCTS = [
-  { id: 'cartier-santos-dumont', frame: 'rectangular-slim',  colors: ['Or', 'Argent'],      brand: 'CARTIER', name: 'Santos-Dumont' },
-  { id: 'cartier-panthere',      frame: 'cat-eye',            colors: ['Écaille', 'Noir'],    brand: 'CARTIER', name: 'Panthère' },
-  { id: 'fred-force-10',         frame: 'marine',             colors: ['Acier brossé', 'Or rose'], brand: 'FRED', name: 'Force 10' },
-  { id: 'gucci-gg0010s',         frame: 'round',              colors: ['Noir', 'Bordeaux'],   brand: 'GUCCI',   name: 'GG Logo Round' },
-  { id: 'ysl-sl-467',            frame: 'rectangular-geo',    colors: ['Noir mat', 'Ivoire'], brand: 'YSL',     name: 'SL 467' },
-  { id: 'miumiu-mu-01vv',        frame: 'butterfly',          colors: ['Rose poudré', 'Blanc'], brand: 'MIU MIU', name: 'MU 01VV' },
-  { id: 'celine-cl-40130u',      frame: 'rectangular-geo',    colors: ['Noir', 'Écaille'],    brand: 'CÉLINE',  name: 'CL 40130U' },
-  { id: 'john-dalia-elba',       frame: 'oval-minimal',       colors: ['Gun', 'Or brossé'],   brand: 'JOHN DALIA', name: 'Elba' },
-  { id: 'cartier-c-decor',       frame: 'double-bridge',      colors: ['Or jaune', 'Or rose'], brand: 'CARTIER', name: 'C Décor' },
-  { id: 'gucci-gg1158s',         frame: 'oval-minimal',       colors: ['Or', 'Noir'],         brand: 'GUCCI',   name: 'GG1158S' },
-  { id: 'fred-b1-wm',            frame: 'sport-shield',       colors: ['Blanc', 'Bleu glacier'], brand: 'FRED',  name: 'B1 W.M' },
-  { id: 'ysl-sl-m116',           frame: 'rectangular-slim',   colors: ['Noir mat', 'Havane'], brand: 'YSL',     name: 'SL M116' },
+  // Cartier
+  { id: 'cartier-premiere-ct0362s', frame: 'rectangular-slim', colors: ['Corne brune / Or'],   brand: 'CARTIER',    name: 'Première de Cartier' },
+  { id: 'cartier-c-decor-ct0330s',  frame: 'rectangular-slim', colors: ['Or'],                  brand: 'CARTIER',    name: 'C Décor CT0330S' },
+  { id: 'cartier-signature-ct0012s',frame: 'double-bridge',    colors: ['Or'],                  brand: 'CARTIER',    name: 'Signature C CT0012S' },
+  { id: 'cartier-ct0046s',          frame: 'rectangular-slim', colors: ['Or'],                  brand: 'CARTIER',    name: 'CT0046S' },
+  // Fred
+  { id: 'fred-force10-fg40023u16a',    frame: 'marine',           colors: ['Acier brossé', 'Noir'], brand: 'FRED',    name: 'Force 10' },
+  { id: 'fred-force10-round-fg40028u01a', frame: 'round',         colors: ['Noir'],              brand: 'FRED',       name: 'Force 10 Round' },
+  { id: 'fred-force10-geo-fg40040u16v',   frame: 'rectangular-geo', colors: ['Argent'],          brand: 'FRED',       name: 'Force 10 Geometric' },
+  // John Dalia
+  { id: 'john-dalia-project01-c603', frame: 'square-thick',    colors: ['Noir'],                brand: 'JOHN DALIA', name: 'Project 01 C603' },
+  { id: 'john-dalia-project01-c621', frame: 'square-thick',    colors: ['Havane'],              brand: 'JOHN DALIA', name: 'Project 01 C621' },
+  { id: 'john-dalia-kai-c432',       frame: 'rectangular-slim', colors: ['Gun'],                brand: 'JOHN DALIA', name: 'Kaï C432' },
+  // Dita
+  { id: 'dita-mach-six',    frame: 'mach-brow',    colors: ['Or'],     brand: 'DITA',  name: 'Mach-Six' },
+  { id: 'dita-grand-apx',   frame: 'butterfly',    colors: ['Noir'],   brand: 'DITA',  name: 'Grand-APX' },
+  { id: 'dita-mach-one-s',  frame: 'sport-shield', colors: ['Platine'],brand: 'DITA',  name: 'Mach-One-S' },
 ];
 
 // ── SVG generators ─────────────────────────────────────────────────────────

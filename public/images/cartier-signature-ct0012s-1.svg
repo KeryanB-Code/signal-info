@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#EDE5D8"/>
+      <stop offset="100%" stop-color="#D4C4B0"/>
+    </radialGradient>
+    <radialGradient id="face" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#E8D9C5" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#C4A882" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Subtle face glow -->
+  <ellipse cx="400" cy="240" rx="200" ry="260" fill="url(#face)"/>
+  <!-- Face silhouette (very subtle) -->
+  <ellipse cx="400" cy="200" rx="140" ry="170" fill="#C9B49A" opacity="0.12"/>
+  <!-- Neck -->
+  <rect x="358" y="360" width="84" height="130" rx="42" fill="#C9B49A" opacity="0.10"/>
+  <!-- Shoulders -->
+  <path d="M 160,480 Q 280,430 400,440 Q 520,430 640,480 L 640,600 L 160,600 Z" fill="#C9B49A" opacity="0.10"/>
+  <!-- Glasses -->
+  <g transform="translate(0, 80)">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C9A84C"/>
+      <stop offset="100%" stop-color="#C9A84C" stop-opacity="0.75"/>
+    </linearGradient>
+    <filter id="sh"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-opacity="0.18"/></filter>
+  </defs>
+  <!-- Left lens (teardrop aviator) -->
+  <path d="M 148,270 Q 240,240 340,280 Q 355,310 340,345 Q 270,390 180,380 Q 120,360 120,320 Q 120,290 148,270 Z"
+        fill="rgba(201,168,76,0.18)" stroke="url(#lg)" stroke-width="3" filter="url(#sh)"/>
+  <!-- Right lens -->
+  <path d="M 460,280 Q 560,240 652,270 Q 680,290 680,320 Q 680,360 620,380 Q 530,390 460,345 Q 445,310 460,280 Z"
+        fill="rgba(201,168,76,0.18)" stroke="url(#lg)" stroke-width="3" filter="url(#sh)"/>
+  <!-- Double bridge top -->
+  <path d="M 340,278 Q 400,265 460,278" fill="none" stroke="#C9A84C" stroke-width="3" stroke-linecap="round"/>
+  <!-- Double bridge bottom -->
+  <path d="M 342,295 Q 400,283 458,295" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
+  <!-- Left temple -->
+  <line x1="125" y1="315" x2="35" y2="330" stroke="#C9A84C" stroke-width="4" stroke-linecap="round"/>
+  <!-- Right temple -->
+  <line x1="675" y1="315" x2="765" y2="330" stroke="#C9A84C" stroke-width="4" stroke-linecap="round"/>
+  <!-- Reflection -->
+  <line x1="165" y1="265" x2="215" y2="258" stroke="white" stroke-width="1.5" stroke-opacity="0.55" stroke-linecap="round"/>
+  <line x1="480" y1="258" x2="530" y2="265" stroke="white" stroke-width="1.5" stroke-opacity="0.55" stroke-linecap="round"/></g>
+  <!-- Brand name -->
+  <text x="400" y="560" text-anchor="middle" font-family="Garamond, Georgia, serif" font-size="11" letter-spacing="0.3em" fill="#8B6914" opacity="0.7" font-weight="400">CARTIER</text>
+  <!-- Subtle grain texture simulation via noise pattern -->
+  <rect width="800" height="600" fill="url(#bg)" opacity="0.04"/>
+</svg>

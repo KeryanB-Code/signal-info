@@ -126,6 +126,7 @@ input, textarea, select { font-family: var(--sans); }
 /* ─── Sections ─── */
 .section { padding: 80px 0; }
 .section-lg { padding: 120px 0; }
+.section-light { background: #F5F0E8; }
 
 /* ─── Grid ─── */
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
@@ -144,7 +145,7 @@ input, textarea, select { font-family: var(--sans); }
 }
 
 /* ─── Product image hover ─── */
-.product-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/5; background: #F5F3EF; }
+.product-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/3; background: #F5F3EF; }
 .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
 .product-img-wrap:hover img { transform: scale(1.04); }
 .product-img-secondary { position: absolute; inset: 0; opacity: 0; transition: opacity .4s ease; }
@@ -256,7 +257,7 @@ input, textarea, select { font-family: var(--sans); }
 
 /* ─── Product Grid ─── */
 .product-card { cursor: pointer; }
-.product-card-info { padding: 16px 0 8px; }
+.product-card-info { padding: 14px 0 8px; }
 .product-card-brand { font-size: 0.65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--sand-dark); margin-bottom: 4px; }
 .product-card-name { font-family: var(--serif); font-size: 1.05rem; color: var(--dark); margin-bottom: 4px; }
 .product-card-price { font-size: 0.875rem; color: var(--gray); }
@@ -264,10 +265,48 @@ input, textarea, select { font-family: var(--sans); }
 .product-card-new-price { color: var(--dark); font-weight: 500; }
 .product-card-actions {
   position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 16px; background: linear-gradient(transparent, rgba(0,0,0,0.3));
-  display: flex; gap: 8px; transform: translateY(100%); transition: transform .3s ease;
+  padding: 16px; background: linear-gradient(transparent, rgba(0,0,0,0.28));
+  display: flex; gap: 8px; transform: translateY(100%); transition: transform .35s ease;
 }
 .product-img-wrap:hover .product-card-actions { transform: translateY(0); }
+
+/* ─── Brand logos grid ─── */
+.brand-logos-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+}
+@media (max-width: 768px) { .brand-logos-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ─── Trust badge ─── */
+.trust-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 20px; border: 1px solid var(--border); background: white;
+  font-size: 0.65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--sand-dark);
+}
+
+/* ─── Brand nav dropdown ─── */
+.brand-nav-dropdown {
+  position: relative;
+}
+.brand-nav-dropdown-menu {
+  position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%);
+  background: white; border: 1px solid var(--border); min-width: 200px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08); z-index: 200;
+  display: none; flex-direction: column; padding: 8px 0;
+}
+.brand-nav-dropdown:hover .brand-nav-dropdown-menu { display: flex; }
+.brand-nav-dropdown-menu a {
+  padding: 10px 20px; font-size: 0.72rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--gray); transition: all .15s; white-space: nowrap;
+}
+.brand-nav-dropdown-menu a:hover { color: var(--dark); background: var(--bg); }
+
+/* ─── Authorized banner ─── */
+.authorized-banner {
+  background: #F5F0E8; border-bottom: 1px solid var(--border);
+  padding: 9px 0; text-align: center;
+  font-size: 0.68rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--sand-dark);
+}
 .wishlist-btn {
   position: absolute; top: 12px; right: 12px; z-index: 2;
   width: 32px; height: 32px; background: white; border-radius: 50%;
