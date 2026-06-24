@@ -19,7 +19,7 @@ export default function ProductCard({ product, onAddToCart, index = 0 }) {
     >
       <div className="product-card-v2-img">
         <img
-          src={product.images[0]}
+          src={product.images[1] || product.images[0]}
           alt={`${product.brand} ${product.name}`}
         />
 

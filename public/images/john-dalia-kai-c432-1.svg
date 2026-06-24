@@ -1,26 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
   <defs>
-    <radialGradient id="bg" cx="50%" cy="45%" r="65%">
-      <stop offset="0%" stop-color="#EDE5D8"/>
-      <stop offset="100%" stop-color="#D4C4B0"/>
+    <radialGradient id="bg" cx="55%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#1E1610"/>
+      <stop offset="100%" stop-color="#080604"/>
     </radialGradient>
-    <radialGradient id="face" cx="50%" cy="40%" r="55%">
-      <stop offset="0%" stop-color="#E8D9C5" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#C4A882" stop-opacity="0"/>
+    <radialGradient id="glow" cx="58%" cy="28%" r="50%">
+      <stop offset="0%" stop-color="#F0D8B0" stop-opacity="0.28"/>
+      <stop offset="70%" stop-color="#C09050" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#080604" stop-opacity="0"/>
     </radialGradient>
+    <radialGradient id="skinGrad" cx="55%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#E8C888"/>
+      <stop offset="50%" stop-color="#C89050"/>
+      <stop offset="100%" stop-color="#986828"/>
+    </radialGradient>
+    <filter id="faceSoft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
   </defs>
-  <!-- Background -->
   <rect width="800" height="600" fill="url(#bg)"/>
-  <!-- Subtle face glow -->
-  <ellipse cx="400" cy="240" rx="200" ry="260" fill="url(#face)"/>
-  <!-- Face silhouette (very subtle) -->
-  <ellipse cx="400" cy="200" rx="140" ry="170" fill="#C9B49A" opacity="0.12"/>
-  <!-- Neck -->
-  <rect x="358" y="360" width="84" height="130" rx="42" fill="#C9B49A" opacity="0.10"/>
+  <ellipse cx="440" cy="180" rx="380" ry="280" fill="url(#glow)"/>
   <!-- Shoulders -->
-  <path d="M 160,480 Q 280,430 400,440 Q 520,430 640,480 L 640,600 L 160,600 Z" fill="#C9B49A" opacity="0.10"/>
-  <!-- Glasses -->
-  <g transform="translate(0, 80)">
+  <path d="M 80,540 Q 220,470 400,482 Q 580,470 720,540 L 720,600 L 80,600 Z" fill="#100C08"/>
+  <!-- Neck -->
+  <rect x="358" y="350" width="84" height="110" rx="42" fill="#C09050" filter="url(#faceSoft)" opacity="0.7"/>
+  <!-- Face -->
+  <ellipse cx="400" cy="250" rx="155" ry="190" fill="url(#skinGrad)" filter="url(#faceSoft)" opacity="0.75"/>
+  <!-- Shadow side -->
+  <ellipse cx="400" cy="250" rx="155" ry="190" fill="#080604" opacity="0.35" style="transform-origin: left center"/>
+  <!-- Hair top -->
+  <path d="M 250,180 Q 235,80 400,60 Q 565,80 550,180 Q 520,100 480,80 Q 440,65 400,62 Q 360,65 320,80 Q 276,100 250,180 Z" fill="#0C0906"/>
+  <!-- Hair sides -->
+  <path d="M 248,232 Q 218,175 232,110 Q 254,60 400,60 Q 330,72 294,108 Q 248,156 248,232 Z" fill="#0A0806"/>
+  <path d="M 552,232 Q 582,175 568,110 Q 546,60 400,60 Q 470,72 506,108 Q 552,156 552,232 Z" fill="#0A0806"/>
+  <!-- Glasses positioned at eye level -->
+  <g transform="translate(0, -20)">
   <defs>
     <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#555560" stop-opacity="1"/>
@@ -44,8 +58,4 @@
   <!-- Lens reflection -->
   <line x1="155" y1="285" x2="200" y2="282" stroke="white" stroke-width="1.5" stroke-opacity="0.6" stroke-linecap="round"/>
   <line x1="485" y1="285" x2="530" y2="282" stroke="white" stroke-width="1.5" stroke-opacity="0.6" stroke-linecap="round"/></g>
-  <!-- Brand name -->
-  <text x="400" y="560" text-anchor="middle" font-family="Garamond, Georgia, serif" font-size="11" letter-spacing="0.3em" fill="#8B6914" opacity="0.7" font-weight="400">JOHN DALIA</text>
-  <!-- Subtle grain texture simulation via noise pattern -->
-  <rect width="800" height="600" fill="url(#bg)" opacity="0.04"/>
 </svg>
