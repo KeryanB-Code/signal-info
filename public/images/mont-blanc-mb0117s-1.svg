@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#EDE5D8"/>
+      <stop offset="100%" stop-color="#D4C4B0"/>
+    </radialGradient>
+    <radialGradient id="face" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#E8D9C5" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#C4A882" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Subtle face glow -->
+  <ellipse cx="400" cy="240" rx="200" ry="260" fill="url(#face)"/>
+  <!-- Face silhouette (very subtle) -->
+  <ellipse cx="400" cy="200" rx="140" ry="170" fill="#C9B49A" opacity="0.12"/>
+  <!-- Neck -->
+  <rect x="358" y="360" width="84" height="130" rx="42" fill="#C9B49A" opacity="0.10"/>
+  <!-- Shoulders -->
+  <path d="M 160,480 Q 280,430 400,440 Q 520,430 640,480 L 640,600 L 160,600 Z" fill="#C9B49A" opacity="0.10"/>
+  <!-- Glasses -->
+  <g transform="translate(0, 80)">
+  <defs>
+    <filter id="sh"><feDropShadow dx="0" dy="6" stdDeviation="9" flood-opacity="0.2"/></filter>
+  </defs>
+  <!-- Left lens -->
+  <rect x="110" y="255" width="240" height="135" rx="3" ry="3" fill="rgba(28,28,30,0.18)" stroke="#1C1C1E" stroke-width="6" filter="url(#sh)"/>
+  <!-- Right lens -->
+  <rect x="450" y="255" width="240" height="135" rx="3" ry="3" fill="rgba(28,28,30,0.18)" stroke="#1C1C1E" stroke-width="6" filter="url(#sh)"/>
+  <!-- Bridge -->
+  <rect x="350" y="303" width="100" height="8" rx="3" fill="#1C1C1E"/>
+  <!-- Left temple -->
+  <line x1="110" y1="312" x2="30" y2="322" stroke="#1C1C1E" stroke-width="6" stroke-linecap="square"/>
+  <!-- Right temple -->
+  <line x1="690" y1="312" x2="770" y2="322" stroke="#1C1C1E" stroke-width="6" stroke-linecap="square"/>
+  <!-- Reflection -->
+  <line x1="135" y1="270" x2="195" y2="267" stroke="white" stroke-width="2" stroke-opacity="0.5"/>
+  <line x1="475" y1="270" x2="535" y2="267" stroke="white" stroke-width="2" stroke-opacity="0.5"/></g>
+  <!-- Brand name -->
+  <text x="400" y="560" text-anchor="middle" font-family="Garamond, Georgia, serif" font-size="11" letter-spacing="0.3em" fill="#8B6914" opacity="0.7" font-weight="400">MONT BLANC</text>
+  <!-- Subtle grain texture simulation via noise pattern -->
+  <rect width="800" height="600" fill="url(#bg)" opacity="0.04"/>
+</svg>

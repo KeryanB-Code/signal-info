@@ -33,9 +33,14 @@ const COLOR_MAP = {
   'Argent / Noir / Bleu': '#AFAFAF',
   'Noir / Écaille': '#1C1C1E', 'Havane clair / Or': '#8B5A3A',
   'Gunmetal / Écaille': '#555560',
-  'Or / Fumé': '#C9A84C', 'Noir / Gris': '#1C1C1E',
+  'Noir / Gris': '#1C1C1E',
   'Ink Swirl / Or': '#2C2C40', 'Crystal Clear / Or': '#DDDDE8',
   'Titane / Fumé': '#B0B0B8',
+  // New brand colors
+  'Argent / Gris': '#AFAFAF', 'Or / Brun': '#C9A84C',
+  'Havane / Or': '#6B3A2A', 'Bordeaux / Or': '#5C1B2B',
+  'Écaille / Or': '#7B4A2D', 'Or / Rose': '#C9A84C', 'Or / Vert': '#C9A84C',
+  'Havane / Noir': '#6B3A2A',
 };
 
 function frameColor(colorsArr) {
@@ -367,22 +372,67 @@ const FRAME_RENDERERS = {
 // ── Product definitions ────────────────────────────────────────────────────
 const PRODUCTS = [
   // Cartier
-  { id: 'cartier-premiere-ct0362s', frame: 'rectangular-slim', colors: ['Corne brune / Or'],   brand: 'CARTIER',    name: 'Première de Cartier' },
-  { id: 'cartier-c-decor-ct0330s',  frame: 'rectangular-slim', colors: ['Or'],                  brand: 'CARTIER',    name: 'C Décor CT0330S' },
-  { id: 'cartier-signature-ct0012s',frame: 'double-bridge',    colors: ['Or'],                  brand: 'CARTIER',    name: 'Signature C CT0012S' },
-  { id: 'cartier-ct0046s',          frame: 'rectangular-slim', colors: ['Or'],                  brand: 'CARTIER',    name: 'CT0046S' },
+  { id: 'cartier-premiere-ct0362s', frame: 'rectangular-slim', colors: ['Corne brune / Or'],   brand: 'CARTIER',         name: 'Première de Cartier' },
+  { id: 'cartier-c-decor-ct0330s',  frame: 'rectangular-slim', colors: ['Or'],                  brand: 'CARTIER',         name: 'C Décor CT0330S' },
+  { id: 'cartier-signature-ct0012s',frame: 'double-bridge',    colors: ['Or'],                  brand: 'CARTIER',         name: 'Signature C CT0012S' },
+  { id: 'cartier-ct0046s',          frame: 'rectangular-slim', colors: ['Or'],                  brand: 'CARTIER',         name: 'CT0046S' },
+  // Louis Vuitton
+  { id: 'lv-discovery-z1531u',      frame: 'sport-shield',     colors: ['Or / Fumé'],           brand: 'LOUIS VUITTON',   name: 'LV Discovery PM' },
+  { id: 'lv-rise-z1623u',           frame: 'rectangular-slim', colors: ['Or / Gris'],           brand: 'LOUIS VUITTON',   name: 'LV Rise' },
+  // Chopard
+  { id: 'chopard-sch349s',          frame: 'oval-minimal',     colors: ['Or'],                  brand: 'CHOPARD',         name: 'Imperiale' },
+  { id: 'chopard-sch318s',          frame: 'rectangular-slim', colors: ['Or / Fumé'],           brand: 'CHOPARD',         name: 'Classic SCH318S' },
   // Fred
-  { id: 'fred-force10-fg40023u16a',    frame: 'marine',           colors: ['Acier brossé', 'Noir'], brand: 'FRED',    name: 'Force 10' },
-  { id: 'fred-force10-round-fg40028u01a', frame: 'round',         colors: ['Noir'],              brand: 'FRED',       name: 'Force 10 Round' },
-  { id: 'fred-force10-geo-fg40040u16v',   frame: 'rectangular-geo', colors: ['Argent'],          brand: 'FRED',       name: 'Force 10 Geometric' },
-  // John Dalia
-  { id: 'john-dalia-project01-c603', frame: 'square-thick',    colors: ['Noir'],                brand: 'JOHN DALIA', name: 'Project 01 C603' },
-  { id: 'john-dalia-project01-c621', frame: 'square-thick',    colors: ['Havane'],              brand: 'JOHN DALIA', name: 'Project 01 C621' },
-  { id: 'john-dalia-kai-c432',       frame: 'rectangular-slim', colors: ['Gun'],                brand: 'JOHN DALIA', name: 'Kaï C432' },
+  { id: 'fred-force10-fg40023u16a',    frame: 'marine',        colors: ['Acier brossé', 'Noir'], brand: 'FRED',           name: 'Force 10' },
+  { id: 'fred-force10-round-fg40028u01a', frame: 'round',      colors: ['Noir'],                brand: 'FRED',            name: 'Force 10 Round' },
+  { id: 'fred-force10-geo-fg40040u16v',   frame: 'rectangular-geo', colors: ['Argent'],         brand: 'FRED',            name: 'Force 10 Geometric' },
   // Dita
-  { id: 'dita-mach-six',    frame: 'mach-brow',    colors: ['Or'],     brand: 'DITA',  name: 'Mach-Six' },
-  { id: 'dita-grand-apx',   frame: 'butterfly',    colors: ['Noir'],   brand: 'DITA',  name: 'Grand-APX' },
-  { id: 'dita-mach-one-s',  frame: 'sport-shield', colors: ['Platine'],brand: 'DITA',  name: 'Mach-One-S' },
+  { id: 'dita-mach-six',            frame: 'mach-brow',        colors: ['Or'],                  brand: 'DITA',            name: 'Mach-Six' },
+  { id: 'dita-grand-apx',           frame: 'butterfly',        colors: ['Noir'],                brand: 'DITA',            name: 'Grand-APX' },
+  { id: 'dita-mach-one-s',          frame: 'sport-shield',     colors: ['Platine'],             brand: 'DITA',            name: 'Mach-One-S' },
+  // John Dalia
+  { id: 'john-dalia-project01-c603', frame: 'square-thick',   colors: ['Noir'],                brand: 'JOHN DALIA',      name: 'Project 01 C603' },
+  { id: 'john-dalia-project01-c621', frame: 'square-thick',   colors: ['Havane'],              brand: 'JOHN DALIA',      name: 'Project 01 C621' },
+  { id: 'john-dalia-kai-c432',       frame: 'rectangular-slim', colors: ['Gun'],               brand: 'JOHN DALIA',      name: 'Kaï C432' },
+  // Tom Ford
+  { id: 'tom-ford-colette-ft0833',  frame: 'butterfly',        colors: ['Havane clair'],        brand: 'TOM FORD',        name: 'Colette' },
+  { id: 'tom-ford-buckley-ft0778',  frame: 'rectangular-geo',  colors: ['Noir / Gris'],         brand: 'TOM FORD',        name: 'Buckley' },
+  // Prada
+  { id: 'prada-symbole-pr17ws',     frame: 'cat-eye',          colors: ['Or / Fumé'],           brand: 'PRADA',           name: 'Symbole PR 17WS' },
+  { id: 'prada-pr08ys',             frame: 'rectangular-slim', colors: ['Noir'],                brand: 'PRADA',           name: 'Runway PR 08YS' },
+  // Bottega Veneta
+  { id: 'bottega-bv1224s',          frame: 'rectangular-slim', colors: ['Or / Fumé'],           brand: 'BOTTEGA VENETA',  name: 'Angle BV1224S' },
+  { id: 'bottega-bv1033o',          frame: 'oval-minimal',     colors: ['Havane'],              brand: 'BOTTEGA VENETA',  name: 'Oval BV1033O' },
+  // Fendi
+  { id: 'fendi-fe40077u',           frame: 'rectangular-slim', colors: ['Noir / Or'],           brand: 'FENDI',           name: 'FF Lettering' },
+  { id: 'fendi-fe40040u',           frame: 'butterfly',        colors: ['Havane clair / Or'],   brand: 'FENDI',           name: 'First' },
+  // Céline
+  { id: 'celine-cl40195u',          frame: 'rectangular-geo',  colors: ['Noir'],                brand: 'CÉLINE',          name: 'Triomphe' },
+  { id: 'celine-cl40198u',          frame: 'cat-eye',          colors: ['Havane clair / Or'],   brand: 'CÉLINE',          name: 'Cat Eye' },
+  // Givenchy
+  { id: 'givenchy-gv7201s',         frame: 'rectangular-geo',  colors: ['Noir'],                brand: 'GIVENCHY',        name: 'GV 7201/S' },
+  { id: 'givenchy-gv40002u',        frame: 'rectangular-slim', colors: ['Havane'],              brand: 'GIVENCHY',        name: 'GV40002U' },
+  // Saint Laurent
+  { id: 'saint-laurent-sl573',      frame: 'rectangular-geo',  colors: ['Noir / Gris'],         brand: 'SAINT LAURENT',   name: 'SL 573' },
+  { id: 'saint-laurent-slm98',      frame: 'rectangular-slim', colors: ['Écaille'],             brand: 'SAINT LAURENT',   name: 'SL M98' },
+  // Miu Miu
+  { id: 'miu-miu-mu54ys',           frame: 'butterfly',        colors: ['Noir / Or'],           brand: 'MIU MIU',         name: 'MU 54YS' },
+  { id: 'miu-miu-mu04ws',           frame: 'round',            colors: ['Or'],                  brand: 'MIU MIU',         name: 'MU 04WS' },
+  // Gucci
+  { id: 'gucci-gg1520s',            frame: 'round',            colors: ['Or / Fumé'],           brand: 'GUCCI',           name: 'GG1520S' },
+  { id: 'gucci-gg0817s',            frame: 'cat-eye',          colors: ['Havane clair / Or'],   brand: 'GUCCI',           name: 'GG0817S' },
+  // Versace
+  { id: 'versace-ve2249',           frame: 'rectangular-slim', colors: ['Or / Fumé'],           brand: 'VERSACE',         name: 'Medusa Biggie' },
+  { id: 'versace-ve4460',           frame: 'round',            colors: ['Or'],                  brand: 'VERSACE',         name: 'Medusa Round' },
+  // Balenciaga
+  { id: 'balenciaga-bb0165s',       frame: 'rectangular-geo',  colors: ['Noir / Or'],           brand: 'BALENCIAGA',      name: 'BB0165S' },
+  { id: 'balenciaga-bb0011s',       frame: 'oval-minimal',     colors: ['Noir'],                brand: 'BALENCIAGA',      name: 'Extreme Oval' },
+  // Burberry
+  { id: 'burberry-be4415',          frame: 'rectangular-slim', colors: ['Havane / Or'],         brand: 'BURBERRY',        name: 'B Print' },
+  { id: 'burberry-be4394',          frame: 'round',            colors: ['Havane'],              brand: 'BURBERRY',        name: 'Heritage' },
+  // Mont Blanc
+  { id: 'mont-blanc-mb0025s',       frame: 'oval-minimal',     colors: ['Argent / Gris'],       brand: 'MONT BLANC',      name: 'MB0025S' },
+  { id: 'mont-blanc-mb0117s',       frame: 'rectangular-geo',  colors: ['Noir / Gris'],         brand: 'MONT BLANC',      name: 'MB0117S' },
 ];
 
 // ── SVG generators ─────────────────────────────────────────────────────────

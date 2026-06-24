@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { BRANDS as BRAND_LIST } from "../data/products.js";
 
 const NAV_LINKS = [
   { to: "/boutique", label: "Boutique" },
@@ -7,11 +8,6 @@ const NAV_LINKS = [
   { to: "/conseil", label: "Espace Conseil" },
   { to: "/boutiques", label: "Nos Boutiques" },
   { to: "/magazine", label: "Magazine" },
-];
-
-const BRAND_LIST = [
-  "Cartier", "Fred", "Dita", "John Dalia",
-  "Miu Miu", "Céline", "Gucci", "Saint Laurent",
 ];
 
 export default function Navbar({ cartCount = 0 }) {

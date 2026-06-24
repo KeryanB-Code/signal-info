@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#EDE5D8"/>
+      <stop offset="100%" stop-color="#D4C4B0"/>
+    </radialGradient>
+    <radialGradient id="face" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#E8D9C5" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#C4A882" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Subtle face glow -->
+  <ellipse cx="400" cy="240" rx="200" ry="260" fill="url(#face)"/>
+  <!-- Face silhouette (very subtle) -->
+  <ellipse cx="400" cy="200" rx="140" ry="170" fill="#C9B49A" opacity="0.12"/>
+  <!-- Neck -->
+  <rect x="358" y="360" width="84" height="130" rx="42" fill="#C9B49A" opacity="0.10"/>
+  <!-- Shoulders -->
+  <path d="M 160,480 Q 280,430 400,440 Q 520,430 640,480 L 640,600 L 160,600 Z" fill="#C9B49A" opacity="0.10"/>
+  <!-- Glasses -->
+  <g transform="translate(0, 80)">
+  <defs>
+    <filter id="sh"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-opacity="0.22"/></filter>
+  </defs>
+  <!-- Left lens (butterfly: wide top, narrowing slightly to inner) -->
+  <path d="M 80,275 Q 130,235 250,245 Q 340,252 360,300 Q 350,360 250,365 Q 140,368 80,340 Z"
+        fill="rgba(139,90,58,0.18)" stroke="#8B5A3A" stroke-width="5.5" filter="url(#sh)"/>
+  <!-- Right lens -->
+  <path d="M 440,300 Q 460,252 550,245 Q 670,235 720,275 Q 720,340 660,365 Q 550,368 440,360 Z"
+        fill="rgba(139,90,58,0.18)" stroke="#8B5A3A" stroke-width="5.5" filter="url(#sh)"/>
+  <!-- Bridge -->
+  <path d="M 360,300 Q 400,288 440,300" fill="none" stroke="#8B5A3A" stroke-width="4" stroke-linecap="round"/>
+  <!-- Left temple -->
+  <line x1="82" y1="308" x2="20" y2="325" stroke="#8B5A3A" stroke-width="5.5" stroke-linecap="round"/>
+  <!-- Right temple -->
+  <line x1="718" y1="308" x2="780" y2="325" stroke="#8B5A3A" stroke-width="5.5" stroke-linecap="round"/>
+  <!-- Decorative hinge detail -->
+  <circle cx="82" cy="308" r="6" fill="#8B5A3A"/>
+  <circle cx="718" cy="308" r="6" fill="#8B5A3A"/>
+  <!-- Reflection -->
+  <line x1="115" y1="258" x2="175" y2="252" stroke="white" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>
+  <line x1="470" y1="258" x2="530" y2="252" stroke="white" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/></g>
+  <!-- Brand name -->
+  <text x="400" y="560" text-anchor="middle" font-family="Garamond, Georgia, serif" font-size="11" letter-spacing="0.3em" fill="#8B6914" opacity="0.7" font-weight="400">TOM FORD</text>
+  <!-- Subtle grain texture simulation via noise pattern -->
+  <rect width="800" height="600" fill="url(#bg)" opacity="0.04"/>
+</svg>

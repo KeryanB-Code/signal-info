@@ -91,7 +91,7 @@ export default function Home({ onAddToCart }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
           >
-            Cartier, Fred, Gucci, Saint Laurent, Miu Miu, Céline, John Dalia. Une sélection de 200+ montures curatée par un opticien diplômé. Essayage 3D, conseil visio, paiement en 4 fois.
+            Cartier, Louis Vuitton, Chopard, Tom Ford, Prada, Céline, Gucci et 12 autres maisons. Une sélection de 200+ montures curatée par un opticien diplômé. Essayage 3D, conseil visio, paiement en 4 fois.
           </motion.p>
 
           <motion.div
@@ -137,21 +137,22 @@ export default function Home({ onAddToCart }) {
       <section style={{ padding: "56px 0", borderBottom: "1px solid var(--border)" }}>
         <div className="container">
           <div className="label" style={{ textAlign: "center", marginBottom: 32 }}>Revendeur Officiel Agréé</div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 32 }}>
-            {["Cartier", "Fred", "Dita", "John Dalia"].map((brand) => (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 0 }}>
+            {["Cartier", "Louis Vuitton", "Chopard", "Fred", "Dita", "John Dalia", "Tom Ford", "Prada"].map((brand) => (
               <Link
                 key={brand}
                 to={`/boutique?brand=${encodeURIComponent(brand)}`}
                 style={{
                   textAlign: "center",
                   fontFamily: "var(--serif)",
-                  fontSize: "1.3rem",
+                  fontSize: "1.1rem",
                   letterSpacing: ".15em",
                   textTransform: "uppercase",
                   color: "var(--dark-2)",
-                  opacity: 0.7,
-                  padding: "20px",
+                  opacity: 0.65,
+                  padding: "22px 16px",
                   border: "1px solid var(--border)",
+                  margin: "-1px 0 0 -1px",
                   transition: "all 0.3s",
                   textDecoration: "none",
                   display: "block",
@@ -159,15 +160,24 @@ export default function Home({ onAddToCart }) {
                 onMouseEnter={(e) => {
                   e.currentTarget.style.opacity = "1";
                   e.currentTarget.style.background = "#F5F0E8";
+                  e.currentTarget.style.zIndex = "1";
+                  e.currentTarget.style.borderColor = "var(--sand)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.opacity = "0.7";
+                  e.currentTarget.style.opacity = "0.65";
                   e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.zIndex = "auto";
+                  e.currentTarget.style.borderColor = "var(--border)";
                 }}
               >
                 {brand}
               </Link>
             ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: 24 }}>
+            <Link to="/boutique" style={{ fontSize: "0.7rem", letterSpacing: ".15em", textTransform: "uppercase", color: "var(--sand-dark)", textDecoration: "none" }}>
+              Voir toutes les marques ({BRANDS.length}) →
+            </Link>
           </div>
         </div>
       </section>
