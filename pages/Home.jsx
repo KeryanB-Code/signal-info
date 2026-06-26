@@ -298,6 +298,101 @@ export default function Home({ onAddToCart }) {
         </div>
       </section>
 
+      {/* ── CAPSULE ── */}
+      <section style={{ background: "#0C0C0C", overflow: "hidden" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: 560 }}>
+
+          {/* Visuel */}
+          <motion.div
+            style={{ position: "relative", overflow: "hidden" }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.9, ease }}
+          >
+            <img
+              src="/images/lifestyle-femme-3.png"
+              alt="Capsule Maison Regard"
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block", filter: "brightness(0.82)" }}
+            />
+            {/* Badge numéro de série */}
+            <div style={{
+              position: "absolute", bottom: 28, left: 28,
+              border: "1px solid rgba(255,255,255,0.22)",
+              padding: "8px 16px", backdropFilter: "blur(8px)",
+              background: "rgba(0,0,0,0.45)",
+            }}>
+              <div style={{ fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginBottom: 3 }}>Édition limitée</div>
+              <div style={{ fontFamily: "var(--serif)", color: "white", fontSize: "1rem", fontWeight: 300 }}>12 pièces · Numérotées</div>
+            </div>
+          </motion.div>
+
+          {/* Texte */}
+          <motion.div
+            style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "72px 64px" }}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.9, delay: 0.12, ease }}
+          >
+            {/* Saison */}
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 32 }}>
+              <div style={{ height: 1, width: 32, background: "var(--sand)" }} />
+              <span style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--sand)" }}>
+                Capsule · Été 2026
+              </span>
+            </div>
+
+            <h2 style={{ fontFamily: "var(--serif)", color: "white", fontSize: "clamp(2rem, 3.5vw, 3rem)", fontWeight: 300, lineHeight: 1.15, marginBottom: 24 }}>
+              L'œuvre de<br /><em style={{ fontStyle: "italic", color: "var(--sand)" }}>deux maîtres.</em>
+            </h2>
+
+            <p style={{ color: "rgba(255,255,255,0.52)", lineHeight: 1.85, fontSize: "0.9rem", marginBottom: 16, maxWidth: 400 }}>
+              Chaque saison, Maison Regard s'associe à un créateur indépendant pour co-signer une monture en édition très limitée.
+            </p>
+            <p style={{ color: "rgba(255,255,255,0.52)", lineHeight: 1.85, fontSize: "0.9rem", marginBottom: 40, maxWidth: 400 }}>
+              Nous apportons notre expertise du domaine — sélection des matières, ergonomie, correction — le créateur y insuffle son univers. Le résultat : un objet unique, entre artisanat et art contemporain.
+            </p>
+
+            {/* Créateur saison */}
+            <div style={{ borderLeft: "1px solid rgba(255,255,255,0.12)", paddingLeft: 20, marginBottom: 44 }}>
+              <div style={{ fontSize: "0.65rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: 6 }}>
+                Créateur de la saison
+              </div>
+              <div style={{ fontFamily: "var(--serif)", color: "white", fontSize: "1.15rem", fontWeight: 300 }}>
+                Studio Lune Noire
+              </div>
+              <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.38)", marginTop: 3 }}>
+                Bijoutier & sculpteur · Paris
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+              <Link
+                to="/capsule"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 10,
+                  background: "var(--sand)", color: "var(--dark)",
+                  padding: "13px 28px", fontSize: "0.72rem",
+                  letterSpacing: "0.12em", textTransform: "uppercase",
+                  fontWeight: 500, textDecoration: "none",
+                  transition: "background 0.2s",
+                }}
+              >
+                Découvrir la capsule
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <span style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.28)", letterSpacing: "0.06em" }}>
+                · Disponible en pré-commande
+              </span>
+            </div>
+          </motion.div>
+
+        </div>
+      </section>
+
       {/* ── TESTIMONIALS ── */}
       <section className="section" style={{ background: "var(--white)" }}>
         <div className="container">
