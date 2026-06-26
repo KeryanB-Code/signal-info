@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { PRODUCTS, BRANDS } from "../data/products.js";
 import ProductCard from "../components/ProductCard.jsx";
 
@@ -19,6 +20,7 @@ export default function Boutique({ onAddToCart }) {
   const [style, setStyle] = useState("Tous les styles");
   const [priceMax, setPriceMax] = useState(1200);
   const [correctionOnly, setCorrectionOnly] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const activeBrand = searchParams.get("brand") || "Toutes";
   const activeCat = searchParams.get("cat") || "Tous";
@@ -52,21 +54,29 @@ export default function Boutique({ onAddToCart }) {
   return (
     <div className="pt-nav">
       {/* Hero de page */}
-      <div style={{ background: "#F0EBE2", padding: "64px 0 48px", borderBottom: "1px solid var(--border)" }}>
+      <div style={{ background: "var(--dark)", padding: "52px 0 40px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div className="container">
-          <div className="label text-sand mb-8">Maison Regard</div>
-          <h1 className="h2" style={{ marginBottom: 12 }}>La Boutique</h1>
-          <p style={{ color: "var(--gray)", fontSize: "0.9rem" }}>
-            {PRODUCTS.length} montures sélectionnées · 7 maisons · Opticien diplômé
+          <div className="label mb-8" style={{ color: "var(--sand)" }}>Maison Regard</div>
+          <h1 className="h2" style={{ marginBottom: 10, color: "white", fontStyle: "italic" }}>La Boutique</h1>
+          <p style={{ color: "rgba(255,255,255,0.42)", fontSize: "0.82rem", letterSpacing: ".06em" }}>
+            {PRODUCTS.length} montures sélectionnées · {BRANDS.length} maisons · Opticien diplômé
           </p>
         </div>
       </div>
 
-      <div className="container" style={{ padding: "40px 24px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "220px 1fr", gap: 48 }}>
+      <div className="container" style={{ padding: "32px 24px" }}>
+        {/* Mobile filter toggle */}
+        <button
+          className="boutique-sidebar-toggle"
+          onClick={() => setSidebarOpen((v) => !v)}
+        >
+          {sidebarOpen ? "✕ Fermer les filtres" : "⊞ Filtrer & trier"}
+        </button>
+
+        <div className="boutique-layout">
           {/* ─── SIDEBAR FILTRES ─── */}
-          <aside>
-            <div style={{ position: "sticky", top: 100 }}>
+          <aside className={`boutique-sidebar${sidebarOpen ? " open" : ""}`}>
+            <div style={{ position: "sticky", top: 110 }}>
               {/* Marques */}
               <div style={{ marginBottom: 32 }}>
                 <div className="label" style={{ marginBottom: 16, color: "var(--dark)" }}>Maisons</div>
@@ -158,7 +168,7 @@ export default function Boutique({ onAddToCart }) {
           </aside>
 
           {/* ─── GRILLE PRODUITS ─── */}
-          <div>
+          <div style={{ minWidth: 0 }}>
             {/* Toolbar */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28, flexWrap: "wrap", gap: 12 }}>
               <div style={{ fontSize: "0.82rem", color: "var(--gray)" }}>
@@ -192,9 +202,9 @@ export default function Boutique({ onAddToCart }) {
                 </button>
               </div>
             ) : (
-              <div className="grid-3">
-                {filtered.map((p) => (
-                  <ProductCard key={p.id} product={p} onAddToCart={onAddToCart} />
+              <div className="grid-2" style={{ gap: 16 }}>
+                {filtered.map((p, i) => (
+                  <ProductCard key={p.id} product={p} onAddToCart={onAddToCart} index={i} />
                 ))}
               </div>
             )}

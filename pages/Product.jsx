@@ -57,7 +57,7 @@ export default function Product({ onAddToCart }) {
   const navigate = useNavigate();
   const product = PRODUCTS.find((p) => p.id === id);
 
-  const [imgIdx, setImgIdx] = useState(0);
+  const [imgIdx, setImgIdx] = useState(1); /* start on clean product shot (index 1) */
   const [selectedAlma, setSelectedAlma] = useState(1);
   const [selectedColor, setSelectedColor] = useState(0);
   const [correctionOpen, setCorrectionOpen] = useState(false);
@@ -103,7 +103,7 @@ export default function Product({ onAddToCart }) {
 
       {/* Main product layout */}
       <div className="container" style={{ padding: "48px 24px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 480px", gap: 64, alignItems: "start" }}>
+        <div className="product-detail-layout">
 
           {/* ─── GALERIE ─── */}
           <motion.div
