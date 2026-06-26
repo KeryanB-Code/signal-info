@@ -19,8 +19,8 @@ const BOUTIQUES = [
     mapQuery: "Lunetterie+Saint-Clair+Lyon",
     rating: 4.9,
     reviewCount: 127,
-    tags: ["Revendeur officiel", "Tom Ford", "Cartier", "Fendi"],
-    desc: "Une adresse de référence à Lyon pour les amateurs de lunetterie haut de gamme. Revendeur officiel agréé de grandes maisons — Cartier, Tom Ford, Fendi et bien d'autres — la Lunetterie Saint-Clair vous accueille dans un cadre élégant pour un conseil personnalisé.",
+    tags: ["Notre boutique", "Tom Ford", "Cartier", "Fendi"],
+    desc: "Notre boutique phare, adresse de référence à Lyon pour les amateurs de lunetterie haut de gamme. Revendeurs officiels agréés Cartier, Tom Ford, Fendi et bien d'autres — notre équipe vous accueille dans un cadre élégant pour un conseil sur-mesure.",
     reviews: [
       { name: "Marion G.", date: "Avril 2025", text: "Accueil exceptionnel. L'opticien a pris le temps de vraiment comprendre mon profil avant de me proposer une sélection. J'ai choisi une monture Cartier que je n'aurais jamais osé seule — parfaite.", note: 5 },
       { name: "Philippe D.", date: "Mars 2025", text: "Boutique superbe, sélection très pointue. Prix cohérents avec la qualité des marques. Je reviens pour ma deuxième paire.", note: 5 },
@@ -45,8 +45,8 @@ const BOUTIQUES = [
     mapQuery: "J'aime+mes+lunettes+Lyon",
     rating: 4.8,
     reviewCount: 89,
-    tags: ["Revendeur officiel", "Gucci", "YSL", "Miu Miu"],
-    desc: "Boutique moderne et accessible au cœur de Lyon. Un espace lumineux et accueillant où la lunetterie de luxe rime avec bonne humeur. Revendeur officiel Gucci, YSL, Miu Miu — pour tous ceux qui veulent du style sans compromis.",
+    tags: ["Notre boutique", "Gucci", "YSL", "Miu Miu"],
+    desc: "Notre boutique lyonnaise moderne et accessible, où la lunetterie de luxe rime avec bonne humeur. Un espace lumineux pensé pour accueillir toute la famille. Revendeurs officiels Gucci, YSL, Miu Miu — pour tous ceux qui veulent du style sans compromis.",
     reviews: [
       { name: "Laurent P.", date: "Mai 2025", text: "Mon fils cherchait des lunettes qu'il serait fier de porter. L'opticien a su le guider avec patience. Résultat : une paire Gucci qu'il adore.", note: 5 },
       { name: "Nathalie V.", date: "Mars 2025", text: "Super conseil pour mes progressifs. Explications claires sur les options de verres. Montage rapide, je recommande.", note: 5 },
@@ -71,8 +71,8 @@ const BOUTIQUES = [
     mapQuery: "Optique+Mas+du+Taureau+Vaulx-en-Velin",
     rating: 4.7,
     reviewCount: 63,
-    tags: ["Revendeur officiel", "Toutes mutuelles", "Céline", "Fred", "Corrections complexes"],
-    desc: "Opticien de proximité à Vaulx-en-Velin, partenaire toutes mutuelles. Une équipe disponible et à l'écoute, spécialisée dans les corrections complexes et les progressifs haut de gamme. Revendeur officiel Céline, Fred et bien d'autres grandes maisons.",
+    tags: ["Notre boutique", "Toutes mutuelles", "Céline", "Fred", "Corrections complexes"],
+    desc: "Notre boutique de Vaulx-en-Velin, ancrée dans son quartier depuis des années. Partenaire toutes mutuelles, notre équipe est spécialisée dans les corrections complexes et les progressifs haut de gamme. Revendeurs officiels Céline, Fred et bien d'autres grandes maisons.",
     reviews: [
       { name: "Claire B.", date: "Avr. 2025", text: "Correction très élevée (-10 dans chaque œil). Enfin une boutique capable de monter mes verres dans une monture fine Céline. Un vrai expert.", note: 5 },
       { name: "Thomas R.", date: "Janv. 2025", text: "Expert dans les corrections sport. Ma paire Fred Force 10 avec verres photochromiques est parfaite pour le ski et le vélo.", note: 5 },
@@ -103,10 +103,10 @@ export default function Boutiques() {
       {/* Hero */}
       <div style={{ background: "#F0EBE2", padding: "64px 0 56px", borderBottom: "1px solid var(--border)" }}>
         <div className="container">
-          <div className="label text-sand mb-8">Présence physique · Lyon & environs</div>
-          <h1 className="h2" style={{ marginBottom: 14 }}>Nos 3 boutiques partenaires</h1>
+          <div className="label text-sand mb-8">Présence physique · Lyon & Vaulx-en-Velin</div>
+          <h1 className="h2" style={{ marginBottom: 14 }}>Nos 3 boutiques</h1>
           <p style={{ color: "var(--gray)", maxWidth: 560, lineHeight: 1.75 }}>
-            Revendeurs officiels agréés de toutes les marques du site. Achetez en ligne ou venez essayer en boutique — même stock, même garantie, même SAV.
+            Revendeurs officiels agréés, nous vous accueillons dans nos boutiques depuis plusieurs années. Achetez en ligne ou venez essayer en boutique — même stock, même garantie, même SAV.
           </p>
 
           {/* Badges de confiance */}
@@ -181,7 +181,7 @@ export default function Boutiques() {
                 color: "white", padding: "6px 14px",
                 fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 500,
               }}>
-                Revendeur officiel agréé
+                Notre boutique · Revendeur officiel agréé
               </div>
             </div>
 
@@ -203,9 +203,9 @@ export default function Boutiques() {
                 <span key={t} style={{
                   padding: "4px 12px", border: "1px solid var(--border)",
                   fontSize: "0.7rem", letterSpacing: "0.08em",
-                  color: t === "Revendeur officiel" || t === "Toutes mutuelles" ? "var(--sand-dark)" : "var(--gray)",
-                  fontWeight: t === "Revendeur officiel" || t === "Toutes mutuelles" ? 600 : 400,
-                  background: t === "Revendeur officiel" || t === "Toutes mutuelles" ? "#FFFDF5" : "white",
+                  color: t === "Notre boutique" || t === "Toutes mutuelles" ? "var(--sand-dark)" : "var(--gray)",
+                  fontWeight: t === "Notre boutique" || t === "Toutes mutuelles" ? 600 : 400,
+                  background: t === "Notre boutique" || t === "Toutes mutuelles" ? "#FFFDF5" : "white",
                 }}>
                   {t}
                 </span>
@@ -291,10 +291,10 @@ export default function Boutiques() {
                 href={b.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-outline"
+                className="btn btn-ghost"
                 style={{ display: "flex", justifyContent: "center" }}
               >
-                Voir le site / Instagram
+                Visiter notre site
               </a>
             </div>
 
