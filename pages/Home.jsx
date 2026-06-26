@@ -7,6 +7,7 @@ import { FadeUpWhenVisible } from "../components/animations/TextReveal.jsx";
 import AnimatedCounter from "../components/animations/AnimatedCounter.jsx";
 import EnhancedMarquee from "../components/animations/EnhancedMarquee.jsx";
 import MagneticButton from "../components/animations/MagneticButton.jsx";
+import ExpandCards from "../components/ExpandCards.jsx";
 
 const FEATURED = PRODUCTS.filter((p) => p.inStock).slice(0, 8);
 const NEW_ARRIVALS = PRODUCTS.filter((p) => p.new && p.inStock).slice(0, 4);
@@ -157,51 +158,6 @@ export default function Home({ onAddToCart }) {
         ))}
       </section>
 
-      {/* ── VIDEO CAMPAIGNS ── */}
-      <section className="video-campaigns-section">
-        <div className="container">
-          <FadeUpWhenVisible>
-            <div style={{ marginBottom: 44 }}>
-              <h2 className="h2" style={{ color: "white" }}>Distributeur Officiel</h2>
-              <p style={{ fontSize: "0.65rem", letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.28)", marginTop: 10 }}>
-                Cartier · Céline · Miu Miu · Dolce &amp; Gabbana · John Dalia
-              </p>
-            </div>
-          </FadeUpWhenVisible>
-          <div className="video-scroll-track">
-            {[
-              { src: "/videos/cartier-femme.mp4", brand: "Cartier", sub: "Collection Femme", to: "/boutique?brand=Cartier" },
-              { src: "/videos/cartier-homme.mp4", brand: "Cartier", sub: "Collection Homme", to: "/boutique?brand=Cartier" },
-              { src: "/videos/celine.mp4", brand: "Céline", sub: "Eyewear", to: "/boutique?brand=C%C3%A9line" },
-              { src: "/videos/miumiu.mp4", brand: "Miu Miu", sub: "Campaign", to: "/boutique?brand=Miu+Miu" },
-              { src: "/videos/dg-1.mp4", brand: "Dolce & Gabbana", sub: "Campagne I", to: "/boutique?brand=Dolce+%26+Gabbana" },
-              { src: "/videos/dg-2.mp4", brand: "Dolce & Gabbana", sub: "Campagne II", to: "/boutique?brand=Dolce+%26+Gabbana" },
-              { src: "/videos/john-dalia.mp4", brand: "John Dalia", sub: "Artisan", to: "/boutique?brand=John+Dalia" },
-              { src: "/videos/meta-kylie.mp4", brand: "Maison Regard", sub: "Éditorial", to: "/boutique" },
-            ].map((v, i) => (
-              <motion.div
-                key={i}
-                className="video-scroll-card"
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.55, delay: i * 0.06, ease }}
-              >
-                <Link to={v.to} className="video-campaign-link">
-                  <video autoPlay muted loop playsInline preload="metadata">
-                    <source src={v.src} type="video/mp4" />
-                  </video>
-                  <div className="video-campaign-overlay">
-                    <div className="video-campaign-brand">{v.brand}</div>
-                    <div className="video-campaign-sub">{v.sub}</div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── BRAND MARQUEE ── */}
       <div style={{ padding: "24px 0", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
         <EnhancedMarquee items={BRANDS} speed={22} gap={64} renderItem={(brand, i) => (
@@ -231,86 +187,36 @@ export default function Home({ onAddToCart }) {
         </div>
       </section>
 
-      {/* ── EDITORIAL CAMPAIGNS ── */}
-      <section style={{ padding: "72px 0", background: "var(--dark)" }}>
+      {/* ── MAISONS & CAMPAGNES — expand cards ── */}
+      <section style={{ background: "var(--dark)", paddingTop: 72, paddingBottom: 0 }}>
         <div className="container">
           <FadeUpWhenVisible>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 40 }}>
               <div>
-                <div className="label" style={{ color: "var(--sand)", marginBottom: 6 }}>Éditorial</div>
-                <h2 className="h2" style={{ color: "white", fontStyle: "italic" }}>Campagnes & Maisons</h2>
+                <div className="label" style={{ color: "var(--sand)", marginBottom: 6 }}>Distributeur Officiel</div>
+                <h2 className="h2" style={{ color: "white" }}>Maisons &amp; Campagnes</h2>
               </div>
-              <Link to="/boutique" style={{ fontSize: "0.68rem", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.38)", textDecoration: "none" }}>
+              <Link to="/boutique" style={{ fontSize: "0.68rem", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.35)", textDecoration: "none" }}>
                 Voir tout →
               </Link>
             </div>
           </FadeUpWhenVisible>
-          <div className="campaigns-grid">
-            {[
-              { img: "/images/brand-chopard-2.png", brand: "Chopard", sub: "Joaillerie & Optique", to: "/boutique?brand=Chopard", tall: true },
-              { img: "/images/brand-gucci.png", brand: "Gucci", sub: "Collection Eyewear", to: "/boutique?brand=Gucci" },
-              { img: "/images/hero-dita.png", brand: "Dita", sub: "Artisanat américain", to: "/boutique?brand=Dita" },
-              { img: "/images/cat-femme-2.png", brand: "Maison Regard", sub: "Collection Femme", to: "/boutique?gender=femme" },
-              { img: "/images/lifestyle-homme-6.png", brand: "Maison Regard", sub: "Collection Homme", to: "/boutique?gender=homme" },
-            ].map((c, i) => (
-              <motion.div
-                key={i}
-                className={`campaign-tile${c.tall ? " tall" : ""}`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.65, delay: i * 0.09, ease }}
-              >
-                <Link to={c.to} className="campaign-tile-link">
-                  <img src={c.img} alt={c.brand} />
-                  <div className="campaign-tile-overlay">
-                    <div className="campaign-tile-brand">{c.brand}</div>
-                    <div className="campaign-tile-sub">{c.sub}</div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
         </div>
-      </section>
-
-      {/* ── PHOTO STRIP MARQUEE ── */}
-      <div style={{
-        background: "var(--dark)",
-        borderTop: "1px solid rgba(255,255,255,.05)",
-        overflow: "hidden",
-        padding: "40px 0",
-      }}>
-        <EnhancedMarquee
-          items={[
-            "/images/brand-chloe.png",
-            "/images/lifestyle-femme-3.png",
-            "/images/brand-lanvin.png",
-            "/images/lifestyle-homme-4.png",
-            "/images/brand-dolce.png",
-            "/images/brand-fred-2.png",
-            "/images/lifestyle-femme-5.png",
-            "/images/brand-montblanc.png",
-            "/images/brand-chopard-homme.png",
-            "/images/lifestyle-homme-8.png",
-            "/images/brand-fred.png",
+        <ExpandCards
+          height={620}
+          cards={[
+            { video: "/videos/cartier-femme.mp4", brand: "Cartier", sub: "Collection Femme", to: "/boutique?brand=Cartier" },
+            { img: "/images/brand-chopard-2.png", brand: "Chopard", sub: "Joaillerie & Optique", to: "/boutique?brand=Chopard" },
+            { video: "/videos/celine.mp4", brand: "Céline", sub: "Eyewear", to: "/boutique?brand=C%C3%A9line" },
+            { video: "/videos/miumiu.mp4", brand: "Miu Miu", sub: "Collection", to: "/boutique?brand=Miu+Miu" },
+            { img: "/images/brand-gucci.png", brand: "Gucci", sub: "Eyewear", to: "/boutique?brand=Gucci" },
+            { video: "/videos/dg-1.mp4", brand: "Dolce & Gabbana", sub: "Campagne", to: "/boutique?brand=Dolce+%26+Gabbana" },
+            { video: "/videos/cartier-homme.mp4", brand: "Cartier", sub: "Collection Homme", to: "/boutique?brand=Cartier" },
+            { img: "/images/hero-dita.png", brand: "Dita", sub: "Artisanat", to: "/boutique?brand=Dita" },
+            { video: "/videos/john-dalia.mp4", brand: "John Dalia", sub: "Artisan", to: "/boutique?brand=John+Dalia" },
           ]}
-          speed={70}
-          gap={10}
-          renderItem={(src, i) => (
-            <div
-              key={i}
-              style={{ width: 210, height: 290, flexShrink: 0, overflow: "hidden" }}
-            >
-              <img
-                src={src}
-                alt=""
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-              />
-            </div>
-          )}
         />
-      </div>
+      </section>
 
       {/* ── STATS ── */}
       <FadeUpWhenVisible>
