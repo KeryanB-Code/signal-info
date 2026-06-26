@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { BRANDS as BRAND_LIST } from "../data/products.js";
 
 const NAV_LINKS = [
   { to: "/boutique", label: "Boutique" },
@@ -39,28 +38,12 @@ export default function Navbar({ cartCount = 0 }) {
           </Link>
 
           <div className="navbar-nav">
-            {/* Dropdown Marques */}
-            <div className="brand-nav-dropdown">
-              <Link
-                to="/marques"
-                style={{
-                  fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase",
-                  fontWeight: 400, color: "var(--gray)", transition: "color .2s",
-                }}
-              >
-                Marques
-              </Link>
-              <div className="brand-nav-dropdown-menu">
-                {BRAND_LIST.map((brand) => (
-                  <Link
-                    key={brand}
-                    to={`/marque/${encodeURIComponent(brand)}`}
-                  >
-                    {brand}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            <Link
+              to="/marques"
+              className={location.pathname === "/marques" ? "active" : ""}
+            >
+              Marques
+            </Link>
 
             {NAV_LINKS.map((l) => (
               <Link
@@ -121,15 +104,6 @@ export default function Navbar({ cartCount = 0 }) {
           <nav>
             <Link to="/boutique">Boutique</Link>
             <Link to="/marques">Marques</Link>
-            {BRAND_LIST.map((brand) => (
-              <Link
-                key={brand}
-                to={`/marque/${encodeURIComponent(brand)}`}
-                style={{ fontSize: "1.1rem", paddingLeft: 16 }}
-              >
-                {brand}
-              </Link>
-            ))}
             {NAV_LINKS.slice(1).map((l) => (
               <Link key={l.to} to={l.to}>{l.label}</Link>
             ))}
