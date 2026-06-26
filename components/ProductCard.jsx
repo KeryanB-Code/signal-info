@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getLifestylePhoto } from "../utils/lifestylePhotos.js";
+import TiltCard from "./animations/TiltCard.jsx";
 
 export default function ProductCard({ product, onAddToCart, index = 0 }) {
   const [liked, setLiked] = useState(false);
@@ -15,11 +16,14 @@ export default function ProductCard({ product, onAddToCart, index = 0 }) {
 
   return (
     <motion.div
-      className="product-card-v2"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.55, delay: index * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
+    <TiltCard maxTilt={6} scale={1.01} glare={true} style={{ height: "100%" }} onClick={handleClick}>
+    <div
+      className="product-card-v2"
       onClick={handleClick}
     >
       <div className="product-card-v2-img">
@@ -88,6 +92,8 @@ export default function ProductCard({ product, onAddToCart, index = 0 }) {
           )}
         </div>
       </div>
+    </div>
+    </TiltCard>
     </motion.div>
   );
 }

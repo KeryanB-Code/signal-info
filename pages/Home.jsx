@@ -226,6 +226,44 @@ export default function Home({ onAddToCart }) {
         </div>
       </section>
 
+      {/* ── PHOTO STRIP MARQUEE ── */}
+      <div style={{
+        background: "var(--dark)",
+        borderTop: "1px solid rgba(255,255,255,.05)",
+        overflow: "hidden",
+        padding: "40px 0",
+      }}>
+        <EnhancedMarquee
+          items={[
+            "/images/brand-chloe.png",
+            "/images/lifestyle-femme-3.png",
+            "/images/brand-lanvin.png",
+            "/images/lifestyle-homme-4.png",
+            "/images/brand-dolce.png",
+            "/images/brand-fred-2.png",
+            "/images/lifestyle-femme-5.png",
+            "/images/brand-montblanc.png",
+            "/images/brand-chopard-homme.png",
+            "/images/lifestyle-homme-8.png",
+            "/images/brand-fred.png",
+          ]}
+          speed={70}
+          gap={10}
+          renderItem={(src, i) => (
+            <div
+              key={i}
+              style={{ width: 210, height: 290, flexShrink: 0, overflow: "hidden" }}
+            >
+              <img
+                src={src}
+                alt=""
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
+          )}
+        />
+      </div>
+
       {/* ── STATS ── */}
       <FadeUpWhenVisible>
         <section style={{ padding: "56px 0", background: "var(--dark)" }}>

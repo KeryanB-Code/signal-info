@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import { ScrollProgress, CustomCursor } from "./components/animations/ScrollProgress.jsx";
 import PageTransition from "./components/animations/PageTransition.jsx";
+import IntroScreen from "./components/animations/IntroScreen.jsx";
 import Home from "./pages/Home.jsx";
 import Boutique from "./pages/Boutique.jsx";
 import Product from "./pages/Product.jsx";
@@ -127,6 +128,7 @@ function AppInner() {
 
   return (
     <>
+      <IntroScreen />
       <CustomCursor />
       <ScrollProgress />
       <ScrollToTop />

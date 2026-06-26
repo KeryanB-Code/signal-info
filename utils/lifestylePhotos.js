@@ -3,6 +3,7 @@ const LIFESTYLE_FEMME = [
   "/images/lifestyle-femme-2.png",
   "/images/lifestyle-femme-3.png",
   "/images/lifestyle-femme-4.png",
+  "/images/lifestyle-femme-5.png",
   "/images/cat-femme-2.png",
 ];
 
@@ -10,9 +11,11 @@ const LIFESTYLE_HOMME = [
   "/images/lifestyle-homme-1.png",
   "/images/lifestyle-homme-2.png",
   "/images/lifestyle-homme-3.png",
+  "/images/lifestyle-homme-4.png",
   "/images/lifestyle-homme-5.png",
   "/images/lifestyle-homme-6.png",
   "/images/lifestyle-homme-7.png",
+  "/images/lifestyle-homme-8.png",
   "/images/cat-homme.png",
 ];
 
