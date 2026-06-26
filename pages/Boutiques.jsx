@@ -67,7 +67,7 @@ const BOUTIQUES = [
       "Samedi":   "9h – 13h",
       "Dimanche": "Fermé",
     },
-    img: "/images/boutique-mastaureau.jpg",
+    img: "/images/boutique-mastaureau.jpg.png",
     mapQuery: "Optique+Mas+du+Taureau+Vaulx-en-Velin",
     rating: 4.7,
     reviewCount: 63,
