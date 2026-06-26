@@ -16,6 +16,7 @@ import Magazine from "./pages/Magazine.jsx";
 import Compte from "./pages/Compte.jsx";
 import Capsule from "./pages/Capsule.jsx";
 import BrandMosaic from "./pages/BrandMosaic.jsx";
+import Marques from "./pages/Marques.jsx";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -148,6 +149,7 @@ function AppInner() {
           <Route path="/compte" element={<Compte />} />
           <Route path="/panier" element={<Panier items={cart} onRemove={removeFromCart} />} />
           <Route path="/capsule" element={<Capsule onAddToCart={addToCart} />} />
+          <Route path="/marques" element={<Marques />} />
           <Route path="/marque/:brand" element={<BrandMosaic />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

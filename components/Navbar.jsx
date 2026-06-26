@@ -42,7 +42,7 @@ export default function Navbar({ cartCount = 0 }) {
             {/* Dropdown Marques */}
             <div className="brand-nav-dropdown">
               <Link
-                to="/boutique"
+                to="/marques"
                 style={{
                   fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase",
                   fontWeight: 400, color: "var(--gray)", transition: "color .2s",
@@ -120,6 +120,7 @@ export default function Navbar({ cartCount = 0 }) {
           </div>
           <nav>
             <Link to="/boutique">Boutique</Link>
+            <Link to="/marques">Marques</Link>
             {BRAND_LIST.map((brand) => (
               <Link
                 key={brand}
