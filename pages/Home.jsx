@@ -54,7 +54,10 @@ export default function Home({ onAddToCart }) {
       {/* ── EDITORIAL HERO ── */}
       <section className="editorial-hero" ref={heroRef}>
         <motion.div className="editorial-hero-bg" style={{ y: heroBgY }}>
-          <img src="/images/hero.png" alt="Maison Regard — Collection" />
+          <video autoPlay muted loop playsInline>
+            <source src="/videos/cartier-femme.mp4" type="video/mp4" />
+            <img src="/images/hero.png" alt="Maison Regard — Collection" />
+          </video>
         </motion.div>
 
         {/* Brand name + CTA overlay */}
@@ -152,6 +155,54 @@ export default function Home({ onAddToCart }) {
             </Link>
           </motion.div>
         ))}
+      </section>
+
+      {/* ── VIDEO CAMPAIGNS ── */}
+      <section className="video-campaigns-section">
+        <div className="container">
+          <FadeUpWhenVisible>
+            <div className="video-campaigns-header">
+              <div>
+                <div className="label" style={{ color: "var(--sand)", marginBottom: 6 }}>Films</div>
+                <h2 className="h2" style={{ color: "white" }}>Campagnes de Maisons</h2>
+              </div>
+              <span style={{ fontSize: "0.62rem", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.28)" }}>
+                Maison Regard · Sélection
+              </span>
+            </div>
+          </FadeUpWhenVisible>
+          <div className="video-campaigns-grid">
+            {[
+              { src: "/videos/cartier-femme.mp4", brand: "Cartier", sub: "Collection Femme", to: "/boutique?brand=Cartier" },
+              { src: "/videos/celine.mp4", brand: "Céline", sub: "Eyewear", to: "/boutique?brand=C%C3%A9line" },
+              { src: "/videos/miumiu.mp4", brand: "Miu Miu", sub: "Campaign", to: "/boutique?brand=Miu+Miu" },
+              { src: "/videos/john-dalia.mp4", brand: "John Dalia", sub: "Artisan", to: "/boutique?brand=John+Dalia" },
+              { src: "/videos/cartier-homme.mp4", brand: "Cartier", sub: "Collection Homme", to: "/boutique?brand=Cartier" },
+              { src: "/videos/dg-1.mp4", brand: "Dolce & Gabbana", sub: "Eyewear I", to: "/boutique?brand=Dolce+%26+Gabbana" },
+              { src: "/videos/meta-kylie.mp4", brand: "Maison Regard", sub: "Éditorial", to: "/boutique" },
+              { src: "/videos/dg-2.mp4", brand: "Dolce & Gabbana", sub: "Eyewear II", to: "/boutique?brand=Dolce+%26+Gabbana" },
+            ].map((v, i) => (
+              <motion.div
+                key={i}
+                className="video-campaign-card"
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, delay: i * 0.07, ease }}
+              >
+                <Link to={v.to} className="video-campaign-link">
+                  <video autoPlay muted loop playsInline preload="metadata">
+                    <source src={v.src} type="video/mp4" />
+                  </video>
+                  <div className="video-campaign-overlay">
+                    <div className="video-campaign-brand">{v.brand}</div>
+                    <div className="video-campaign-sub">{v.sub}</div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ── BRAND MARQUEE ── */}
