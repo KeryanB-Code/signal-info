@@ -8,20 +8,31 @@ export default function ProductCard({ product, onAddToCart, index = 0 }) {
   const handleClick = () => navigate(`/produit/${product.id}`);
   const colorCount = product.colors?.length || 1;
 
+  /* images[1] = clean product shot (default), images[0] = editorial worn shot (hover) */
+  const mainImg = product.images[1] || product.images[0];
+  const wornImg = product.images[0] !== mainImg ? product.images[0] : null;
+
   return (
     <motion.div
       className="product-card-v2"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.5, delay: index * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ duration: 0.55, delay: index * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
       onClick={handleClick}
     >
       <div className="product-card-v2-img">
-        <img
-          src={product.images[1] || product.images[0]}
-          alt={`${product.brand} ${product.name}`}
-        />
+        {/* Clean product shot — default view */}
+        <img src={mainImg} alt={`${product.brand} ${product.name}`} />
+
+        {/* Editorial worn shot — crossfades in on hover */}
+        {wornImg && (
+          <img
+            src={wornImg}
+            alt={`${product.brand} ${product.name} — porté`}
+            className="product-card-v2-img-worn"
+          />
+        )}
 
         {/* Wishlist heart */}
         <button

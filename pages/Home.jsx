@@ -1,5 +1,6 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { PRODUCTS, BRANDS } from "../data/products.js";
 import ProductCard from "../components/ProductCard.jsx";
 import { FadeUpWhenVisible } from "../components/animations/TextReveal.jsx";
@@ -32,35 +33,78 @@ const TESTIMONIALS = [
   },
 ];
 
+const ease = [0.25, 0.46, 0.45, 0.94];
+
 export default function Home({ onAddToCart }) {
+  const heroRef = useRef(null);
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  /* Parallax: bg moves up slower than page scroll */
+  const heroBgY = useTransform(heroScroll, [0, 1], ["0%", "-20%"]);
+  /* Hero text fades + lifts as user scrolls */
+  const heroTextOpacity = useTransform(heroScroll, [0, 0.45], [1, 0]);
+  const heroTextY = useTransform(heroScroll, [0, 0.45], [0, -32]);
+
   return (
     <div className="pt-nav">
 
       {/* ── EDITORIAL HERO ── */}
-      <section className="editorial-hero">
-        <div className="editorial-hero-bg">
+      <section className="editorial-hero" ref={heroRef}>
+        <motion.div className="editorial-hero-bg" style={{ y: heroBgY }}>
           <img src="/images/hero-editorial.svg" alt="Maison Regard — Collection Cartier" />
-        </div>
+        </motion.div>
 
         {/* Brand name + CTA overlay */}
-        <div className="editorial-hero-caption">
-          <p className="editorial-hero-eyebrow">Revendeur officiel agréé</p>
-          <h2 className="editorial-hero-brand">Cartier</h2>
-          <div className="editorial-hero-cta-row">
+        <motion.div
+          className="editorial-hero-caption"
+          style={{ opacity: heroTextOpacity, y: heroTextY }}
+        >
+          <motion.p
+            className="editorial-hero-eyebrow"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease }}
+          >
+            Revendeur officiel agréé
+          </motion.p>
+          <motion.h2
+            className="editorial-hero-brand"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.55, ease }}
+          >
+            Cartier
+          </motion.h2>
+          <motion.div
+            className="editorial-hero-cta-row"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.75, ease }}
+          >
             <span className="editorial-hero-line" />
             <Link to="/boutique?brand=Cartier" className="editorial-hero-cta-text">
               DÉCOUVRIR
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Boutique CTA button */}
-        <Link to="/boutique" className="editorial-hero-nav-btn">
-          Explorer la boutique
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </Link>
+        <motion.div
+          style={{ position: "absolute", bottom: 52, right: 48, zIndex: 3 }}
+          initial={{ opacity: 0, x: 16 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.9, ease }}
+        >
+          <Link to="/boutique" className="editorial-hero-nav-btn">
+            Explorer la boutique
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </motion.div>
 
         {/* Scroll indicator */}
         <div className="editorial-hero-scroll">
@@ -87,27 +131,27 @@ export default function Home({ onAddToCart }) {
 
       {/* ── CATEGORY TILES ── */}
       <section className="cat-tiles-section">
-        <Link to="/boutique?gender=femme" className="cat-tile">
-          <img src="/images/cat-femme.svg" alt="Solaires Femme" />
-          <div className="cat-tile-overlay">
-            <span className="cat-tile-name">Solaires Femme</span>
-            <span className="cat-tile-link">Découvrir →</span>
-          </div>
-        </Link>
-        <Link to="/boutique?gender=homme" className="cat-tile">
-          <img src="/images/cat-homme.svg" alt="Solaires Homme" />
-          <div className="cat-tile-overlay">
-            <span className="cat-tile-name">Solaires Homme</span>
-            <span className="cat-tile-link">Découvrir →</span>
-          </div>
-        </Link>
-        <Link to="/boutique" className="cat-tile">
-          <img src="/images/cat-nouveautes.svg" alt="Nouvelles Collections" />
-          <div className="cat-tile-overlay">
-            <span className="cat-tile-name">Nouvelles Collections</span>
-            <span className="cat-tile-link">Voir tout →</span>
-          </div>
-        </Link>
+        {[
+          { to: "/boutique?gender=femme", img: "/images/cat-femme.svg", alt: "Solaires Femme", label: "Solaires Femme" },
+          { to: "/boutique?gender=homme", img: "/images/cat-homme.svg", alt: "Solaires Homme", label: "Solaires Homme" },
+          { to: "/boutique", img: "/images/cat-nouveautes.svg", alt: "Nouvelles Collections", label: "Nouvelles Collections", cta: "Voir tout →" },
+        ].map((tile, i) => (
+          <motion.div
+            key={tile.label}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.65, delay: i * 0.1, ease }}
+          >
+            <Link to={tile.to} className="cat-tile">
+              <img src={tile.img} alt={tile.alt} />
+              <div className="cat-tile-overlay">
+                <span className="cat-tile-name">{tile.label}</span>
+                <span className="cat-tile-link">{tile.cta || "Découvrir →"}</span>
+              </div>
+            </Link>
+          </motion.div>
+        ))}
       </section>
 
       {/* ── BRAND MARQUEE ── */}
@@ -122,13 +166,15 @@ export default function Home({ onAddToCart }) {
       {/* ── PRODUCT SELECTION ── */}
       <section className="section">
         <div className="container">
-          <div className="products-section-hdr">
-            <div className="products-section-hdr-left">
-              <div className="label">Sélection</div>
-              <h2 className="h2">Notre curation</h2>
+          <FadeUpWhenVisible>
+            <div className="products-section-hdr">
+              <div className="products-section-hdr-left">
+                <div className="label">Sélection</div>
+                <h2 className="h2">Notre curation</h2>
+              </div>
+              <Link to="/boutique" className="btn btn-ghost">Voir tout →</Link>
             </div>
-            <Link to="/boutique" className="btn btn-ghost">Voir tout →</Link>
-          </div>
+          </FadeUpWhenVisible>
           <div className="grid-4">
             {DISPLAY_PRODUCTS.map((p, i) => (
               <ProductCard key={p.id} product={p} onAddToCart={onAddToCart} index={i} />
@@ -140,43 +186,54 @@ export default function Home({ onAddToCart }) {
       {/* ── BRAND TILES ── */}
       <section style={{ padding: "56px 0", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", background: "var(--white)" }}>
         <div className="container">
-          <div style={{ textAlign: "center", marginBottom: 32 }}>
-            <div className="label" style={{ color: "var(--gray-light)", marginBottom: 6 }}>Revendeur officiel agréé</div>
-            <h2 className="h2" style={{ fontSize: "clamp(1.5rem, 3vw, 2.2rem)" }}>Nos maisons partenaires</h2>
-          </div>
+          <FadeUpWhenVisible>
+            <div style={{ textAlign: "center", marginBottom: 32 }}>
+              <div className="label" style={{ color: "var(--gray-light)", marginBottom: 6 }}>Revendeur officiel agréé</div>
+              <h2 className="h2" style={{ fontSize: "clamp(1.5rem, 3vw, 2.2rem)" }}>Nos maisons partenaires</h2>
+            </div>
+          </FadeUpWhenVisible>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 0 }}>
-            {BRANDS.slice(0, 8).map((brand) => (
-              <Link
+            {BRANDS.slice(0, 8).map((brand, i) => (
+              <motion.div
                 key={brand}
-                to={`/boutique?brand=${encodeURIComponent(brand)}`}
-                style={{
-                  textAlign: "center",
-                  fontFamily: "var(--serif)",
-                  fontSize: "1rem",
-                  letterSpacing: ".18em",
-                  textTransform: "uppercase",
-                  color: "var(--dark-2)",
-                  opacity: 0.55,
-                  padding: "20px 12px",
-                  border: "1px solid var(--border)",
-                  margin: "-1px 0 0 -1px",
-                  transition: "all 0.25s",
-                  textDecoration: "none",
-                  display: "block",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.opacity = "1";
-                  e.currentTarget.style.background = "#FAFAFA";
-                  e.currentTarget.style.color = "var(--dark)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.opacity = "0.55";
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "var(--dark-2)";
-                }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
               >
-                {brand}
-              </Link>
+                <Link
+                  to={`/boutique?brand=${encodeURIComponent(brand)}`}
+                  style={{
+                    textAlign: "center",
+                    fontFamily: "var(--serif)",
+                    fontSize: "1rem",
+                    letterSpacing: ".18em",
+                    textTransform: "uppercase",
+                    color: "var(--dark-2)",
+                    opacity: 0.55,
+                    padding: "20px 12px",
+                    border: "1px solid var(--border)",
+                    margin: "-1px 0 0 -1px",
+                    transition: "all 0.3s",
+                    textDecoration: "none",
+                    display: "block",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.opacity = "1";
+                    e.currentTarget.style.background = "#FAFAFA";
+                    e.currentTarget.style.color = "var(--dark)";
+                    e.currentTarget.style.letterSpacing = ".22em";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.opacity = "0.55";
+                    e.currentTarget.style.background = "transparent";
+                    e.currentTarget.style.color = "var(--dark-2)";
+                    e.currentTarget.style.letterSpacing = ".18em";
+                  }}
+                >
+                  {brand}
+                </Link>
+              </motion.div>
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: 20 }}>
@@ -248,7 +305,7 @@ export default function Home({ onAddToCart }) {
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.45, delay: i * 0.06, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  transition={{ duration: 0.45, delay: i * 0.06, ease }}
                   style={{
                     display: "flex", gap: 16, alignItems: "flex-start",
                     padding: "14px 18px", background: "var(--white)", border: "1px solid var(--border)",
@@ -285,7 +342,7 @@ export default function Home({ onAddToCart }) {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+                transition={{ duration: 0.6, delay: i * 0.1, ease }}
               >
                 <div style={{ display: "flex", gap: 2, marginBottom: 14 }}>
                   {[...Array(5)].map((_, j) => (

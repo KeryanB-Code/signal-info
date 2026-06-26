@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { PRODUCTS } from "../data/products.js";
 import ProductCard from "../components/ProductCard.jsx";
 
@@ -105,7 +106,12 @@ export default function Product({ onAddToCart }) {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 480px", gap: 64, alignItems: "start" }}>
 
           {/* ─── GALERIE ─── */}
-          <div className="product-gallery">
+          <motion.div
+            className="product-gallery"
+            initial={{ opacity: 0, x: -24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
             <div className="product-thumbs">
               {product.images.map((src, i) => (
                 <div
@@ -129,13 +135,26 @@ export default function Product({ onAddToCart }) {
                 <span style={{ fontSize: "0.55rem", color: "var(--sand-dark)", letterSpacing: ".05em" }}>3D</span>
               </button>
             </div>
+            {/* Crossfade gallery — all images stacked, active shown via CSS class */}
             <div className="product-main-img">
-              <img src={product.images[imgIdx]} alt={`${product.brand} ${product.name}`} />
+              {product.images.map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt={`${product.brand} ${product.name}`}
+                  className={imgIdx === i ? "active" : ""}
+                />
+              ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* ─── INFOS PRODUIT ─── */}
-          <div style={{ position: "sticky", top: 100 }}>
+          <motion.div
+            style={{ position: "sticky", top: 100 }}
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, delay: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
             <div style={{ marginBottom: 6 }}>
               <Link to={`/boutique?brand=${product.brand}`} className="label text-sand">{product.brand}</Link>
             </div>
@@ -291,7 +310,7 @@ export default function Product({ onAddToCart }) {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* ─── TABS : Description / Matières / Avis ─── */}

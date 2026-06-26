@@ -332,11 +332,23 @@ input, textarea, select { font-family: var(--sans); }
 .product-thumbs { display: flex; flex-direction: column; gap: 8px; }
 .product-thumb {
   aspect-ratio: 1; overflow: hidden; cursor: pointer; border: 1px solid transparent;
-  transition: border-color .2s;
+  transition: border-color .25s;
 }
 .product-thumb.active { border-color: var(--dark); }
-.product-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.product-main-img { aspect-ratio: 4/5; overflow: hidden; background: #F5F3EF; }
+.product-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.product-thumb:hover img { transform: scale(1.06); }
+.product-main-img {
+  aspect-ratio: 4/5; overflow: hidden; background: #F5F3EF;
+  position: relative; cursor: zoom-in;
+}
+/* crossfade: all images stacked, show active via opacity */
+.product-main-img img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  transition: opacity .45s ease, transform .7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0;
+}
+.product-main-img img.active { opacity: 1; }
+.product-main-img:hover img.active { transform: scale(1.07); }
 .product-main-img img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ─── Alma Widget ─── */
@@ -594,6 +606,8 @@ input, textarea, select { font-family: var(--sans); }
 }
 .editorial-hero-bg {
   position: absolute; inset: 0;
+  height: 130%; /* extra for parallax travel */
+  will-change: transform;
 }
 .editorial-hero-bg img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
@@ -688,11 +702,17 @@ input, textarea, select { font-family: var(--sans); }
   font-family: var(--serif); font-style: italic; font-size: clamp(1.3rem, 2.5vw, 1.9rem);
   font-weight: 300; color: white; opacity: 0.93; line-height: 1.1; display: block;
   margin-bottom: 8px;
+  transform: translateY(8px);
+  transition: transform .55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+.cat-tile:hover .cat-tile-name { transform: translateY(0); }
 .cat-tile-link {
   font-size: 0.62rem; letter-spacing: .22em; text-transform: uppercase;
-  color: rgba(255,255,255,0.5); font-family: var(--sans); display: block;
+  color: rgba(255,255,255,0.65); font-family: var(--sans); display: block;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .38s ease .1s, transform .38s ease .1s;
 }
+.cat-tile:hover .cat-tile-link { opacity: 1; transform: translateY(0); }
 @media (max-width: 768px) {
   .cat-tiles-section { grid-template-columns: 1fr; }
   .cat-tile { aspect-ratio: 4/3; }
@@ -711,9 +731,17 @@ input, textarea, select { font-family: var(--sans); }
 }
 .product-card-v2-img img {
   width: 100%; height: 100%; object-fit: cover;
-  transition: transform .6s ease;
+  transition: transform .7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.product-card-v2:hover .product-card-v2-img img { transform: scale(1.04); }
+.product-card-v2:hover .product-card-v2-img img { transform: scale(1.05); }
+/* Worn/editorial image crossfade on hover */
+.product-card-v2-img-worn {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity .65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+}
+.product-card-v2:hover .product-card-v2-img-worn { opacity: 1; }
 .product-card-v2-wishlist {
   position: absolute; top: 10px; right: 10px; z-index: 2;
   width: 30px; height: 30px; background: white; border-radius: 50%;
