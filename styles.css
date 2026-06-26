@@ -916,6 +916,31 @@ input, textarea, select { font-family: var(--sans); }
 }
 .pt-nav { padding-top: 108px; }
 
+/* ── BRAND MOSAIC PAGE ── */
+.brand-mosaic-grid {
+  column-gap: 5px;
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.brand-mosaic-item {
+  break-inside: avoid;
+  margin-bottom: 5px;
+  overflow: hidden;
+  display: block;
+}
+.brand-mosaic-item img,
+.brand-mosaic-item video {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+@media (max-width: 768px) {
+  .brand-mosaic-grid {
+    columns: 1 !important;
+  }
+}
+
 /* ── VIDEO CAMPAIGNS ── */
 .video-campaigns-section {
   background: #080808;

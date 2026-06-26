@@ -54,7 +54,7 @@ export default function Navbar({ cartCount = 0 }) {
                 {BRAND_LIST.map((brand) => (
                   <Link
                     key={brand}
-                    to={`/boutique?brand=${encodeURIComponent(brand)}`}
+                    to={`/marque/${encodeURIComponent(brand)}`}
                   >
                     {brand}
                   </Link>
@@ -123,7 +123,7 @@ export default function Navbar({ cartCount = 0 }) {
             {BRAND_LIST.map((brand) => (
               <Link
                 key={brand}
-                to={`/boutique?brand=${encodeURIComponent(brand)}`}
+                to={`/marque/${encodeURIComponent(brand)}`}
                 style={{ fontSize: "1.1rem", paddingLeft: 16 }}
               >
                 {brand}
