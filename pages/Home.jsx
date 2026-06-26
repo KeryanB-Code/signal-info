@@ -193,8 +193,7 @@ export default function Home({ onAddToCart }) {
           <FadeUpWhenVisible>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 40 }}>
               <div>
-                <div className="label" style={{ color: "var(--sand)", marginBottom: 6 }}>Distributeur Officiel</div>
-                <h2 className="h2" style={{ color: "white" }}>Maisons &amp; Campagnes</h2>
+                <h2 className="h2" style={{ color: "white" }}>Maisons</h2>
               </div>
               <Link to="/boutique" style={{ fontSize: "0.68rem", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.35)", textDecoration: "none" }}>
                 Voir tout →
