@@ -54,7 +54,7 @@ export default function Home({ onAddToCart }) {
       {/* ── EDITORIAL HERO ── */}
       <section className="editorial-hero" ref={heroRef}>
         <motion.div className="editorial-hero-bg" style={{ y: heroBgY }}>
-          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1400&q=90" alt="Maison Regard — Collection Cartier" />
+          <img src="/images/hero.png" alt="Maison Regard — Collection" />
         </motion.div>
 
         {/* Brand name + CTA overlay */}
@@ -132,9 +132,9 @@ export default function Home({ onAddToCart }) {
       {/* ── CATEGORY TILES ── */}
       <section className="cat-tiles-section">
         {[
-          { to: "/boutique?gender=femme", img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&h=800&q=85", alt: "Solaires Femme", label: "Solaires Femme" },
-          { to: "/boutique?gender=homme", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=800&q=85", alt: "Solaires Homme", label: "Solaires Homme" },
-          { to: "/boutique", img: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=600&h=800&q=85", alt: "Nouvelles Collections", label: "Nouvelles Collections", cta: "Voir tout →" },
+          { to: "/boutique?gender=femme", img: "/images/cat-femme.png", alt: "Solaires Femme", label: "Solaires Femme" },
+          { to: "/boutique?gender=homme", img: "/images/cat-homme.png", alt: "Solaires Homme", label: "Solaires Homme" },
+          { to: "/boutique", img: "/images/hero-cartier.png", alt: "Nouvelles Collections", label: "Nouvelles Collections", cta: "Voir tout →" },
         ].map((tile, i) => (
           <motion.div
             key={tile.label}
@@ -183,63 +183,45 @@ export default function Home({ onAddToCart }) {
         </div>
       </section>
 
-      {/* ── BRAND TILES ── */}
-      <section style={{ padding: "56px 0", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", background: "var(--white)" }}>
+      {/* ── EDITORIAL CAMPAIGNS ── */}
+      <section style={{ padding: "72px 0", background: "var(--dark)" }}>
         <div className="container">
           <FadeUpWhenVisible>
-            <div style={{ textAlign: "center", marginBottom: 32 }}>
-              <div className="label" style={{ color: "var(--gray-light)", marginBottom: 6 }}>Revendeur officiel agréé</div>
-              <h2 className="h2" style={{ fontSize: "clamp(1.5rem, 3vw, 2.2rem)" }}>Nos maisons partenaires</h2>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 40 }}>
+              <div>
+                <div className="label" style={{ color: "var(--sand)", marginBottom: 6 }}>Éditorial</div>
+                <h2 className="h2" style={{ color: "white", fontStyle: "italic" }}>Campagnes & Maisons</h2>
+              </div>
+              <Link to="/boutique" style={{ fontSize: "0.68rem", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.38)", textDecoration: "none" }}>
+                Voir tout →
+              </Link>
             </div>
           </FadeUpWhenVisible>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 0 }}>
-            {BRANDS.slice(0, 8).map((brand, i) => (
+          <div className="campaigns-grid">
+            {[
+              { img: "/images/brand-chopard-2.png", brand: "Chopard", sub: "Joaillerie & Optique", to: "/boutique?brand=Chopard", tall: true },
+              { img: "/images/brand-gucci.png", brand: "Gucci", sub: "Collection Eyewear", to: "/boutique?brand=Gucci" },
+              { img: "/images/hero-dita.png", brand: "Dita", sub: "Artisanat américain", to: "/boutique?brand=Dita" },
+              { img: "/images/cat-femme-2.png", brand: "Maison Regard", sub: "Collection Femme", to: "/boutique?gender=femme" },
+              { img: "/images/lifestyle-homme-6.png", brand: "Maison Regard", sub: "Collection Homme", to: "/boutique?gender=homme" },
+            ].map((c, i) => (
               <motion.div
-                key={brand}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
+                key={i}
+                className={`campaign-tile${c.tall ? " tall" : ""}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.65, delay: i * 0.09, ease }}
               >
-                <Link
-                  to={`/boutique?brand=${encodeURIComponent(brand)}`}
-                  style={{
-                    textAlign: "center",
-                    fontFamily: "var(--serif)",
-                    fontSize: "1rem",
-                    letterSpacing: ".18em",
-                    textTransform: "uppercase",
-                    color: "var(--dark-2)",
-                    opacity: 0.55,
-                    padding: "20px 12px",
-                    border: "1px solid var(--border)",
-                    margin: "-1px 0 0 -1px",
-                    transition: "all 0.3s",
-                    textDecoration: "none",
-                    display: "block",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = "1";
-                    e.currentTarget.style.background = "#FAFAFA";
-                    e.currentTarget.style.color = "var(--dark)";
-                    e.currentTarget.style.letterSpacing = ".22em";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = "0.55";
-                    e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.color = "var(--dark-2)";
-                    e.currentTarget.style.letterSpacing = ".18em";
-                  }}
-                >
-                  {brand}
+                <Link to={c.to} className="campaign-tile-link">
+                  <img src={c.img} alt={c.brand} />
+                  <div className="campaign-tile-overlay">
+                    <div className="campaign-tile-brand">{c.brand}</div>
+                    <div className="campaign-tile-sub">{c.sub}</div>
+                  </div>
                 </Link>
               </motion.div>
             ))}
-          </div>
-          <div style={{ textAlign: "center", marginTop: 20 }}>
-            <Link to="/boutique" style={{ fontSize: "0.65rem", letterSpacing: ".18em", textTransform: "uppercase", color: "var(--gray)", textDecoration: "none" }}>
-              Voir toutes les marques ({BRANDS.length}) →
-            </Link>
           </div>
         </div>
       </section>
