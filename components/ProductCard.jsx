@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { getLifestylePhoto } from "../utils/lifestylePhotos.js";
 
 export default function ProductCard({ product, onAddToCart, index = 0 }) {
   const [liked, setLiked] = useState(false);
@@ -8,9 +9,9 @@ export default function ProductCard({ product, onAddToCart, index = 0 }) {
   const handleClick = () => navigate(`/produit/${product.id}`);
   const colorCount = product.colors?.length || 1;
 
-  /* images[1] = clean product shot (default), images[0] = editorial worn shot (hover) */
+  /* images[1] = clean product shot (default), lifestyle photo = editorial worn shot (hover) */
   const mainImg = product.images[1] || product.images[0];
-  const wornImg = product.images[0] !== mainImg ? product.images[0] : null;
+  const wornImg = getLifestylePhoto(product);
 
   return (
     <motion.div
@@ -25,14 +26,12 @@ export default function ProductCard({ product, onAddToCart, index = 0 }) {
         {/* Clean product shot — default view */}
         <img src={mainImg} alt={`${product.brand} ${product.name}`} />
 
-        {/* Editorial worn shot — crossfades in on hover */}
-        {wornImg && (
-          <img
-            src={wornImg}
-            alt={`${product.brand} ${product.name} — porté`}
-            className="product-card-v2-img-worn"
-          />
-        )}
+        {/* Lifestyle photo — crossfades in on hover */}
+        <img
+          src={wornImg}
+          alt={`${product.brand} ${product.name} — porté`}
+          className="product-card-v2-img-worn"
+        />
 
         {/* Wishlist heart */}
         <button

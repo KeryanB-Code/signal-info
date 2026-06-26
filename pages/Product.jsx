@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { PRODUCTS } from "../data/products.js";
 import ProductCard from "../components/ProductCard.jsx";
+import { getLifestylePhoto } from "../utils/lifestylePhotos.js";
 
 const ALMA_PLANS = [
   { x: "2x", label: "2 fois", monthly: null },
@@ -57,7 +58,9 @@ export default function Product({ onAddToCart }) {
   const navigate = useNavigate();
   const product = PRODUCTS.find((p) => p.id === id);
 
-  const [imgIdx, setImgIdx] = useState(1); /* start on clean product shot (index 1) */
+  const lifestyleImg = getLifestylePhoto(product);
+  const galleryImages = [lifestyleImg, ...product.images];
+  const [imgIdx, setImgIdx] = useState(1); /* start on clean product shot (index 1 after lifestyle prepend) */
   const [selectedAlma, setSelectedAlma] = useState(1);
   const [selectedColor, setSelectedColor] = useState(0);
   const [correctionOpen, setCorrectionOpen] = useState(false);
@@ -113,7 +116,7 @@ export default function Product({ onAddToCart }) {
             transition={{ duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <div className="product-thumbs">
-              {product.images.map((src, i) => (
+              {galleryImages.map((src, i) => (
                 <div
                   key={i}
                   className={`product-thumb ${imgIdx === i ? "active" : ""}`}
@@ -137,7 +140,7 @@ export default function Product({ onAddToCart }) {
             </div>
             {/* Crossfade gallery — all images stacked, active shown via CSS class */}
             <div className="product-main-img">
-              {product.images.map((src, i) => (
+              {galleryImages.map((src, i) => (
                 <img
                   key={i}
                   src={src}

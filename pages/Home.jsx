@@ -54,7 +54,7 @@ export default function Home({ onAddToCart }) {
       {/* ── EDITORIAL HERO ── */}
       <section className="editorial-hero" ref={heroRef}>
         <motion.div className="editorial-hero-bg" style={{ y: heroBgY }}>
-          <img src="/images/hero-editorial.svg" alt="Maison Regard — Collection Cartier" />
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1400&q=90" alt="Maison Regard — Collection Cartier" />
         </motion.div>
 
         {/* Brand name + CTA overlay */}
@@ -132,9 +132,9 @@ export default function Home({ onAddToCart }) {
       {/* ── CATEGORY TILES ── */}
       <section className="cat-tiles-section">
         {[
-          { to: "/boutique?gender=femme", img: "/images/cat-femme.svg", alt: "Solaires Femme", label: "Solaires Femme" },
-          { to: "/boutique?gender=homme", img: "/images/cat-homme.svg", alt: "Solaires Homme", label: "Solaires Homme" },
-          { to: "/boutique", img: "/images/cat-nouveautes.svg", alt: "Nouvelles Collections", label: "Nouvelles Collections", cta: "Voir tout →" },
+          { to: "/boutique?gender=femme", img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&h=800&q=85", alt: "Solaires Femme", label: "Solaires Femme" },
+          { to: "/boutique?gender=homme", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=800&q=85", alt: "Solaires Homme", label: "Solaires Homme" },
+          { to: "/boutique", img: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=600&h=800&q=85", alt: "Nouvelles Collections", label: "Nouvelles Collections", cta: "Voir tout →" },
         ].map((tile, i) => (
           <motion.div
             key={tile.label}
