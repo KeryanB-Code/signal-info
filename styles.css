@@ -921,23 +921,6 @@ input, textarea, select { font-family: var(--sans); }
   background: #080808;
   padding: 72px 0 80px;
 }
-.video-campaigns-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 40px;
-}
-.video-campaigns-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto auto;
-  gap: 10px;
-}
-.video-campaign-card {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 9 / 14;
-}
 .video-campaign-link {
   display: block;
   position: relative;
@@ -952,7 +935,7 @@ input, textarea, select { font-family: var(--sans); }
   display: block;
   transition: transform 0.7s cubic-bezier(.25,.46,.45,.94);
 }
-.video-campaign-card:hover .video-campaign-link video {
+.video-scroll-card:hover .video-campaign-link video {
   transform: scale(1.06);
 }
 .video-campaign-overlay {
@@ -966,7 +949,7 @@ input, textarea, select { font-family: var(--sans); }
   pointer-events: none;
   transition: background 0.4s ease;
 }
-.video-campaign-card:hover .video-campaign-overlay {
+.video-scroll-card:hover .video-campaign-overlay {
   background: linear-gradient(to top, rgba(0,0,0,.88) 0%, transparent 65%);
 }
 .video-campaign-brand {
@@ -984,23 +967,43 @@ input, textarea, select { font-family: var(--sans); }
   margin-top: 5px;
 }
 
-/* Hero video background */
+/* Hero video background — portrait video, centered, full height, no over-crop */
+.editorial-hero-bg {
+  background: #0C0C0C;
+}
 .editorial-hero-bg video {
-  width: 100%;
   height: 100%;
-  object-fit: cover;
+  width: auto;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   display: block;
+  min-width: 100%;
+  object-fit: cover;
+  object-position: center top;
 }
 
-@media (max-width: 900px) {
-  .video-campaigns-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* Video scroll track */
+.video-scroll-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 8px;
 }
-@media (max-width: 480px) {
-  .video-campaigns-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-  }
-  .video-campaigns-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+.video-scroll-track::-webkit-scrollbar { display: none; }
+.video-scroll-card {
+  flex-shrink: 0;
+  width: 280px;
+  height: 420px;
+  scroll-snap-align: start;
+  overflow: hidden;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .video-scroll-card { width: 220px; height: 340px; }
 }

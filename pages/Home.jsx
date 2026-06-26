@@ -137,7 +137,7 @@ export default function Home({ onAddToCart }) {
         {[
           { to: "/boutique?gender=femme", img: "/images/cat-femme.png", alt: "Solaires Femme", label: "Solaires Femme" },
           { to: "/boutique?gender=homme", img: "/images/cat-homme.png", alt: "Solaires Homme", label: "Solaires Homme" },
-          { to: "/boutique", img: "/images/hero-cartier.png", alt: "Nouvelles Collections", label: "Nouvelles Collections", cta: "Voir tout →" },
+          { to: "/boutique", img: "/images/cat-unisexe.png", alt: "Unisexe", label: "Unisexe" },
         ].map((tile, i) => (
           <motion.div
             key={tile.label}
@@ -161,34 +161,31 @@ export default function Home({ onAddToCart }) {
       <section className="video-campaigns-section">
         <div className="container">
           <FadeUpWhenVisible>
-            <div className="video-campaigns-header">
-              <div>
-                <div className="label" style={{ color: "var(--sand)", marginBottom: 6 }}>Films</div>
-                <h2 className="h2" style={{ color: "white" }}>Campagnes de Maisons</h2>
-              </div>
-              <span style={{ fontSize: "0.62rem", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.28)" }}>
-                Maison Regard · Sélection
-              </span>
+            <div style={{ marginBottom: 44 }}>
+              <h2 className="h2" style={{ color: "white" }}>Distributeur Officiel</h2>
+              <p style={{ fontSize: "0.65rem", letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.28)", marginTop: 10 }}>
+                Cartier · Céline · Miu Miu · Dolce &amp; Gabbana · John Dalia
+              </p>
             </div>
           </FadeUpWhenVisible>
-          <div className="video-campaigns-grid">
+          <div className="video-scroll-track">
             {[
               { src: "/videos/cartier-femme.mp4", brand: "Cartier", sub: "Collection Femme", to: "/boutique?brand=Cartier" },
+              { src: "/videos/cartier-homme.mp4", brand: "Cartier", sub: "Collection Homme", to: "/boutique?brand=Cartier" },
               { src: "/videos/celine.mp4", brand: "Céline", sub: "Eyewear", to: "/boutique?brand=C%C3%A9line" },
               { src: "/videos/miumiu.mp4", brand: "Miu Miu", sub: "Campaign", to: "/boutique?brand=Miu+Miu" },
+              { src: "/videos/dg-1.mp4", brand: "Dolce & Gabbana", sub: "Campagne I", to: "/boutique?brand=Dolce+%26+Gabbana" },
+              { src: "/videos/dg-2.mp4", brand: "Dolce & Gabbana", sub: "Campagne II", to: "/boutique?brand=Dolce+%26+Gabbana" },
               { src: "/videos/john-dalia.mp4", brand: "John Dalia", sub: "Artisan", to: "/boutique?brand=John+Dalia" },
-              { src: "/videos/cartier-homme.mp4", brand: "Cartier", sub: "Collection Homme", to: "/boutique?brand=Cartier" },
-              { src: "/videos/dg-1.mp4", brand: "Dolce & Gabbana", sub: "Eyewear I", to: "/boutique?brand=Dolce+%26+Gabbana" },
               { src: "/videos/meta-kylie.mp4", brand: "Maison Regard", sub: "Éditorial", to: "/boutique" },
-              { src: "/videos/dg-2.mp4", brand: "Dolce & Gabbana", sub: "Eyewear II", to: "/boutique?brand=Dolce+%26+Gabbana" },
             ].map((v, i) => (
               <motion.div
                 key={i}
-                className="video-campaign-card"
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                className="video-scroll-card"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.6, delay: i * 0.07, ease }}
+                transition={{ duration: 0.55, delay: i * 0.06, ease }}
               >
                 <Link to={v.to} className="video-campaign-link">
                   <video autoPlay muted loop playsInline preload="metadata">
@@ -221,7 +218,7 @@ export default function Home({ onAddToCart }) {
             <div className="products-section-hdr">
               <div className="products-section-hdr-left">
                 <div className="label">Sélection</div>
-                <h2 className="h2">Notre curation</h2>
+                <h2 className="h2">Notre Sélection</h2>
               </div>
               <Link to="/boutique" className="btn btn-ghost">Voir tout →</Link>
             </div>
