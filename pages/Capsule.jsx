@@ -1,27 +1,36 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { PRODUCTS } from "../data/products.js";
+import { useProducts } from "../context/ProductsContext.jsx";
 import ProductCard from "../components/ProductCard.jsx";
-
-const CAPSULE_PRODUCTS = PRODUCTS.slice(0, 8).map((p, i) => ({
-  ...p,
-  capsuleName: [
-    "La Lumière Rasante",
-    "L'Ombre Portée",
-    "Le Reflet Brisé",
-    "La Trace Bleue",
-    "Le Crépuscule",
-    "L'Empreinte Dorée",
-    "Le Seuil",
-    "Le Contre-Jour",
-  ][i],
-  stock: Math.floor(Math.random() * 8) + 3,
-}));
+import DataState from "../components/DataState.jsx";
 
 export default function Capsule({ onAddToCart }) {
+  const { products, loading, error } = useProducts();
   const [countdown] = useState({ days: 12, hours: 7, min: 34 });
 
+  // useMemo (pas recalculé à chaque rendu) : sinon le stock "aléatoire"
+  // changerait sous les yeux du visiteur à chaque interaction de la page.
+  const CAPSULE_PRODUCTS = useMemo(
+    () =>
+      products.slice(0, 8).map((p, i) => ({
+        ...p,
+        capsuleName: [
+          "La Lumière Rasante",
+          "L'Ombre Portée",
+          "Le Reflet Brisé",
+          "La Trace Bleue",
+          "Le Crépuscule",
+          "L'Empreinte Dorée",
+          "Le Seuil",
+          "Le Contre-Jour",
+        ][i],
+        stock: Math.floor(Math.random() * 8) + 3,
+      })),
+    [products]
+  );
+
   return (
+    <DataState loading={loading} error={error}>
     <div className="pt-nav">
       {/* ─── HERO CAPSULE ─── */}
       <div className="capsule-hero" style={{ height: "80vh" }}>
@@ -163,5 +172,6 @@ export default function Capsule({ onAddToCart }) {
         </div>
       </section>
     </div>
+    </DataState>
   );
 }

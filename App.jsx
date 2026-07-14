@@ -5,6 +5,11 @@ import Footer from "./components/Footer.jsx";
 import { ScrollProgress, CustomCursor } from "./components/animations/ScrollProgress.jsx";
 import PageTransition from "./components/animations/PageTransition.jsx";
 import IntroScreen from "./components/animations/IntroScreen.jsx";
+import { ProductsProvider } from "./context/ProductsContext.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import { logEvent } from "./data/eventsApi.js";
+import { getSessionId } from "./utils/sessionId.js";
+import { PILOTAGE_ROLES } from "./data/roles.js";
 import Home from "./pages/Home.jsx";
 import Boutique from "./pages/Boutique.jsx";
 import Product from "./pages/Product.jsx";
@@ -17,10 +22,23 @@ import Compte from "./pages/Compte.jsx";
 import Capsule from "./pages/Capsule.jsx";
 import BrandMosaic from "./pages/BrandMosaic.jsx";
 import Marques from "./pages/Marques.jsx";
+import AdminRoute from "./components/admin/AdminRoute.jsx";
+import RequireRole from "./components/admin/RequireRole.jsx";
+import AdminLogin from "./pages/admin/AdminLogin.jsx";
+import AdminLayout from "./pages/admin/AdminLayout.jsx";
+import AdminHome from "./pages/admin/AdminHome.jsx";
+import AdminProducts from "./pages/admin/AdminProducts.jsx";
+import AdminProductForm from "./pages/admin/AdminProductForm.jsx";
+import AdminBugs from "./pages/admin/AdminBugs.jsx";
+import AdminPilotage from "./pages/admin/AdminPilotage.jsx";
+import AdminAccess from "./pages/admin/AdminAccess.jsx";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    logEvent({ type: "pageview", path: pathname, sessionId: getSessionId() });
+  }, [pathname]);
   return null;
 }
 
@@ -89,7 +107,11 @@ function Panier({ items, onRemove }) {
                     ))}
                   </div>
                 </div>
-                <button className="btn btn-dark" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+                <button
+                  className="btn btn-dark"
+                  style={{ width: "100%", display: "flex", justifyContent: "center" }}
+                  onClick={() => logEvent({ type: "checkout_click", path: "/panier", sessionId: getSessionId() })}
+                >
                   Procéder au paiement
                 </button>
                 <p style={{ fontSize: "0.7rem", color: "var(--gray)", textAlign: "center", marginTop: 12 }}>
@@ -119,9 +141,11 @@ function NotFound() {
 
 function AppInner() {
   const [cart, setCart] = useState([]);
+  const location = useLocation();
 
   const addToCart = (product) => {
     setCart((prev) => [...prev, product]);
+    logEvent({ type: "add_to_cart", path: location.pathname, productId: product.id, sessionId: getSessionId() });
   };
 
   const removeFromCart = (index) => {
@@ -162,7 +186,27 @@ function AppInner() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AppInner />
+      <ProductsProvider>
+        <AuthProvider>
+          <Routes>
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminRoute />}>
+              <Route element={<AdminLayout />}>
+                <Route index element={<AdminHome />} />
+                <Route path="products" element={<AdminProducts />} />
+                <Route path="products/new" element={<AdminProductForm />} />
+                <Route path="products/:id/edit" element={<AdminProductForm />} />
+                <Route path="bugs" element={<AdminBugs />} />
+                <Route element={<RequireRole roles={PILOTAGE_ROLES} />}>
+                  <Route path="pilotage" element={<AdminPilotage />} />
+                  <Route path="access" element={<AdminAccess />} />
+                </Route>
+              </Route>
+            </Route>
+            <Route path="/*" element={<AppInner />} />
+          </Routes>
+        </AuthProvider>
+      </ProductsProvider>
     </BrowserRouter>
   );
 }

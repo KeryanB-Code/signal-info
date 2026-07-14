@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { PRODUCTS } from "../data/products.js";
+import { useProducts } from "../context/ProductsContext.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 
 const STEPS = [
@@ -56,8 +56,8 @@ const STEPS = [
   },
 ];
 
-function getRecommendations(answers) {
-  let list = [...PRODUCTS];
+function getRecommendations(answers, products) {
+  let list = [...products];
 
   if (answers.usage === "vue") list = list.filter((p) => p.correction);
   if (answers.usage === "soleil") list = list.filter((p) => p.category === "soleil");
@@ -72,7 +72,7 @@ function getRecommendations(answers) {
   else if (answers.budget === "mid") list = list.filter((p) => p.price > 500 && p.price <= 800);
   else if (answers.budget === "premium") list = list.filter((p) => p.price > 800);
 
-  if (list.length < 3) list = [...PRODUCTS].sort((a, b) => b.rating - a.rating);
+  if (list.length < 3) list = [...products].sort((a, b) => b.rating - a.rating);
 
   return list.slice(0, 5);
 }
@@ -87,15 +87,24 @@ function getProfileText(answers) {
 }
 
 export default function Diagnostic({ onAddToCart }) {
+  const { products, loading } = useProducts();
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState({});
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
   const [selected, setSelected] = useState(null);
 
+  if (loading) {
+    return (
+      <div className="pt-nav" style={{ padding: "120px 0", textAlign: "center", color: "var(--gray)" }}>
+        Chargement…
+      </div>
+    );
+  }
+
   const step = STEPS[currentStep];
   const isLast = currentStep === STEPS.length - 1;
-  const recommendations = done ? getRecommendations(answers) : [];
+  const recommendations = done ? getRecommendations(answers, products) : [];
 
   const handleOption = (optionId) => {
     setSelected(optionId);

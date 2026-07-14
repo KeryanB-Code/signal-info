@@ -1,17 +1,13 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { PRODUCTS, BRANDS } from "../data/products.js";
+import { useProducts } from "../context/ProductsContext.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 import { FadeUpWhenVisible } from "../components/animations/TextReveal.jsx";
 import AnimatedCounter from "../components/animations/AnimatedCounter.jsx";
 import EnhancedMarquee from "../components/animations/EnhancedMarquee.jsx";
 import MagneticButton from "../components/animations/MagneticButton.jsx";
 import ExpandCards from "../components/ExpandCards.jsx";
-
-const FEATURED = PRODUCTS.filter((p) => p.inStock).slice(0, 8);
-const NEW_ARRIVALS = PRODUCTS.filter((p) => p.new && p.inStock).slice(0, 4);
-const DISPLAY_PRODUCTS = NEW_ARRIVALS.length >= 4 ? NEW_ARRIVALS : FEATURED;
 
 const TESTIMONIALS = [
   {
@@ -37,6 +33,11 @@ const TESTIMONIALS = [
 const ease = [0.25, 0.46, 0.45, 0.94];
 
 export default function Home({ onAddToCart }) {
+  const { products, loading, error, BRANDS } = useProducts();
+  const FEATURED = products.filter((p) => p.inStock).slice(0, 8);
+  const NEW_ARRIVALS = products.filter((p) => p.new && p.inStock).slice(0, 4);
+  const DISPLAY_PRODUCTS = NEW_ARRIVALS.length >= 4 ? NEW_ARRIVALS : FEATURED;
+
   const heroRef = useRef(null);
   const { scrollYProgress: heroScroll } = useScroll({
     target: heroRef,
@@ -48,6 +49,23 @@ export default function Home({ onAddToCart }) {
   /* Hero text fades + lifts as user scrolls */
   const heroTextOpacity = useTransform(heroScroll, [0, 0.45], [1, 0]);
   const heroTextY = useTransform(heroScroll, [0, 0.45], [0, -32]);
+
+  if (loading) {
+    return (
+      <div className="pt-nav" style={{ padding: "120px 0", textAlign: "center", color: "var(--gray)" }}>
+        Chargement…
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="pt-nav" style={{ padding: "120px 0", textAlign: "center" }}>
+        <p style={{ fontFamily: "var(--serif)", fontSize: "1.3rem", marginBottom: 12 }}>Un problème est survenu</p>
+        <p style={{ color: "var(--gray)" }}>Impossible de charger le site. Réessaie dans quelques instants.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-nav">

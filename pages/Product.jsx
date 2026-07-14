@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { PRODUCTS } from "../data/products.js";
+import { useProducts } from "../context/ProductsContext.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 import { getLifestylePhoto } from "../utils/lifestylePhotos.js";
 
@@ -56,10 +56,9 @@ function TryOnModal({ product, onClose }) {
 export default function Product({ onAddToCart }) {
   const { id } = useParams();
   const navigate = useNavigate();
-  const product = PRODUCTS.find((p) => p.id === id);
+  const { products, loading, error } = useProducts();
+  const product = products.find((p) => p.id === id);
 
-  const lifestyleImg = getLifestylePhoto(product);
-  const galleryImages = [lifestyleImg, ...product.images];
   const [imgIdx, setImgIdx] = useState(1); /* start on clean product shot (index 1 after lifestyle prepend) */
   const [selectedAlma, setSelectedAlma] = useState(1);
   const [selectedColor, setSelectedColor] = useState(0);
@@ -67,6 +66,23 @@ export default function Product({ onAddToCart }) {
   const [tryOnOpen, setTryOnOpen] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [activeTab, setActiveTab] = useState("desc");
+
+  if (loading) {
+    return (
+      <div className="pt-nav" style={{ padding: "120px 0", textAlign: "center", color: "var(--gray)" }}>
+        Chargement…
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="pt-nav" style={{ padding: "120px 0", textAlign: "center" }}>
+        <p style={{ fontFamily: "var(--serif)", fontSize: "1.3rem", marginBottom: 12 }}>Un problème est survenu</p>
+        <p style={{ color: "var(--gray)" }}>Impossible de charger cette fiche produit. Réessaie dans quelques instants.</p>
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -77,7 +93,9 @@ export default function Product({ onAddToCart }) {
     );
   }
 
-  const related = PRODUCTS.filter((p) => p.brand === product.brand && p.id !== product.id).slice(0, 3);
+  const lifestyleImg = getLifestylePhoto(product);
+  const galleryImages = [lifestyleImg, ...product.images];
+  const related = products.filter((p) => p.brand === product.brand && p.id !== product.id).slice(0, 3);
 
   const almaMonthly = (times) => Math.ceil(product.price / times).toLocaleString("fr-FR");
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { PRODUCTS } from "../data/products.js";
+import { useProducts } from "../context/ProductsContext.jsx";
 
 const TABS = [
   { id: "orders", label: "Mes commandes", icon: "📦" },
@@ -10,29 +10,30 @@ const TABS = [
   { id: "profile", label: "Mon profil", icon: "👤" },
 ];
 
-const SAMPLE_ORDERS = [
-  {
-    id: "MR-2025-0042",
-    date: "15 mars 2025",
-    product: PRODUCTS[0],
-    status: "Livré",
-    statusColor: "#27ae60",
-    total: 890,
-  },
-  {
-    id: "MR-2025-0018",
-    date: "4 janvier 2025",
-    product: PRODUCTS[4],
-    status: "Livré",
-    statusColor: "#27ae60",
-    total: 395,
-  },
-];
-
 export default function Compte() {
+  const { products, loading } = useProducts();
   const [activeTab, setActiveTab] = useState("orders");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
+
+  const SAMPLE_ORDERS = products.length > 4 ? [
+    {
+      id: "MR-2025-0042",
+      date: "15 mars 2025",
+      product: products[0],
+      status: "Livré",
+      statusColor: "#27ae60",
+      total: 890,
+    },
+    {
+      id: "MR-2025-0018",
+      date: "4 janvier 2025",
+      product: products[4],
+      status: "Livré",
+      statusColor: "#27ae60",
+      total: 395,
+    },
+  ] : [];
 
   if (!isLoggedIn) {
     return (
@@ -184,7 +185,7 @@ export default function Compte() {
                   Ma sélection sauvegardée
                 </h2>
                 <div className="grid-3">
-                  {PRODUCTS.slice(0, 3).map((p) => (
+                  {products.slice(0, 3).map((p) => (
                     <Link key={p.id} to={`/produit/${p.id}`} style={{ display: "block" }}>
                       <div style={{ aspectRatio: "4/5", overflow: "hidden", background: "#F5F3EF", marginBottom: 10 }}>
                         <img src={p.images[0]} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />

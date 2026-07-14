@@ -1,8 +1,9 @@
 import { useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { PRODUCTS, BRANDS } from "../data/products.js";
+import { useProducts } from "../context/ProductsContext.jsx";
 import ProductCard from "../components/ProductCard.jsx";
+import DataState from "../components/DataState.jsx";
 
 const CATEGORIES = ["Tous", "Optique", "Soleil"];
 const STYLES = ["Tous les styles", "Minimaliste", "Classique", "Statement", "Sport-chic"];
@@ -15,6 +16,7 @@ const SORT_OPTIONS = [
 ];
 
 export default function Boutique({ onAddToCart }) {
+  const { products, loading, error, BRANDS } = useProducts();
   const [searchParams, setSearchParams] = useSearchParams();
   const [sort, setSort] = useState("featured");
   const [style, setStyle] = useState("Tous les styles");
@@ -37,7 +39,7 @@ export default function Boutique({ onAddToCart }) {
   };
 
   const filtered = useMemo(() => {
-    let list = [...PRODUCTS];
+    let list = [...products];
     if (activeBrand !== "Toutes") list = list.filter((p) => p.brand === activeBrand);
     if (activeCat !== "Tous") list = list.filter((p) => p.category === activeCat.toLowerCase());
     if (style !== "Tous les styles") list = list.filter((p) => p.style === style.toLowerCase().replace("-", "-"));
@@ -49,9 +51,10 @@ export default function Boutique({ onAddToCart }) {
     else if (sort === "rating") list.sort((a, b) => b.rating - a.rating);
     else if (sort === "new") list.sort((a, b) => (b.new ? 1 : 0) - (a.new ? 1 : 0));
     return list;
-  }, [activeBrand, activeCat, style, sort, priceMax, correctionOnly]);
+  }, [products, activeBrand, activeCat, style, sort, priceMax, correctionOnly]);
 
   return (
+    <DataState loading={loading} error={error}>
     <div className="pt-nav">
       {/* Hero de page */}
       <div style={{ background: "var(--dark)", padding: "52px 0 40px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
@@ -59,7 +62,7 @@ export default function Boutique({ onAddToCart }) {
           <div className="label mb-8" style={{ color: "var(--sand)" }}>Maison Regard</div>
           <h1 className="h2" style={{ marginBottom: 10, color: "white", fontStyle: "italic" }}>La Boutique</h1>
           <p style={{ color: "rgba(255,255,255,0.42)", fontSize: "0.82rem", letterSpacing: ".06em" }}>
-            {PRODUCTS.length} montures sélectionnées · {BRANDS.length} maisons · Opticien diplômé
+            {products.length} montures sélectionnées · {BRANDS.length} maisons · Opticien diplômé
           </p>
         </div>
       </div>
@@ -96,7 +99,7 @@ export default function Boutique({ onAddToCart }) {
                     >
                       {b}
                       <span style={{ fontSize: "0.7rem", color: "var(--gray-light)" }}>
-                        {PRODUCTS.filter((p) => b === "Toutes" || p.brand === b).length}
+                        {products.filter((p) => b === "Toutes" || p.brand === b).length}
                       </span>
                     </button>
                   ))}
@@ -212,5 +215,6 @@ export default function Boutique({ onAddToCart }) {
         </div>
       </div>
     </div>
+    </DataState>
   );
 }
