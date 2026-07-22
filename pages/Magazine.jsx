@@ -676,7 +676,7 @@ function ArticleCard({ article, size = "normal" }) {
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease }}
       >
-        <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr", background: "#0C0C0C", overflow: "hidden" }}>
+        <div className="magazine-hero-grid" style={{ background: "#0C0C0C", overflow: "hidden" }}>
           <div style={{ position: "relative", overflow: "hidden", aspectRatio: "4/3" }}>
             <img
               src={article.img}
@@ -870,7 +870,7 @@ export default function Magazine() {
         )}
 
         {/* Newsletter */}
-        <div style={{ marginTop: 80, background: "#0C0C0C", padding: "56px 64px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
+        <div style={{ marginTop: 80, background: "#0C0C0C", padding: "56px 64px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: 48, alignItems: "center" }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
               <div style={{ height: 1, width: 24, background: "var(--sand)" }} />

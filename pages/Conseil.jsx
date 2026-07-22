@@ -101,39 +101,70 @@ export default function Conseil() {
       {/* ─── EXPERT CARD ─── */}
       <section className="section">
         <div className="container">
-          <div className="expert-card" style={{ gridTemplateColumns: "260px 1fr" }}>
-            <div className="expert-photo">
-              <img
-                src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=85"
-                alt="Opticien Maison Regard"
-              />
-            </div>
-            <div>
-              <div className="label text-sand mb-12">Votre opticien</div>
-              <h2 style={{ fontFamily: "var(--serif)", fontSize: "2rem", fontWeight: 300, marginBottom: 4 }}>
-                Opticien diplômé, 12 ans d'expérience
+          <div className="expert-card">
+            <div className="expert-intro">
+              <div className="label text-sand mb-12">Votre équipe</div>
+              <h2 className="expert-title">
+                Des opticiens diplômés d'État,<br />pas des conseillers de vente
               </h2>
-              <p style={{ color: "var(--gray)", fontSize: "0.875rem", marginBottom: 24 }}>
-                BTS Opticien-Lunetier · Certifié Kering Eyewear · Partenaire Richemont
+              <p className="expert-credentials">
+                BTS Opticien-Lunetier · Certifiés Kering Eyewear · Partenaires Richemont
               </p>
-              <p style={{ color: "var(--dark)", lineHeight: 1.8, marginBottom: 16 }}>
-                Je suis opticien depuis 2012. J'ai ouvert ma première boutique à Lyon en 2015, et Maison Regard en ligne en 2022. Ma conviction : le conseil optique de qualité ne devrait pas être réservé aux clients qui habitent à côté d'une bonne boutique.
-              </p>
-              <p style={{ color: "var(--gray)", lineHeight: 1.8, marginBottom: 24 }}>
-                Chaque monture dans notre catalogue a été portée, testée, et validée. Je refuse de vendre quelque chose que je ne mettrais pas moi-même — ou que je ne recommanderais pas à ma famille.
-              </p>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, paddingTop: 24, borderTop: "1px solid var(--border)" }}>
+
+              <div className="expert-stats">
                 {[
                   { n: "12", t: "Ans d'expérience" },
-                  { n: "3", t: "Boutiques à Lyon" },
+                  { n: "3", t: "Boutiques en région lyonnaise" },
                   { n: "200+", t: "Montures sélectionnées" },
                 ].map((s) => (
-                  <div key={s.t} style={{ textAlign: "center" }}>
-                    <div style={{ fontFamily: "var(--serif)", fontSize: "2rem", color: "var(--sand-dark)" }}>{s.n}</div>
-                    <div style={{ fontSize: "0.75rem", color: "var(--gray)", letterSpacing: ".05em" }}>{s.t}</div>
+                  <div key={s.t}>
+                    <div className="expert-stat-n">{s.n}</div>
+                    <div className="expert-stat-t">{s.t}</div>
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="expert-body">
+              <p className="expert-lead">
+                Derrière chaque réponse, il y a un opticien diplômé. Pas un service client, pas un script :
+                les mêmes professionnels qui vous recevraient dans l'une de nos trois boutiques de la région
+                lyonnaise, avec la même exigence et le même temps passé sur votre dossier.
+              </p>
+              <p>
+                Douze ans d'exercice en boutique nous ont appris une chose : un conseil optique de qualité ne
+                devrait pas dépendre de l'adresse où l'on habite. C'est exactement ce que cet espace existe
+                pour corriger.
+              </p>
+              <p>
+                Chaque monture de notre catalogue a été portée, testée et validée par l'équipe avant d'y
+                figurer. Nous ne proposons rien que nous ne porterions pas nous-mêmes, ni que nous ne
+                recommanderions pas à nos proches.
+              </p>
+
+              <ul className="expert-quals">
+                <li>
+                  <span className="expert-qual-title">Diplôme d'État</span>
+                  <span className="expert-qual-text">
+                    Chaque membre de l'équipe est titulaire du BTS Opticien-Lunetier, seul diplôme habilitant
+                    à l'exercice en France.
+                  </span>
+                </li>
+                <li>
+                  <span className="expert-qual-title">Formation continue</span>
+                  <span className="expert-qual-text">
+                    Sessions techniques suivies directement auprès des maisons, de la sélection des matières
+                    au montage des verres.
+                  </span>
+                </li>
+                <li>
+                  <span className="expert-qual-title">Suivi en boutique</span>
+                  <span className="expert-qual-text">
+                    Réglages, ajustements et service après-vente assurés dans nos boutiques, que l'achat ait
+                    été fait en ligne ou sur place.
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -142,7 +173,7 @@ export default function Conseil() {
       {/* ─── RDV VISIO ─── */}
       <section className="section" style={{ background: "var(--dark)" }} id="rdv">
         <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: 64, alignItems: "center" }}>
             <div>
               <div className="label" style={{ color: "var(--sand)", marginBottom: 16 }}>Consultation personnalisée</div>
               <h2 className="h2 text-white" style={{ marginBottom: 20 }}>
@@ -179,7 +210,7 @@ export default function Conseil() {
                 <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.82rem", marginBottom: 20 }}>
                   Calendrier de réservation — intégration Calendly en production
                 </p>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6, marginBottom: 20 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 120px), 1fr))", gap: 6, marginBottom: 20 }}>
                   {["Lun 9h", "Lun 11h", "Mar 14h", "Mer 10h", "Jeu 16h", "Ven 9h"].map((slot) => (
                     <button
                       key={slot}

@@ -140,7 +140,9 @@ export default function Boutiques() {
       {/* Tabs */}
       <div style={{ borderBottom: "1px solid var(--border)", background: "white", position: "sticky", top: "var(--navbar-h, 72px)", zIndex: 10 }}>
         <div className="container">
-          <div style={{ display: "flex" }}>
+          {/* Les noms de boutiques ne coupent pas : sur mobile la rangée défile
+              horizontalement au lieu de faire déborder toute la page. */}
+          <div style={{ display: "flex", overflowX: "auto", scrollbarWidth: "none" }}>
             {BOUTIQUES.map((shop, i) => (
               <button
                 key={shop.name}
@@ -163,7 +165,7 @@ export default function Boutiques() {
 
       {/* Detail */}
       <div className="container" style={{ padding: "48px 24px 80px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: 48, alignItems: "start" }}>
+        <div className="boutique-detail-grid">
 
           {/* Colonne gauche */}
           <div>

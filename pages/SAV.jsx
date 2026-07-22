@@ -92,7 +92,7 @@ export default function SAV() {
             <p style={{ color: "var(--gray)", marginTop: 12 }}>Toutes les corrections sont montées par notre opticien diplômé</p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, maxWidth: 860, margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))", gap: 16, maxWidth: 860, margin: "0 auto" }}>
             {CORRECTION_TYPES.map((type) => (
               <div key={type.name} style={{ padding: "24px", border: "1px solid var(--border)", background: "white" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
@@ -118,7 +118,7 @@ export default function SAV() {
       {/* ─── PERSONNALISATION / DÉGRADÉS ─── */}
       <section className="section" style={{ background: "#F0EBE2" }}>
         <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "start" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: 64, alignItems: "start" }}>
             <div>
               <div className="label text-sand mb-16">Sur mesure</div>
               <h2 className="h2" style={{ marginBottom: 20 }}>
@@ -137,7 +137,7 @@ export default function SAV() {
 
             <div>
               <div className="label" style={{ marginBottom: 16, color: "var(--dark)" }}>Coloris disponibles</div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 200px), 1fr))", gap: 12 }}>
                 {DEGRADE_OPTIONS.map((d) => (
                   <div key={d.name} style={{ padding: "16px", border: "1px solid var(--border)", background: "white" }}>
                     <div style={{
@@ -164,7 +164,7 @@ export default function SAV() {
           <p style={{ color: "var(--gray)", marginBottom: 40 }}>
             Opticien disponible du lundi au samedi, 9h – 19h. Réponse garantie sous 2h en semaine.
           </p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))", gap: 20 }}>
             {[
               { icon: "📧", label: "Email", value: "contact@maisonregard.fr", href: "mailto:contact@maisonregard.fr" },
               { icon: "📱", label: "WhatsApp", value: "Réponse en <30 min", href: "https://wa.me/" },

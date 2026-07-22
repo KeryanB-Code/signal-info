@@ -107,7 +107,7 @@ export default function Capsule({ onAddToCart }) {
                 <div style={{ fontFamily: "var(--serif)", fontSize: "1.1rem", fontStyle: "italic", marginBottom: 24, color: "var(--sand-dark)" }}>
                   "{qa.q}"
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 200px), 1fr))", gap: 24 }}>
                   {[qa.a1, qa.a2].map((a) => (
                     <div key={a.author}>
                       <div className="label" style={{ marginBottom: 8, color: "var(--dark)" }}>{a.author}</div>

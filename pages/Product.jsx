@@ -4,12 +4,64 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useProducts } from "../context/ProductsContext.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 import { getLifestylePhoto } from "../utils/lifestylePhotos.js";
+import { IconShield, IconStar, IconWarranty, IconDelivery, IconGlasses } from "../components/TrustIcons.jsx";
 
-const ALMA_PLANS = [
-  { x: "2x", label: "2 fois", monthly: null },
-  { x: "3x", label: "3 fois", monthly: null },
-  { x: "4x", label: "4 fois", monthly: null },
+const PAYMENT_PLANS = [
+  { times: 1, x: "1x", label: "Comptant" },
+  { times: 2, x: "2x", label: "2 fois" },
+  { times: 3, x: "3x", label: "3 fois" },
+  { times: 4, x: "4x", label: "4 fois" },
 ];
+
+// Les coloris sont saisis en toutes lettres ("Corne brune / Or", "Noir mat"),
+// jamais en hexadécimal : on reconstitue une pastille à partir des mots reconnus,
+// pour remplacer les pastilles-texte par de vraies pastilles de couleur.
+const SWATCH_WORDS = [
+  ["ruthenium", "#4A4E52"], ["palladium", "#C6C8CA"], ["titane", "#A8ADB2"],
+  ["gunmetal", "#4A4E52"], ["platine", "#D6D8D9"], ["fume", "#6E6A66"],
+  ["bordeaux", "#5C1A24"], ["chocolat", "#4B2E1E"], ["ecaille", "#6B4226"],
+  ["havane", "#8C5B2F"], ["cristal", "#E4E2DD"], ["crystal", "#E4E2DD"],
+  ["ink", "#1B2A3A"], ["transparent", "#E4E2DD"],
+  ["ivoire", "#EFE7D8"], ["nacre", "#EDE6DA"], ["taupe", "#8A7A6A"],
+  ["ambre", "#B26A21"], ["sable", "#C4A882"], ["beige", "#D9C7AE"],
+  ["nude", "#D9C7AE"], ["corne", "#7A5C3E"], ["marron", "#5B3A22"],
+  ["brun", "#5B3A22"], ["kaki", "#4A4A32"], ["argent", "#C9CBCC"],
+  ["acier", "#9AA0A6"], ["dore", "#C9A227"], ["or", "#C9A227"],
+  ["noir", "#12100E"], ["blanc", "#F2EFE9"], ["gris", "#8A8A8A"],
+  ["bleu", "#1F3A5F"], ["vert", "#2F4A34"], ["rouge", "#7A1F26"],
+  ["rose", "#D8A0A6"], ["violet", "#4A3A5C"], ["jaune", "#D4B44A"],
+];
+
+const deburr = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+function toneOf(part) {
+  const t = deburr(part);
+  // Les entrées longues d'abord (cf. ordre de SWATCH_WORDS) : "ecaille" doit
+  // gagner sur "aille", "dore" sur "or".
+  const hit = SWATCH_WORDS.find(([word]) => t.includes(word));
+  return hit ? hit[1] : "#B8B2A7";
+}
+
+// "Corne brune / Or" → dégradé deux tons, coupé net à 50% comme une monture bicolore.
+function swatchBackground(color) {
+  const tones = String(color).split("/").map(toneOf);
+  if (tones.length < 2) return tones[0];
+  return `linear-gradient(135deg, ${tones[0]} 0 50%, ${tones[1]} 50% 100%)`;
+}
+
+// Fenêtre de livraison indicative, calculée à l'affichage : une date figée dans
+// le code vieillirait mal en démo.
+function deliveryWindow(from = new Date()) {
+  const day = (n) => new Date(from.getTime() + n * 86400000);
+  const fmt = (d, withMonth) =>
+    withMonth
+      ? d.toLocaleDateString("fr-FR", { day: "numeric", month: "long" })
+      : d.toLocaleDateString("fr-FR", { day: "numeric" });
+  const start = day(3);
+  const end = day(6);
+  const sameMonth = start.getMonth() === end.getMonth();
+  return `${fmt(start, !sameMonth)} – ${fmt(end, true)}`;
+}
 
 function TryOnModal({ product, onClose }) {
   return (
@@ -60,12 +112,17 @@ export default function Product({ onAddToCart }) {
   const product = products.find((p) => p.id === id);
 
   const [imgIdx, setImgIdx] = useState(1); /* start on clean product shot (index 1 after lifestyle prepend) */
-  const [selectedAlma, setSelectedAlma] = useState(1);
+  const [selectedAlma, setSelectedAlma] = useState(0);
   const [selectedColor, setSelectedColor] = useState(0);
   const [correctionOpen, setCorrectionOpen] = useState(false);
+  const [selectedLensType, setSelectedLensType] = useState(null);
+  const [prescriptionFormOpen, setPrescriptionFormOpen] = useState(false);
+  const [prescription, setPrescription] = useState({ sphOD: "", cylOD: "", axeOD: "", sphOG: "", cylOG: "", axeOG: "" });
+  const [prescriptionSaved, setPrescriptionSaved] = useState(false);
   const [tryOnOpen, setTryOnOpen] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [activeTab, setActiveTab] = useState("desc");
+  const [allColorsOpen, setAllColorsOpen] = useState(false);
 
   if (loading) {
     return (
@@ -99,10 +156,28 @@ export default function Product({ onAddToCart }) {
 
   const almaMonthly = (times) => Math.ceil(product.price / times).toLocaleString("fr-FR");
 
+  // Au-delà de 4 coloris on replie, comme sur les fiches des grandes enseignes :
+  // la rangée de pastilles ne doit jamais passer à la ligne.
+  const visibleColors = allColorsOpen ? product.colors : product.colors.slice(0, 4);
+
   const handleAddToCart = () => {
-    if (onAddToCart) onAddToCart(product);
+    const item = selectedLensType
+      ? { ...product, lensType: selectedLensType, prescription: prescriptionSaved ? prescription : null }
+      : product;
+    if (onAddToCart) onAddToCart(item);
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 2500);
+  };
+
+  const handleBuyNow = () => {
+    handleAddToCart();
+    navigate("/panier");
+  };
+
+  const handleSavePrescription = (e) => {
+    e.preventDefault();
+    setPrescriptionSaved(true);
+    setPrescriptionFormOpen(false);
   };
 
   return (
@@ -199,51 +274,64 @@ export default function Product({ onAddToCart }) {
             </div>
 
             {/* Prix */}
-            <div style={{ fontSize: "1.8rem", fontFamily: "var(--serif)", fontWeight: 400, marginBottom: 24 }}>
-              {product.price.toLocaleString("fr-FR")} €
+            <div className="pdp-price">
+              <div className="pdp-price-amount">{product.price.toLocaleString("fr-FR")} €</div>
+              <div className="pdp-price-note">Prix TTC · verres correcteurs sur devis</div>
             </div>
 
-            {/* Couleurs */}
+            {/* Coloris */}
             {product.colors.length > 1 && (
-              <div style={{ marginBottom: 24 }}>
-                <div style={{ fontSize: "0.78rem", fontWeight: 500, marginBottom: 10 }}>
-                  Coloris : <span style={{ fontWeight: 300, color: "var(--gray)" }}>{product.colors[selectedColor]}</span>
+              <div className="pdp-colors">
+                <div className="pdp-colors-head">
+                  <span>
+                    Couleur <span className="pdp-colors-current">{product.colors[selectedColor]}</span>
+                  </span>
+                  {product.colors.length > 4 && (
+                    <button className="pdp-colors-toggle" onClick={() => setAllColorsOpen(!allColorsOpen)}>
+                      {allColorsOpen ? "Réduire" : `Voir les ${product.colors.length} couleurs`}
+                    </button>
+                  )}
                 </div>
-                <div style={{ display: "flex", gap: 8 }}>
-                  {product.colors.map((c, i) => (
+                <div className="pdp-swatches">
+                  {visibleColors.map((c, i) => (
                     <button
-                      key={i}
+                      key={c}
+                      className={`pdp-swatch ${selectedColor === i ? "selected" : ""}`}
                       onClick={() => setSelectedColor(i)}
-                      style={{
-                        padding: "6px 16px", border: `1px solid ${selectedColor === i ? "var(--dark)" : "var(--border)"}`,
-                        fontSize: "0.75rem", background: selectedColor === i ? "var(--dark)" : "white",
-                        color: selectedColor === i ? "white" : "var(--gray)", cursor: "pointer", transition: "all .2s",
-                      }}
+                      title={c}
+                      aria-label={c}
+                      aria-pressed={selectedColor === i}
                     >
-                      {c}
+                      <span className="pdp-swatch-tone" style={{ background: swatchBackground(c) }} />
                     </button>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* Alma Widget */}
+            <p className="pdp-microline">
+              Livraison offerte en France métropolitaine · 30 jours pour changer d'avis
+            </p>
+
+            {/* Modalités de paiement */}
             <div className="alma-widget">
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
                 <span style={{ fontSize: "0.65rem", letter: ".1em", textTransform: "uppercase", fontWeight: 600, color: "var(--sand-dark)" }}>
                   ALMA
                 </span>
-                <span style={{ fontSize: "0.75rem", color: "var(--gray)" }}>— Paiement en plusieurs fois sans frais</span>
+                <span style={{ fontSize: "0.75rem", color: "var(--gray)" }}>— Comptant ou en plusieurs fois sans frais</span>
               </div>
               <div className="alma-options">
-                {ALMA_PLANS.map((plan, i) => (
+                {PAYMENT_PLANS.map((plan, i) => (
                   <div
                     key={i}
                     className={`alma-option ${selectedAlma === i ? "selected" : ""}`}
                     onClick={() => setSelectedAlma(i)}
                   >
                     <div className="installments">{plan.x}</div>
-                    <div className="amount">{almaMonthly(i + 2)} €/mois</div>
+                    <div className="amount">
+                      {plan.times === 1 ? `${almaMonthly(1)} €` : `${almaMonthly(plan.times)} €/mois`}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -253,84 +341,170 @@ export default function Product({ onAddToCart }) {
             </div>
 
             {/* CTA */}
-            <div style={{ display: "flex", gap: 10, marginTop: 4 }}>
+            <div className="pdp-cta">
               <button
-                className={`btn ${addedToCart ? "btn-sand" : "btn-dark"}`}
-                style={{ flex: 1 }}
+                className={`btn ${addedToCart ? "btn-sand" : "btn-dark"} pdp-cta-main`}
                 onClick={handleAddToCart}
                 disabled={!product.inStock}
               >
                 {!product.inStock ? "Me notifier du réassort" : addedToCart ? "Ajouté ✓" : "Ajouter au panier"}
               </button>
-              <button
-                className="btn btn-outline"
-                style={{ padding: "14px 16px" }}
-                onClick={() => setTryOnOpen(true)}
-                title="Essayer en 3D"
-              >
-                👁 3D
-              </button>
+              {product.inStock && (
+                <button className="btn btn-outline pdp-cta-main" onClick={handleBuyNow}>
+                  Acheter maintenant
+                </button>
+              )}
             </div>
 
-            <button
-              className="btn btn-ghost"
-              style={{ width: "100%", marginTop: 10, display: "flex", justifyContent: "center" }}
-              onClick={() => navigate("/conseil")}
-            >
-              Demander l'avis de l'opticien →
-            </button>
+            <div className="pdp-secondary">
+              <button onClick={() => setTryOnOpen(true)}>Essayer en 3D</button>
+              <span aria-hidden="true">·</span>
+              <button onClick={() => navigate("/conseil")}>Demander l'avis de l'opticien</button>
+            </div>
 
-            {/* Correction */}
+            <div className="pdp-or"><span>ou</span></div>
+
+            {/* Personnaliser les verres */}
             {product.correction && (
-              <div style={{ marginTop: 20, border: "1px solid var(--border)", padding: 16 }}>
-                <button
-                  style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", background: "none", border: "none", cursor: "pointer" }}
-                  onClick={() => setCorrectionOpen(!correctionOpen)}
-                >
-                  <span style={{ fontFamily: "var(--serif)", fontSize: "1rem" }}>Ajouter une correction</span>
-                  <span style={{ transform: correctionOpen ? "rotate(180deg)" : "none", transition: ".2s", color: "var(--gray)" }}>▾</span>
+              <div className={`pdp-custom ${correctionOpen ? "open" : ""}`}>
+                <button className="pdp-custom-head" onClick={() => setCorrectionOpen(!correctionOpen)}>
+                  <span>
+                    <span className="pdp-custom-title">Personnaliser les verres</span>
+                    <span className="pdp-custom-sub">Correction optique · teinte · dégradé</span>
+                  </span>
+                  <IconGlasses className="pdp-custom-icon" />
                 </button>
                 {correctionOpen && (
                   <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid var(--border)" }}>
                     <p style={{ fontSize: "0.82rem", color: "var(--gray)", marginBottom: 16 }}>
-                      Renseignez votre ordonnance (ou envoyez-la par email après commande). L'opticien la vérifie avant montage.
+                      Choisissez votre type de verre, puis renseignez votre ordonnance. L'opticien la vérifie avant montage.
                     </p>
                     <div className="correction-grid">
                       {["Verres simples", "Progressifs", "Anti-lumière bleue", "Photochromiques"].map((v) => (
-                        <div key={v} className="correction-card">
+                        <div
+                          key={v}
+                          className="correction-card"
+                          onClick={() => setSelectedLensType(v)}
+                          style={{
+                            cursor: "pointer",
+                            borderColor: selectedLensType === v ? "var(--sand-dark)" : undefined,
+                            background: selectedLensType === v ? "var(--sand-light)" : undefined,
+                          }}
+                        >
                           <div style={{ fontSize: "0.82rem", fontWeight: 500 }}>{v}</div>
                           <div style={{ fontSize: "0.72rem", color: "var(--gray)", marginTop: 4 }}>Sur devis</div>
                         </div>
                       ))}
                     </div>
-                    <button className="btn btn-outline" style={{ marginTop: 16, width: "100%", display: "flex", justifyContent: "center", fontSize: "0.75rem" }}>
-                      Renseigner mon ordonnance
-                    </button>
+
+                    {prescriptionSaved ? (
+                      <div style={{ marginTop: 16, padding: 12, background: "var(--sand-light)", fontSize: "0.78rem" }}>
+                        ✓ Ordonnance enregistrée — elle sera jointe à la commande.
+                        <button
+                          onClick={() => setPrescriptionFormOpen(true)}
+                          style={{ marginLeft: 8, textDecoration: "underline", color: "var(--sand-dark)" }}
+                        >
+                          Modifier
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        className="btn btn-outline"
+                        style={{ marginTop: 16, width: "100%", display: "flex", justifyContent: "center", fontSize: "0.75rem" }}
+                        onClick={() => setPrescriptionFormOpen(true)}
+                        disabled={!selectedLensType}
+                      >
+                        {selectedLensType ? "Renseigner mon ordonnance" : "Choisissez d'abord un type de verre"}
+                      </button>
+                    )}
+
+                    {prescriptionFormOpen && (
+                      <form onSubmit={handleSavePrescription} style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid var(--border)" }}>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginBottom: 8 }}>
+                          <div style={{ fontSize: "0.68rem", color: "var(--gray)", gridColumn: "1 / -1" }}>Œil droit (OD)</div>
+                          {["sphOD", "cylOD", "axeOD"].map((k) => (
+                            <input
+                              key={k}
+                              type="text"
+                              placeholder={k.startsWith("sph") ? "SPH" : k.startsWith("cyl") ? "CYL" : "AXE"}
+                              value={prescription[k]}
+                              onChange={(e) => setPrescription({ ...prescription, [k]: e.target.value })}
+                              style={{ padding: "8px 10px", border: "1px solid var(--border)", fontSize: "0.78rem" }}
+                            />
+                          ))}
+                        </div>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginBottom: 12 }}>
+                          <div style={{ fontSize: "0.68rem", color: "var(--gray)", gridColumn: "1 / -1" }}>Œil gauche (OG)</div>
+                          {["sphOG", "cylOG", "axeOG"].map((k) => (
+                            <input
+                              key={k}
+                              type="text"
+                              placeholder={k.startsWith("sph") ? "SPH" : k.startsWith("cyl") ? "CYL" : "AXE"}
+                              value={prescription[k]}
+                              onChange={(e) => setPrescription({ ...prescription, [k]: e.target.value })}
+                              style={{ padding: "8px 10px", border: "1px solid var(--border)", fontSize: "0.78rem" }}
+                            />
+                          ))}
+                        </div>
+                        <button type="submit" className="btn btn-dark" style={{ width: "100%", display: "flex", justifyContent: "center", fontSize: "0.75rem" }}>
+                          Enregistrer l'ordonnance
+                        </button>
+                      </form>
+                    )}
                   </div>
                 )}
               </div>
             )}
 
-            {/* Personnalisation */}
-            <div style={{ marginTop: 12, border: "1px solid var(--border)", padding: "14px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: "0.875rem" }}>Personnalisation & dégradés</span>
-              <Link to="/sav" style={{ fontSize: "0.72rem", color: "var(--sand-dark)", textDecoration: "underline" }}>En savoir plus →</Link>
+            {/* Même bloc pour les montures sans correction possible : la teinte et le
+                dégradé restent personnalisables, mais le devis passe par le SAV. */}
+            {!product.correction && (
+              <Link to="/sav" className="pdp-custom pdp-custom-link">
+                <span className="pdp-custom-head">
+                  <span>
+                    <span className="pdp-custom-title">Personnaliser les verres</span>
+                    <span className="pdp-custom-sub">Teinte · dégradé · verres solaires à votre vue</span>
+                  </span>
+                  <IconGlasses className="pdp-custom-icon" />
+                </span>
+              </Link>
+            )}
+
+            {/* Disponibilité */}
+            <div className="pdp-stock">
+              <span className={`pdp-stock-pill ${product.inStock ? "in" : "out"}`}>
+                {product.inStock ? "En stock" : "Sur commande"}
+              </span>
+              <span className="pdp-stock-eta">
+                {product.inStock ? `Chez vous le ${deliveryWindow()}` : "Réapprovisionnement sous 3 à 4 semaines"}
+              </span>
             </div>
 
-            {/* Garanties */}
-            <div style={{ marginTop: 20, display: "flex", flexDirection: "column", gap: 8 }}>
+            {/* Réassurance */}
+            <ul className="pdp-trust">
               {[
-                { icon: "🚚", text: "Livraison offerte · Expédition sous 24h" },
-                { icon: "↩", text: "Retour gratuit sous 30 jours" },
-                { icon: "🔧", text: "2 ans de garantie constructeur" },
-                { icon: "📅", text: "Consultation visio gratuite incluse" },
-              ].map((g) => (
-                <div key={g.text} style={{ display: "flex", gap: 10, alignItems: "center", fontSize: "0.8rem", color: "var(--gray)" }}>
-                  <span>{g.icon}</span>
-                  {g.text}
-                </div>
-              ))}
-            </div>
+                { Icon: IconShield, title: "Revendeur officiel", text: "Montures authentiques, garanties par la maison" },
+                { Icon: IconStar, title: "Opticiens diplômés", text: "Trois boutiques en France, une expertise au service de votre vue" },
+                { Icon: IconWarranty, title: "Garantie 2 ans", text: "Prise en charge intégrale sur la monture" },
+                { Icon: IconDelivery, title: "Livraison offerte", text: "France métropolitaine et Union européenne" },
+                { Icon: IconGlasses, title: "Besoin d'un conseil ?", text: "Échangez avec un opticien, par téléphone ou en visio", to: "/conseil" },
+              ].map(({ Icon, title, text, to }) => {
+                const body = (
+                  <>
+                    <Icon className="pdp-trust-icon" />
+                    <span>
+                      <span className="pdp-trust-title">{title}</span>
+                      <span className="pdp-trust-text">{text}</span>
+                    </span>
+                  </>
+                );
+                return (
+                  <li key={title}>
+                    {to ? <Link to={to} className="pdp-trust-row">{body}</Link> : <div className="pdp-trust-row">{body}</div>}
+                  </li>
+                );
+              })}
+            </ul>
           </motion.div>
         </div>
 

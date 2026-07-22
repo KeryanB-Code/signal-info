@@ -1,12 +1,14 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabaseClient.js";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { useProducts } from "../../context/ProductsContext.jsx";
 import { PILOTAGE_ROLES, ROLE_LABEL } from "../../data/roles.js";
 import { IconHome, IconExternal, IconBox, IconPlus, IconBug, IconChart, IconKey, IconLogout } from "../../components/admin/AdminIcons.jsx";
 
 export default function AdminLayout() {
   const navigate = useNavigate();
   const { role } = useAuth();
+  const { offline } = useProducts();
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -31,7 +33,7 @@ export default function AdminLayout() {
         </div>
       </div>
       <div className="container">
-        <div style={{ display: "flex", minHeight: "60vh" }}>
+        <div className="admin-body">
           <div className="admin-sidebar">
             <div className="admin-nav-group">
               <NavLink to="/admin" end className={navClass}>
@@ -63,6 +65,14 @@ export default function AdminLayout() {
             </button>
           </div>
           <div className="admin-content">
+            {offline && (
+              <div className="admin-offline-banner">
+                <strong>Mode dégradé — base de données injoignable.</strong> Le site public affiche le
+                catalogue de secours intégré au code. Les produits listés ici ne sont pas ceux de la base, et
+                toute création, modification ou suppression échouera. Vérifie que le projet Supabase est bien
+                actif, puis recharge la page.
+              </div>
+            )}
             <Outlet />
           </div>
         </div>
