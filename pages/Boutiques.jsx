@@ -3,7 +3,7 @@ import { useState } from "react";
 const BOUTIQUES = [
   {
     name: "Lunetterie Saint-Clair",
-    address: "Lunetterie Saint-Clair · Lyon",
+    address: "Caluire-et-Cuire · Grande rue de Saint-Clair",
     phone: "",
     website: "https://lunetteriesaintclair.fr",
     hours: {
@@ -16,20 +16,15 @@ const BOUTIQUES = [
       "Dimanche": "Fermé",
     },
     img: "/images/boutique-saint-clair.jpg",
-    mapQuery: "Lunetterie+Saint-Clair+Lyon",
-    rating: 4.9,
-    reviewCount: 127,
+    mapQuery: "Lunetterie+Saint-Clair+Caluire-et-Cuire",
+    rating: 4.7,
+    reviewCount: 134,
     tags: ["Notre boutique", "Tom Ford", "Cartier", "Fendi"],
-    desc: "Notre boutique phare, adresse de référence à Lyon pour les amateurs de lunetterie haut de gamme. Revendeurs officiels agréés Cartier, Tom Ford, Fendi et bien d'autres — notre équipe vous accueille dans un cadre élégant pour un conseil sur-mesure.",
-    reviews: [
-      { name: "Marion G.", date: "Avril 2025", text: "Accueil exceptionnel. L'opticien a pris le temps de vraiment comprendre mon profil avant de me proposer une sélection. J'ai choisi une monture Cartier que je n'aurais jamais osé seule — parfaite.", note: 5 },
-      { name: "Philippe D.", date: "Mars 2025", text: "Boutique superbe, sélection très pointue. Prix cohérents avec la qualité des marques. Je reviens pour ma deuxième paire.", note: 5 },
-      { name: "Amira S.", date: "Fév. 2025", text: "Service irréprochable du début à la fin. Le SAV est réactif et professionnel. Une vraie boutique de luxe à Lyon.", note: 5 },
-    ],
+    desc: "Notre boutique phare, adresse de référence dans la métropole lyonnaise pour les amateurs de lunetterie haut de gamme. Revendeurs officiels agréés Cartier, Tom Ford, Fendi et bien d'autres — notre équipe vous accueille dans un cadre élégant pour un conseil sur-mesure.",
   },
   {
     name: "J'aime mes lunettes",
-    address: "Lyon",
+    address: "Lyon 9e · 46 boulevard Balmont",
     phone: "",
     website: "https://www.instagram.com/jaimemeslunettes_lyon/",
     hours: {
@@ -42,20 +37,15 @@ const BOUTIQUES = [
       "Dimanche": "Fermé",
     },
     img: "/images/boutique-jaimemeslunettes.jpg",
-    mapQuery: "J'aime+mes+lunettes+Lyon",
-    rating: 4.8,
-    reviewCount: 89,
+    mapQuery: "J'aime+mes+lunettes+46+boulevard+Balmont+Lyon",
+    rating: 4.5,
+    reviewCount: 11,
     tags: ["Notre boutique", "Gucci", "YSL", "Miu Miu"],
     desc: "Notre boutique lyonnaise moderne et accessible, où la lunetterie de luxe rime avec bonne humeur. Un espace lumineux pensé pour accueillir toute la famille. Revendeurs officiels Gucci, YSL, Miu Miu — pour tous ceux qui veulent du style sans compromis.",
-    reviews: [
-      { name: "Laurent P.", date: "Mai 2025", text: "Mon fils cherchait des lunettes qu'il serait fier de porter. L'opticien a su le guider avec patience. Résultat : une paire Gucci qu'il adore.", note: 5 },
-      { name: "Nathalie V.", date: "Mars 2025", text: "Super conseil pour mes progressifs. Explications claires sur les options de verres. Montage rapide, je recommande.", note: 5 },
-      { name: "Rachid M.", date: "Fév. 2025", text: "Deuxième achat ici, toujours aussi bien. Équipe souriante, produits authentiques. RAS.", note: 5 },
-    ],
   },
   {
     name: "Optique Mas du Taureau",
-    address: "Vaulx-en-Velin",
+    address: "Vaulx-en-Velin · 4 place Guy Môquet",
     phone: "",
     website: "https://www.opticiensparconviction.fr/votre-opticien-a-vaulx-en-velin/optique-mas-du-taureau",
     hours: {
@@ -68,16 +58,11 @@ const BOUTIQUES = [
       "Dimanche": "Fermé",
     },
     img: "/images/boutique-mastaureau.jpg.png",
-    mapQuery: "Optique+Mas+du+Taureau+Vaulx-en-Velin",
-    rating: 4.7,
-    reviewCount: 63,
+    mapQuery: "Optique+Mas+du+Taureau+4+place+Guy+Moquet+Vaulx-en-Velin",
+    rating: 4.6,
+    reviewCount: 47,
     tags: ["Notre boutique", "Toutes mutuelles", "Céline", "Fred", "Corrections complexes"],
     desc: "Notre boutique de Vaulx-en-Velin, ancrée dans son quartier depuis des années. Partenaire toutes mutuelles, notre équipe est spécialisée dans les corrections complexes et les progressifs haut de gamme. Revendeurs officiels Céline, Fred et bien d'autres grandes maisons.",
-    reviews: [
-      { name: "Claire B.", date: "Avr. 2025", text: "Correction très élevée (-10 dans chaque œil). Enfin une boutique capable de monter mes verres dans une monture fine Céline. Un vrai expert.", note: 5 },
-      { name: "Thomas R.", date: "Janv. 2025", text: "Expert dans les corrections sport. Ma paire Fred Force 10 avec verres photochromiques est parfaite pour le ski et le vélo.", note: 5 },
-      { name: "Sandra K.", date: "Déc. 2024", text: "Prise en charge rapide par ma mutuelle, zéro avance de frais. Équipe super professionnelle.", note: 5 },
-    ],
   },
 ];
 
@@ -103,7 +88,7 @@ export default function Boutiques() {
       {/* Hero */}
       <div style={{ background: "#F0EBE2", padding: "64px 0 56px", borderBottom: "1px solid var(--border)" }}>
         <div className="container">
-          <div className="label text-sand mb-8">Présence physique · Lyon & Vaulx-en-Velin</div>
+          <div className="label text-sand mb-8">Présence physique · Lyon, Caluire-et-Cuire & Vaulx-en-Velin</div>
           <h1 className="h2" style={{ marginBottom: 14 }}>Nos 3 boutiques</h1>
           <p style={{ color: "var(--gray)", maxWidth: 560, lineHeight: 1.75 }}>
             Revendeurs officiels agréés, nous vous accueillons dans nos boutiques depuis plusieurs années. Achetez en ligne ou venez essayer en boutique — même stock, même garantie, même SAV.
@@ -223,27 +208,35 @@ export default function Boutiques() {
               <div style={{
                 display: "flex", alignItems: "center", gap: 12, marginBottom: 20,
               }}>
-                <div className="label" style={{ color: "var(--dark)" }}>Avis clients vérifiés</div>
+                <div className="label" style={{ color: "var(--dark)" }}>Avis Google</div>
                 <div style={{ height: 1, flex: 1, background: "var(--border)" }} />
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                {b.reviews.map((r, i) => (
-                  <div key={i} style={{
-                    background: "white", border: "1px solid var(--border)",
-                    padding: "20px 24px",
-                  }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
-                      <div>
-                        <Stars n={r.note} size={11} />
-                        <div style={{ fontWeight: 500, fontSize: "0.82rem", marginTop: 6 }}>{r.name}</div>
-                      </div>
-                      <span style={{ fontSize: "0.72rem", color: "var(--gray-light)" }}>{r.date}</span>
-                    </div>
-                    <p style={{ color: "var(--gray)", fontSize: "0.875rem", lineHeight: 1.7, fontStyle: "italic" }}>
-                      "{r.text}"
-                    </p>
-                  </div>
-                ))}
+
+              {/* Note et nombre d'avis repris de la fiche Google publique de la
+                  boutique. Le texte des avis n'est pas recopié ici : il
+                  appartient à ses auteurs et sa republication passe par l'API
+                  Google Places, pas par du contenu figé dans le code. */}
+              <div className="shop-rating">
+                <div className="shop-rating-score">
+                  <div className="shop-rating-n">{b.rating.toLocaleString("fr-FR")}</div>
+                  <Stars n={b.rating} size={13} />
+                  <div className="shop-rating-count">{b.reviewCount} avis</div>
+                </div>
+                <div className="shop-rating-body">
+                  <p>
+                    Note attribuée par les client·es de {b.name} sur Google. Les avis sont publiés et
+                    modérés par Google, pas par nous — vous pouvez les lire dans leur intégralité, y
+                    compris les moins bons.
+                  </p>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${b.mapQuery}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline"
+                  >
+                    Lire les {b.reviewCount} avis sur Google
+                  </a>
+                </div>
               </div>
             </div>
           </div>

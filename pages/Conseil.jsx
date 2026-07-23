@@ -207,33 +207,20 @@ export default function Conseil() {
                 Créneaux disponibles du lundi au samedi, 9h – 19h.
               </p>
               <div className="calendly-embed">
-                <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.82rem", marginBottom: 20 }}>
-                  Calendrier de réservation — intégration Calendly en production
+                <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.88rem", lineHeight: 1.7, marginBottom: 24 }}>
+                  Écrivez-nous le créneau qui vous arrange : un opticien vous confirme le rendez-vous visio
+                  et vous envoie le lien de connexion, généralement sous 24 h ouvrées.
                 </p>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 120px), 1fr))", gap: 6, marginBottom: 20 }}>
-                  {["Lun 9h", "Lun 11h", "Mar 14h", "Mer 10h", "Jeu 16h", "Ven 9h"].map((slot) => (
-                    <button
-                      key={slot}
-                      style={{
-                        padding: "10px 6px", background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)",
-                        color: "white", fontSize: "0.75rem", cursor: "pointer", transition: "all .2s",
-                        borderRadius: 2,
-                      }}
-                      onMouseEnter={(e) => e.target.style.background = "var(--sand)"}
-                      onMouseLeave={(e) => e.target.style.background = "rgba(255,255,255,0.1)"}
-                      onClick={() => alert("Réservation : " + slot + " — Calendly s'ouvre en production")}
-                    >
-                      {slot}
-                    </button>
-                  ))}
-                </div>
-                <button
+                <a
+                  href="mailto:contact@maisonregard.fr?subject=Demande%20de%20consultation%20visio&body=Bonjour%2C%0A%0AJe%20souhaite%20r%C3%A9server%20une%20consultation%20visio.%0A%0AMes%20disponibilit%C3%A9s%20%3A%20%0AMon%20besoin%20%28type%20de%20monture%2C%20correction%2C%20budget%29%20%3A%20%0A%0AMerci"
                   className="btn btn-sand"
                   style={{ width: "100%", display: "flex", justifyContent: "center", fontSize: "0.78rem" }}
-                  onClick={() => window.open("https://calendly.com", "_blank")}
                 >
-                  Voir tous les créneaux →
-                </button>
+                  Demander un rendez-vous
+                </a>
+                <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.75rem", textAlign: "center", marginTop: 14 }}>
+                  ou directement à contact@maisonregard.fr
+                </p>
               </div>
             </div>
           </div>

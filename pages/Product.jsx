@@ -83,16 +83,13 @@ function TryOnModal({ product, onClose }) {
             <p style={{ fontFamily: "var(--serif)", fontSize: "1.1rem", marginBottom: 8 }}>
               Essayage 3D
             </p>
-            <p style={{ fontSize: "0.82rem", opacity: 0.6, marginBottom: 24 }}>
-              Dans la version live, votre caméra s'active ici et superpose la monture sur votre visage en temps réel grâce à la détection de points de repère faciaux.
+            <p style={{ fontSize: "0.82rem", opacity: 0.6, marginBottom: 20 }}>
+              L'essayage virtuel superpose la monture sur votre visage en temps réel, directement dans le
+              navigateur. Cette fonctionnalité sera activée prochainement.
             </p>
-            <button
-              className="btn btn-sand"
-              style={{ fontSize: "0.8rem" }}
-              onClick={() => alert("Activation de la caméra… (intégration Snapchat Lens / Visage Tech en production)")}
-            >
-              Activer la caméra
-            </button>
+            <span className="badge badge-outline" style={{ borderColor: "rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.7)" }}>
+              Bientôt disponible
+            </span>
           </div>
         </div>
         <div style={{ padding: "24px 32px 32px" }}>
@@ -259,19 +256,22 @@ export default function Product({ onAddToCart }) {
             </h1>
             <p style={{ color: "var(--gray)", fontSize: "0.875rem", marginBottom: 20 }}>{product.subtitle}</p>
 
-            {/* Rating */}
-            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 24 }}>
-              <div style={{ display: "flex", gap: 2 }}>
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill={i < Math.round(product.rating) ? "var(--sand)" : "var(--border)"} stroke="none">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                  </svg>
-                ))}
+            {/* Note produit — affichée seulement si de vrais avis existent en base.
+                Une monture qui n'a pas encore été notée ne montre pas d'étoiles. */}
+            {product.reviewCount > 0 && (
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 24 }}>
+                <div style={{ display: "flex", gap: 2 }}>
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill={i < Math.round(product.rating) ? "var(--sand)" : "var(--border)"} stroke="none">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                  ))}
+                </div>
+                <span style={{ fontSize: "0.78rem", color: "var(--gray)" }}>
+                  {product.rating} · {product.reviewCount} avis
+                </span>
               </div>
-              <span style={{ fontSize: "0.78rem", color: "var(--gray)" }}>
-                {product.rating} · {product.reviewCount} avis
-              </span>
-            </div>
+            )}
 
             {/* Prix */}
             <div className="pdp-price">
@@ -514,7 +514,8 @@ export default function Product({ onAddToCart }) {
             {[
               { id: "desc", label: "Description" },
               { id: "matieres", label: "Matières & dimensions" },
-              { id: "avis", label: `Avis (${product.reviewCount})` },
+              // L'onglet Avis n'apparaît que si la monture a de vrais avis en base.
+              ...(product.reviews?.length ? [{ id: "avis", label: `Avis (${product.reviews.length})` }] : []),
             ].map((t) => (
               <button
                 key={t.id}
@@ -566,13 +567,9 @@ export default function Product({ onAddToCart }) {
             </div>
           )}
 
-          {activeTab === "avis" && (
+          {activeTab === "avis" && product.reviews?.length > 0 && (
             <div style={{ maxWidth: 720 }}>
-              {[
-                { note: 5, name: "M. Durand", date: "Mars 2025", text: `Monture reçue en parfait état, exactement comme sur les photos. La consultation visio avant achat m'a rassuré sur la taille. Livraison rapide, emballage premium.` },
-                { note: 5, name: "Julie B.", date: "Fév. 2025", text: "J'avais hésité à commander en ligne une monture de cette gamme. Le diagnostic m'a guidée, et l'opticien a pris le temps de répondre à mes questions. Parfait." },
-                { note: 4, name: "Alexis T.", date: "Jan. 2025", text: "Belle monture, conforme à l'annonce. Un petit bémol sur le délai de livraison (3 jours au lieu de 24h), mais le SAV a été réactif pour m'informer." },
-              ].map((r, i) => (
+              {product.reviews.map((r, i) => (
                 <div key={i} style={{ padding: "24px 0", borderBottom: "1px solid var(--border)" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
                     <div>

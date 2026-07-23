@@ -610,6 +610,12 @@ a.pdp-trust-row:hover .pdp-trust-title { text-decoration: underline; text-underl
 .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .testimonial-name { font-size: 0.82rem; font-weight: 500; }
 .testimonial-location { font-size: 0.72rem; color: var(--gray-light); }
+
+/* Carte note Google d'une boutique (accueil) — cliquable vers la fiche Google. */
+.home-rating-card { display: block; color: inherit; text-decoration: none; transition: border-color .2s, transform .2s; }
+.home-rating-card:hover { border-color: var(--sand); transform: translateY(-2px); }
+.home-rating-score { font-family: var(--serif); font-size: 2.6rem; font-weight: 300; line-height: 1; color: var(--dark); margin-bottom: 10px; }
+.home-rating-card .testimonial-location { margin-top: 2px; }
 @media (max-width: 768px) { .testimonials { grid-template-columns: 1fr; } }
 
 /* ─── Newsletter ─── */
@@ -1380,6 +1386,21 @@ a.pdp-trust-row:hover .pdp-trust-title { text-decoration: underline; text-underl
 .admin-nav-divider { height: 1px; background: var(--border); margin: 20px 14px; }
 .admin-nav-logout { color: #B0483B; }
 .admin-nav-logout:hover { background: rgba(176,72,59,0.08); color: #8f3a30; }
+
+/* ─── Note Google d'une boutique ─── */
+.shop-rating {
+  display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: center;
+  background: white; border: 1px solid var(--border); padding: 28px 32px;
+}
+.shop-rating-score { text-align: center; padding-right: 32px; border-right: 1px solid var(--border); }
+.shop-rating-n { font-family: var(--serif); font-size: 3rem; font-weight: 300; line-height: 1; color: var(--dark); }
+.shop-rating-score > div:nth-child(2) { justify-content: center; margin-top: 10px; }
+.shop-rating-count { font-size: 0.75rem; color: var(--gray); margin-top: 8px; white-space: nowrap; }
+.shop-rating-body p { color: var(--gray); font-size: 0.875rem; line-height: 1.75; margin-bottom: 18px; }
+@media (max-width: 640px) {
+  .shop-rating { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
+  .shop-rating-score { padding-right: 0; padding-bottom: 24px; border-right: none; border-bottom: 1px solid var(--border); }
+}
 
 .admin-body { display: flex; min-height: 60vh; }
 .admin-content { flex: 1; min-width: 0; padding: 44px 0 80px 40px; border-left: 1px solid var(--border); }

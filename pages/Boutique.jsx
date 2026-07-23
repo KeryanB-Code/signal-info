@@ -7,11 +7,12 @@ import DataState from "../components/DataState.jsx";
 
 const CATEGORIES = ["Tous", "Optique", "Soleil"];
 const STYLES = ["Tous les styles", "Minimaliste", "Classique", "Statement", "Sport-chic"];
+// Le tri "Mieux notés" n'a de sens que si des produits ont de vrais avis ; il est
+// ajouté dynamiquement dans le composant (voir sortOptions).
 const SORT_OPTIONS = [
   { value: "featured", label: "Sélection" },
   { value: "price-asc", label: "Prix croissant" },
   { value: "price-desc", label: "Prix décroissant" },
-  { value: "rating", label: "Mieux notés" },
   { value: "new", label: "Nouveautés" },
 ];
 
@@ -26,6 +27,15 @@ export default function Boutique({ onAddToCart }) {
 
   const activeBrand = searchParams.get("brand") || "Toutes";
   const activeCat = searchParams.get("cat") || "Tous";
+
+  // "Mieux notés" n'apparaît que si au moins un produit a des avis réels.
+  const hasReviews = useMemo(() => products.some((p) => p.reviewCount > 0), [products]);
+  const sortOptions = useMemo(
+    () => (hasReviews
+      ? [...SORT_OPTIONS.slice(0, 3), { value: "rating", label: "Mieux notés" }, SORT_OPTIONS[3]]
+      : SORT_OPTIONS),
+    [hasReviews],
+  );
 
   const setBrand = (b) => {
     const p = new URLSearchParams(searchParams);
@@ -188,7 +198,7 @@ export default function Boutique({ onAddToCart }) {
                     fontSize: "0.82rem", color: "var(--dark)", cursor: "pointer",
                   }}
                 >
-                  {SORT_OPTIONS.map((o) => (
+                  {sortOptions.map((o) => (
                     <option key={o.value} value={o.value}>{o.label}</option>
                   ))}
                 </select>

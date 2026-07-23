@@ -9,25 +9,13 @@ import EnhancedMarquee from "../components/animations/EnhancedMarquee.jsx";
 import MagneticButton from "../components/animations/MagneticButton.jsx";
 import ExpandCards from "../components/ExpandCards.jsx";
 
-const TESTIMONIALS = [
-  {
-    text: "Je cherchais une paire de Cartier depuis deux ans. Le diagnostic en ligne m'a orienté directement vers la Santos-Dumont. Elle est parfaite.",
-    name: "Claire M.",
-    location: "Lyon",
-    initials: "CM",
-  },
-  {
-    text: "La consultation visio m'a évité une erreur de taille. Il a vu que la forme ovale de mon visage demandait quelque chose de plus structuré. Résultat : des YSL parfaites.",
-    name: "Thomas R.",
-    location: "Paris",
-    initials: "TR",
-  },
-  {
-    text: "Le paiement en 4 fois a été décisif. J'avais hésité des mois sur les Miu Miu. Je ne regrette pas une seconde. SAV impeccable.",
-    name: "Sophia L.",
-    location: "Bordeaux",
-    initials: "SL",
-  },
+// Notes Google réelles des trois boutiques physiques (fiches publiques, juillet
+// 2026). Maison Regard en ligne étant récent, aucun avis client fictif n'est
+// affiché : la preuve sociale repose sur les vraies boutiques.
+const SHOP_RATINGS = [
+  { name: "Lunetterie Saint-Clair", city: "Caluire-et-Cuire", rating: 4.7, reviews: 134, mapQuery: "Lunetterie+Saint-Clair+Caluire-et-Cuire" },
+  { name: "Optique Mas du Taureau", city: "Vaulx-en-Velin", rating: 4.6, reviews: 47, mapQuery: "Optique+Mas+du+Taureau+4+place+Guy+Moquet+Vaulx-en-Velin" },
+  { name: "J'aime mes lunettes", city: "Lyon 9e", rating: 4.5, reviews: 11, mapQuery: "J'aime+mes+lunettes+46+boulevard+Balmont+Lyon" },
 ];
 
 const ease = [0.25, 0.46, 0.45, 0.94];
@@ -416,38 +404,38 @@ export default function Home({ onAddToCart }) {
         <div className="container">
           <FadeUpWhenVisible>
             <div className="text-center mb-48">
-              <div className="label" style={{ color: "var(--gray-light)", marginBottom: 8 }}>Avis clients vérifiés</div>
-              <h2 className="h2">Ce que disent nos clients</h2>
+              <div className="label" style={{ color: "var(--gray-light)", marginBottom: 8 }}>Nos boutiques sur Google</div>
+              <h2 className="h2">Une maison née en boutique</h2>
+              <p style={{ color: "var(--gray)", marginTop: 16, maxWidth: 560, margin: "16px auto 0" }}>
+                Maison Regard prolonge en ligne trois boutiques d'opticiens de la région lyonnaise. Voici
+                leurs notes sur Google — publiées et modérées par Google, pas par nous.
+              </p>
             </div>
           </FadeUpWhenVisible>
           <div className="testimonials">
-            {TESTIMONIALS.map((t, i) => (
-              <motion.div
+            {SHOP_RATINGS.map((s, i) => (
+              <motion.a
                 key={i}
-                className="testimonial"
+                href={`https://www.google.com/maps/search/?api=1&query=${s.mapQuery}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="testimonial home-rating-card"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: i * 0.1, ease }}
               >
+                <div className="home-rating-score">{s.rating.toLocaleString("fr-FR")}</div>
                 <div style={{ display: "flex", gap: 2, marginBottom: 14 }}>
                   {[...Array(5)].map((_, j) => (
-                    <svg key={j} width="11" height="11" viewBox="0 0 24 24" fill="var(--sand)" stroke="none">
+                    <svg key={j} width="12" height="12" viewBox="0 0 24 24" fill={j < Math.round(s.rating) ? "var(--sand)" : "var(--border)"} stroke="none">
                       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                     </svg>
                   ))}
                 </div>
-                <p className="testimonial-text">"{t.text}"</p>
-                <div className="testimonial-author">
-                  <div className="testimonial-avatar" style={{ background: "var(--dark)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <span style={{ color: "var(--sand)", fontFamily: "var(--serif)", fontSize: "0.85rem", fontWeight: 500 }}>{t.initials}</span>
-                  </div>
-                  <div>
-                    <div className="testimonial-name">{t.name}</div>
-                    <div className="testimonial-location">{t.location}</div>
-                  </div>
-                </div>
-              </motion.div>
+                <div className="testimonial-name">{s.name}</div>
+                <div className="testimonial-location">{s.city} · {s.reviews} avis Google →</div>
+              </motion.a>
             ))}
           </div>
         </div>

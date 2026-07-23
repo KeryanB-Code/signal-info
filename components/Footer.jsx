@@ -99,15 +99,11 @@ export default function Footer() {
           </div>
 
           <div className="footer-bottom">
-            <span>© 2025 Maison Regard — Opticien diplômé d'état</span>
-            <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/1280px-PayPal.svg.png"
-                alt="PayPal" style={{ height: 14, opacity: 0.5, filter: "brightness(10)" }}
-              />
-              <span style={{ opacity: 0.5 }}>Visa</span>
-              <span style={{ opacity: 0.5 }}>Mastercard</span>
-              <span style={{ opacity: 0.5, fontSize: "0.7rem", letterSpacing: ".05em" }}>ALMA</span>
+            <span>© {new Date().getFullYear()} Maison Regard — Opticiens diplômés d'État</span>
+            <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+              {["Visa", "Mastercard", "PayPal", "Alma"].map((m) => (
+                <span key={m} style={{ opacity: 0.5, fontSize: "0.72rem", letterSpacing: ".05em" }}>{m}</span>
+              ))}
             </div>
           </div>
         </div>
