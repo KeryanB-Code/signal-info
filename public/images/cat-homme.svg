@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
+  <defs>
+    <radialGradient id="bgH" cx="58%" cy="22%" r="78%">
+      <stop offset="0%" stop-color="#1A1A20"/>
+      <stop offset="100%" stop-color="#050507"/>
+    </radialGradient>
+    <radialGradient id="lightH" cx="70%" cy="12%" r="48%">
+      <stop offset="0%" stop-color="#E8E4F0" stop-opacity="0.3"/>
+      <stop offset="65%" stop-color="#8090B8" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#050507" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="skinH" cx="55%" cy="40%" r="58%">
+      <stop offset="0%" stop-color="#D8B888"/>
+      <stop offset="45%" stop-color="#B89060"/>
+      <stop offset="100%" stop-color="#886830"/>
+    </radialGradient>
+    <linearGradient id="shadowLH" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#050507" stop-opacity="0.72"/>
+      <stop offset="50%" stop-color="#050507" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#050507" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="hlH" cx="64%" cy="36%" r="28%">
+      <stop offset="0%" stop-color="#F8F0E8" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#F8F0E8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldH" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D8C878"/>
+      <stop offset="30%" stop-color="#B89840"/>
+      <stop offset="70%" stop-color="#887020"/>
+      <stop offset="100%" stop-color="#A88030"/>
+    </linearGradient>
+    <radialGradient id="lensH" cx="38%" cy="32%" r="62%">
+      <stop offset="0%" stop-color="#182028" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#080E12" stop-opacity="0.96"/>
+    </radialGradient>
+    <radialGradient id="vignH" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#050507" stop-opacity="0"/>
+      <stop offset="70%" stop-color="#050507" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#050507" stop-opacity="0.88"/>
+    </radialGradient>
+    <linearGradient id="textBgH" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#050507" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#050507" stop-opacity="0.78"/>
+    </linearGradient>
+    <filter id="softH" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="1.0"/>
+    </filter>
+    <filter id="hairH" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="1.8"/>
+    </filter>
+    <filter id="glassShH">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="800" fill="url(#bgH)"/>
+  <ellipse cx="420" cy="135" rx="300" ry="235" fill="url(#lightH)"/>
+
+  <!-- Clothing / shoulders (wider for masculine) -->
+  <path d="M 0,700 Q 95,608 300,625 Q 505,608 600,700 L 600,800 L 0,800 Z" fill="#0A0A0E"/>
+  <path d="M 0,740 Q 100,662 300,678 Q 500,662 600,740 L 600,800 L 0,800 Z" fill="#050507"/>
+
+  <!-- Neck (thicker, more angular) -->
+  <rect x="256" y="582" width="90" height="92" rx="36" fill="#AA8855" filter="url(#softH)"/>
+  <rect x="256" y="582" width="35" height="92" rx="18" fill="#806035" opacity="0.4"/>
+
+  <!-- Face shape — slightly wider/squarer for masculine -->
+  <ellipse cx="302" cy="372" rx="162" ry="192" fill="url(#skinH)" filter="url(#softH)"/>
+  <ellipse cx="302" cy="372" rx="162" ry="192" fill="url(#shadowLH)"/>
+  <!-- Cheek highlight -->
+  <ellipse cx="394" cy="408" rx="58" ry="42" fill="url(#hlH)"/>
+
+  <!-- Hair — short masculine style -->
+  <path d="M 140,295 Q 115,148 302,115 Q 489,148 464,295 Q 442,178 400,150 Q 352,125 302,120 Q 252,125 204,150 Q 158,178 140,295 Z" fill="#0E0E12" filter="url(#hairH)"/>
+  <!-- Side hair left (short, close-cropped) -->
+  <path d="M 140,340 Q 110,268 128,182 Q 154,115 302,115 Q 232,130 190,168 Q 142,218 140,340 Z" fill="#0A0A0E"/>
+  <!-- Side hair right (short) -->
+  <path d="M 464,340 Q 494,268 476,182 Q 450,115 302,115 Q 372,130 414,168 Q 462,218 464,340 Z" fill="#0A0A0E"/>
+  <!-- Crown -->
+  <path d="M 140,255 Q 128,148 302,115 Q 476,148 464,255 Q 428,148 365,126 Q 334,116 302,114 Q 270,116 239,126 Q 172,148 140,255 Z" fill="#0C0C10"/>
+
+  <!-- Forehead skin -->
+  <ellipse cx="302" cy="254" rx="132" ry="50" fill="#C8A870" opacity="0.44" filter="url(#softH)"/>
+
+  <!-- Nose (broader, stronger) -->
+  <path d="M 297,390 Q 292,428 274,446 Q 288,455 302,457 Q 316,455 330,446 Q 312,428 307,390 Z" fill="#806030" opacity="0.26"/>
+
+  <!-- Lips (thinner, masculine) -->
+  <path d="M 270,498 Q 286,491 302,493 Q 318,491 334,498 Q 324,506 312,509 Q 304,511 296,511 Q 288,511 276,509 Q 264,506 270,498 Z" fill="#A07048" opacity="0.52"/>
+  <path d="M 272,498 Q 287,493 302,495 Q 317,493 332,498" fill="none" stroke="#805030" stroke-width="0.8" opacity="0.35"/>
+
+  <!-- RECTANGULAR GLASSES (masculine style) -->
+  <g filter="url(#glassShH)">
+    <!-- Left lens: rectangle with slightly rounded corners -->
+    <rect x="132" y="316" width="146" height="68" rx="7" fill="url(#lensH)" stroke="url(#goldH)" stroke-width="4.5"/>
+    <!-- Right lens -->
+    <rect x="322" y="316" width="146" height="68" rx="7" fill="url(#lensH)" stroke="url(#goldH)" stroke-width="4.5"/>
+    <!-- Bridge (double-bridge style) -->
+    <line x1="278" y1="330" x2="322" y2="330" stroke="url(#goldH)" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="278" y1="344" x2="322" y2="344" stroke="url(#goldH)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Left temple -->
+    <line x1="132" y1="350" x2="95" y2="358" stroke="url(#goldH)" stroke-width="4" stroke-linecap="round"/>
+    <!-- Right temple -->
+    <line x1="468" y1="350" x2="505" y2="358" stroke="url(#goldH)" stroke-width="4" stroke-linecap="round"/>
+    <!-- Brow bar (browline frame detail) -->
+    <path d="M 132,316 L 278,316" stroke="url(#goldH)" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M 322,316 L 468,316" stroke="url(#goldH)" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <!-- Nose pads -->
+    <ellipse cx="283" cy="352" rx="4" ry="6" fill="#B8983A" opacity="0.9"/>
+    <ellipse cx="317" cy="352" rx="4" ry="6" fill="#B8983A" opacity="0.9"/>
+    <!-- Lens reflections — horizontal bar style for rectangular lenses -->
+    <path d="M 148,330" fill="none"/>
+    <rect x="148" y="326" width="90" height="2" rx="1" fill="white" opacity="0.1"/>
+    <rect x="338" y="326" width="90" height="2" rx="1" fill="white" opacity="0.1"/>
+    <!-- Top rim highlight -->
+    <path d="M 95,317 Q 145,306 278,314" fill="none" stroke="#D8C888" stroke-width="1.5" stroke-opacity="0.4" stroke-linecap="round"/>
+    <path d="M 322,314 Q 455,306 505,317" fill="none" stroke="#D8C888" stroke-width="1.5" stroke-opacity="0.4" stroke-linecap="round"/>
+  </g>
+
+  <!-- VIGNETTE -->
+  <rect width="600" height="800" fill="url(#vignH)"/>
+
+</svg>

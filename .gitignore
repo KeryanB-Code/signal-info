@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+.DS_Store
+*.log
+.vercel
+.env*
+
+# fichier temporaire généré par Vite
+vite.config.js.timestamp-*

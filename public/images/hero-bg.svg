@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <radialGradient id="bgGrad" cx="65%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#EDE5D8"/>
+      <stop offset="55%" stop-color="#DDD0BC"/>
+      <stop offset="100%" stop-color="#C9B89E"/>
+    </radialGradient>
+    <radialGradient id="glow1" cx="70%" cy="35%" r="45%">
+      <stop offset="0%" stop-color="#F5EDD8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#EDE5D8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="faceGrad" cx="50%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#D4B896" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#C4A882" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D4AF5A"/>
+      <stop offset="50%" stop-color="#C9A84C"/>
+      <stop offset="100%" stop-color="#A8853C"/>
+    </linearGradient>
+    <filter id="softBlur"><feGaussianBlur stdDeviation="1.5"/></filter>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="900" fill="url(#bgGrad)"/>
+  <ellipse cx="1050" cy="330" rx="580" ry="520" fill="url(#glow1)"/>
+
+  <!-- Subtle textile/grain lines (luxury fabric feel) -->
+  <g opacity="0.04" stroke="#8B6914" stroke-width="0.5">
+    <line x1="0" y1="180" x2="1600" y2="180"/>
+    <line x1="0" y1="360" x2="1600" y2="360"/>
+    <line x1="0" y1="540" x2="1600" y2="540"/>
+    <line x1="0" y1="720" x2="1600" y2="720"/>
+    <line x1="280" y1="0" x2="280" y2="900"/>
+    <line x1="560" y1="0" x2="560" y2="900"/>
+    <line x1="840" y1="0" x2="840" y2="900"/>
+    <line x1="1120" y1="0" x2="1120" y2="900"/>
+    <line x1="1400" y1="0" x2="1400" y2="900"/>
+  </g>
+
+  <!-- Face silhouette (right side) -->
+  <ellipse cx="1050" cy="340" rx="210" ry="280" fill="url(#faceGrad)"/>
+  <!-- Neck -->
+  <rect x="988" y="590" width="124" height="200" rx="62" fill="#C4A882" opacity="0.12"/>
+  <!-- Shoulders suggestion -->
+  <path d="M 700,820 Q 900,760 1050,775 Q 1200,760 1400,820 L 1600,900 L 600,900 Z" fill="#C4A882" opacity="0.09"/>
+
+  <!-- MAIN GLASSES — Cat-eye Cartier (large, centered right) -->
+  <g transform="translate(780, 270)" filter="url(#softBlur)">
+    <!-- Left lens -->
+    <path d="M 30,100 Q 80,42 200,50 Q 285,56 305,102 Q 305,158 200,162 Q 85,165 30,140 Z"
+          fill="rgba(212,175,90,0.14)" stroke="url(#goldGrad)" stroke-width="5" stroke-linejoin="round"/>
+    <!-- Right lens -->
+    <path d="M 365,102 Q 385,56 460,50 Q 575,42 620,100 Q 620,140 578,162 Q 460,165 365,158 Z"
+          fill="rgba(212,175,90,0.14)" stroke="url(#goldGrad)" stroke-width="5" stroke-linejoin="round"/>
+    <!-- Bridge -->
+    <path d="M 305,100 Q 335,88 365,100" fill="none" stroke="#C9A84C" stroke-width="4" stroke-linecap="round"/>
+    <!-- Left temple -->
+    <line x1="32" y1="120" x2="-80" y2="132" stroke="#C9A84C" stroke-width="5" stroke-linecap="round"/>
+    <!-- Right temple -->
+    <line x1="618" y1="120" x2="730" y2="132" stroke="#C9A84C" stroke-width="5" stroke-linecap="round"/>
+    <!-- Reflections -->
+    <line x1="62" y1="62" x2="125" y2="56" stroke="white" stroke-width="2" stroke-opacity="0.55" stroke-linecap="round"/>
+    <line x1="395" y1="58" x2="458" y2="56" stroke="white" stroke-width="2" stroke-opacity="0.55" stroke-linecap="round"/>
+  </g>
+
+  <!-- SECONDARY GLASSES — Round (background, slightly offset) -->
+  <g transform="translate(920, 480)" opacity="0.45">
+    <circle cx="95" cy="75" r="75" fill="rgba(92,27,43,0.08)" stroke="#5C1B2B" stroke-width="3.5"/>
+    <circle cx="265" cy="75" r="75" fill="rgba(92,27,43,0.08)" stroke="#5C1B2B" stroke-width="3.5"/>
+    <path d="M 170,65 Q 180,55 190,65" fill="none" stroke="#5C1B2B" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="22" y1="72" x2="-30" y2="80" stroke="#5C1B2B" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="338" y1="72" x2="390" y2="80" stroke="#5C1B2B" stroke-width="3.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- TERTIARY — Rectangular frame (top right, like a product display) -->
+  <g transform="translate(1260, 140)" opacity="0.35">
+    <rect x="0" y="0" width="190" height="95" rx="4" fill="rgba(38,38,38,0.06)" stroke="#262626" stroke-width="3"/>
+    <rect x="220" y="0" width="190" height="95" rx="4" fill="rgba(38,38,38,0.06)" stroke="#262626" stroke-width="3"/>
+    <rect x="190" y="40" width="30" height="6" rx="2" fill="#262626"/>
+    <line x1="0" y1="46" x2="-50" y2="52" stroke="#262626" stroke-width="3" stroke-linecap="round"/>
+    <line x1="410" y1="46" x2="460" y2="52" stroke="#262626" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Floating dots decoration (luxury brand aesthetic) -->
+  <circle cx="750" cy="160" r="3" fill="#C4A882" opacity="0.4"/>
+  <circle cx="770" cy="145" r="2" fill="#C4A882" opacity="0.3"/>
+  <circle cx="1480" cy="640" r="4" fill="#C4A882" opacity="0.3"/>
+  <circle cx="1500" cy="660" r="2.5" fill="#C4A882" opacity="0.25"/>
+  <circle cx="200" cy="720" r="3" fill="#C4A882" opacity="0.3"/>
+
+  <!-- Thin decorative lines (editorial grid feel) -->
+  <line x1="720" y1="80" x2="720" y2="180" stroke="#C4A882" stroke-width="0.8" opacity="0.4"/>
+  <line x1="680" y1="120" x2="760" y2="120" stroke="#C4A882" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- Brand mark (very subtle) -->
+  <text x="1540" y="870" text-anchor="end" font-family="Garamond, Georgia, serif" font-size="11" letter-spacing="0.35em" fill="#8B6914" opacity="0.35" font-weight="300">MAISON REGARD</text>
+</svg>

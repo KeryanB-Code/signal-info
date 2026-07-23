@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="35%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#2A2520"/>
+      <stop offset="100%" stop-color="#1A1614"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="40%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#C4A882" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#C4A882" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="340" cy="290" rx="320" ry="260" fill="url(#glow)"/>
+  <!-- Glasses, slightly larger (scale 1.15 from center) -->
+  <g transform="translate(400,300) scale(1.18) translate(-400,-300)">
+  <defs>
+    <filter id="sh"><feDropShadow dx="0" dy="6" stdDeviation="9" flood-opacity="0.2"/></filter>
+  </defs>
+  <!-- Left lens -->
+  <rect x="110" y="255" width="240" height="135" rx="3" ry="3" fill="rgba(28,28,30,0.18)" stroke="#1C1C1E" stroke-width="6" filter="url(#sh)"/>
+  <!-- Right lens -->
+  <rect x="450" y="255" width="240" height="135" rx="3" ry="3" fill="rgba(28,28,30,0.18)" stroke="#1C1C1E" stroke-width="6" filter="url(#sh)"/>
+  <!-- Bridge -->
+  <rect x="350" y="303" width="100" height="8" rx="3" fill="#1C1C1E"/>
+  <!-- Left temple -->
+  <line x1="110" y1="312" x2="30" y2="322" stroke="#1C1C1E" stroke-width="6" stroke-linecap="square"/>
+  <!-- Right temple -->
+  <line x1="690" y1="312" x2="770" y2="322" stroke="#1C1C1E" stroke-width="6" stroke-linecap="square"/>
+  <!-- Reflection -->
+  <line x1="135" y1="270" x2="195" y2="267" stroke="white" stroke-width="2" stroke-opacity="0.5"/>
+  <line x1="475" y1="270" x2="535" y2="267" stroke="white" stroke-width="2" stroke-opacity="0.5"/></g>
+  <!-- Brand signature bottom right -->
+  <text x="740" y="576" text-anchor="end" font-family="Garamond, Georgia, serif" font-size="10" letter-spacing="0.35em" fill="#C4A882" opacity="0.6" font-weight="300">MONT BLANC</text>
+</svg>

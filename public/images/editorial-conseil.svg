@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <radialGradient id="bg" cx="45%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#E8DDD0"/>
+      <stop offset="100%" stop-color="#C9B89E"/>
+    </radialGradient>
+    <radialGradient id="skinGrad" cx="50%" cy="30%" r="55%">
+      <stop offset="0%" stop-color="#D4B896" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#C4A882" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D4AF5A"/>
+      <stop offset="100%" stop-color="#A8853C"/>
+    </linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="1"/></filter>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <ellipse cx="400" cy="300" rx="280" ry="380" fill="url(#skinGrad)"/>
+
+  <!-- Person silhouette — head/neck/shoulders -->
+  <!-- Head (oval) -->
+  <ellipse cx="400" cy="280" rx="155" ry="190" fill="#D4B896" opacity="0.25"/>
+  <!-- Neck -->
+  <rect x="362" y="445" width="76" height="160" rx="38" fill="#D4B896" opacity="0.20"/>
+  <!-- Shoulders -->
+  <path d="M 60,760 Q 200,680 400,695 Q 600,680 740,760 L 800,900 L 0,900 Z" fill="#D4B896" opacity="0.18"/>
+
+  <!-- White coat (opticien) -->
+  <path d="M 120,760 Q 250,710 400,720 Q 550,710 680,760 L 700,1000 L 100,1000 Z" fill="white" opacity="0.55"/>
+  <!-- Coat lapel detail -->
+  <path d="M 400,720 L 355,820 L 400,800 L 445,820 Z" fill="white" opacity="0.4"/>
+
+  <!-- GLASSES on face — slim rectangular frames -->
+  <g transform="translate(218, 290)" filter="url(#soft)">
+    <!-- Left lens -->
+    <rect x="0" y="0" width="148" height="72" rx="5" fill="rgba(212,175,90,0.15)" stroke="url(#gold)" stroke-width="3.5"/>
+    <!-- Right lens -->
+    <rect x="216" y="0" width="148" height="72" rx="5" fill="rgba(212,175,90,0.15)" stroke="url(#gold)" stroke-width="3.5"/>
+    <!-- Bridge -->
+    <rect x="148" y="28" width="68" height="5" rx="2" fill="#C9A84C"/>
+    <!-- Left temple -->
+    <line x1="0" y1="34" x2="-55" y2="40" stroke="#C9A84C" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Right temple -->
+    <line x1="364" y1="34" x2="419" y2="40" stroke="#C9A84C" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Nose pads -->
+    <ellipse cx="158" cy="37" rx="4" ry="5.5" fill="#C9A84C" opacity="0.7"/>
+    <ellipse cx="206" cy="37" rx="4" ry="5.5" fill="#C9A84C" opacity="0.7"/>
+    <!-- Reflections -->
+    <line x1="18" y1="12" x2="58" y2="10" stroke="white" stroke-width="1.5" stroke-opacity="0.6" stroke-linecap="round"/>
+    <line x1="234" y1="10" x2="274" y2="12" stroke="white" stroke-width="1.5" stroke-opacity="0.6" stroke-linecap="round"/>
+  </g>
+
+  <!-- Decorative elements -->
+  <!-- Small glasses icon bottom right -->
+  <g transform="translate(580, 820)" opacity="0.25">
+    <circle cx="35" cy="30" r="28" fill="none" stroke="#8B6914" stroke-width="2"/>
+    <circle cx="95" cy="30" r="28" fill="none" stroke="#8B6914" stroke-width="2"/>
+    <line x1="63" y1="25" x2="67" y2="25" stroke="#8B6914" stroke-width="2"/>
+    <line x1="7" y1="28" x2="-15" y2="32" stroke="#8B6914" stroke-width="2" stroke-linecap="round"/>
+    <line x1="123" y1="28" x2="145" y2="32" stroke="#8B6914" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- "MR" monogram top right -->
+  <text x="740" y="55" text-anchor="end" font-family="Garamond, Georgia, serif" font-size="13" letter-spacing="0.3em" fill="#8B6914" opacity="0.45">MR</text>
+  <line x1="660" y1="62" x2="740" y2="62" stroke="#8B6914" stroke-width="0.7" opacity="0.3"/>
+
+  <!-- Bottom caption bar -->
+  <rect x="0" y="920" width="800" height="80" fill="#1A1A1A" opacity="0.82"/>
+  <text x="40" y="958" font-family="Garamond, Georgia, serif" font-size="13" letter-spacing="0.2em" fill="#C4A882" font-weight="300">OPTICIEN DIPLÔMÉ D'ÉTAT</text>
+  <text x="40" y="978" font-family="Garamond, Georgia, serif" font-size="10" letter-spacing="0.35em" fill="rgba(255,255,255,0.45)" font-weight="300">MAISON REGARD · LYON</text>
+</svg>

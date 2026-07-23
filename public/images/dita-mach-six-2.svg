@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F4F4F2"/>
+    </radialGradient>
+    <radialGradient id="shadow" cx="50%" cy="82%" r="38%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Ground shadow -->
+  <ellipse cx="400" cy="390" rx="260" ry="18" fill="url(#shadow)"/>
+  <!-- Glasses — scaled 1.5x from center to fill frame -->
+  <g transform="translate(400,295) scale(1.5) translate(-400,-295)">
+    
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C9A84C" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#C9A84C" stop-opacity="0.7"/>
+    </linearGradient>
+    <filter id="sh"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-opacity="0.14"/></filter>
+  </defs>
+  <!-- Left lens (rectangular narrow) -->
+  <rect x="125" y="278" width="215" height="95" rx="3" ry="3" fill="rgba(201,168,76,0.18)" stroke="url(#lg)" stroke-width="2.5" filter="url(#sh)"/>
+  <!-- Right lens -->
+  <rect x="460" y="278" width="215" height="95" rx="3" ry="3" fill="rgba(201,168,76,0.18)" stroke="url(#lg)" stroke-width="2.5" filter="url(#sh)"/>
+  <!-- Double brow bar top gauche -->
+  <rect x="125" y="262" width="215" height="5" rx="2" fill="#C9A84C"/>
+  <!-- Double brow bar top droit -->
+  <rect x="460" y="262" width="215" height="5" rx="2" fill="#C9A84C"/>
+  <!-- Double brow bar secondaire (légèrement en dessous) -->
+  <rect x="125" y="271" width="215" height="3" rx="1" fill="#C9A84C" opacity="0.55"/>
+  <rect x="460" y="271" width="215" height="3" rx="1" fill="#C9A84C" opacity="0.55"/>
+  <!-- Bridge fin -->
+  <rect x="340" y="292" width="120" height="4" rx="2" fill="#C9A84C"/>
+  <!-- Vis hexagonales gauche (jonction charnière) -->
+  <polygon points="128,278 136,273 144,278 144,287 136,292 128,287" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+  <circle cx="136" cy="283" r="2" fill="#C9A84C"/>
+  <!-- Vis hexagonales droit -->
+  <polygon points="656,278 664,273 672,278 672,287 664,292 656,287" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+  <circle cx="664" cy="283" r="2" fill="#C9A84C"/>
+  <!-- Left temple (très fin) -->
+  <line x1="127" y1="320" x2="38" y2="330" stroke="#C9A84C" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Right temple -->
+  <line x1="673" y1="320" x2="762" y2="330" stroke="#C9A84C" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Nose pads precision -->
+  <ellipse cx="350" cy="302" rx="4" ry="6" fill="#C9A84C" opacity="0.7"/>
+  <ellipse cx="450" cy="302" rx="4" ry="6" fill="#C9A84C" opacity="0.7"/>
+  <!-- Reflection -->
+  <line x1="150" y1="288" x2="198" y2="285" stroke="white" stroke-width="1.5" stroke-opacity="0.55" stroke-linecap="round"/>
+  <line x1="485" y1="288" x2="533" y2="285" stroke="white" stroke-width="1.5" stroke-opacity="0.55" stroke-linecap="round"/>
+  </g>
+</svg>

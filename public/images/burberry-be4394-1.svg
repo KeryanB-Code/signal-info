@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="55%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#1E1610"/>
+      <stop offset="100%" stop-color="#080604"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="58%" cy="28%" r="50%">
+      <stop offset="0%" stop-color="#F0D8B0" stop-opacity="0.28"/>
+      <stop offset="70%" stop-color="#C09050" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#080604" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="skinGrad" cx="55%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#E8C888"/>
+      <stop offset="50%" stop-color="#C89050"/>
+      <stop offset="100%" stop-color="#986828"/>
+    </radialGradient>
+    <filter id="faceSoft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="440" cy="180" rx="380" ry="280" fill="url(#glow)"/>
+  <!-- Shoulders -->
+  <path d="M 80,540 Q 220,470 400,482 Q 580,470 720,540 L 720,600 L 80,600 Z" fill="#100C08"/>
+  <!-- Neck -->
+  <rect x="358" y="350" width="84" height="110" rx="42" fill="#C09050" filter="url(#faceSoft)" opacity="0.7"/>
+  <!-- Face -->
+  <ellipse cx="400" cy="250" rx="155" ry="190" fill="url(#skinGrad)" filter="url(#faceSoft)" opacity="0.75"/>
+  <!-- Shadow side -->
+  <ellipse cx="400" cy="250" rx="155" ry="190" fill="#080604" opacity="0.35" style="transform-origin: left center"/>
+  <!-- Hair top -->
+  <path d="M 250,180 Q 235,80 400,60 Q 565,80 550,180 Q 520,100 480,80 Q 440,65 400,62 Q 360,65 320,80 Q 276,100 250,180 Z" fill="#0C0906"/>
+  <!-- Hair sides -->
+  <path d="M 248,232 Q 218,175 232,110 Q 254,60 400,60 Q 330,72 294,108 Q 248,156 248,232 Z" fill="#0A0806"/>
+  <path d="M 552,232 Q 582,175 568,110 Q 546,60 400,60 Q 470,72 506,108 Q 552,156 552,232 Z" fill="#0A0806"/>
+  <!-- Glasses positioned at eye level -->
+  <g transform="translate(0, -20)">
+  <defs>
+    <filter id="sh"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-opacity="0.18"/></filter>
+  </defs>
+  <!-- Left lens (circle) -->
+  <circle cx="248" cy="308" r="105" fill="rgba(107,58,42,0.18)" stroke="#6B3A2A" stroke-width="5" filter="url(#sh)"/>
+  <!-- Right lens -->
+  <circle cx="552" cy="308" r="105" fill="rgba(107,58,42,0.18)" stroke="#6B3A2A" stroke-width="5" filter="url(#sh)"/>
+  <!-- Bridge -->
+  <path d="M 353,295 Q 400,280 447,295" fill="none" stroke="#6B3A2A" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Left temple -->
+  <line x1="144" y1="308" x2="40" y2="320" stroke="#6B3A2A" stroke-width="5" stroke-linecap="round"/>
+  <!-- Right temple -->
+  <line x1="656" y1="308" x2="760" y2="320" stroke="#6B3A2A" stroke-width="5" stroke-linecap="round"/>
+  <!-- Nose pads -->
+  <ellipse cx="365" cy="302" rx="5" ry="7" fill="#6B3A2A" opacity="0.7"/>
+  <ellipse cx="435" cy="302" rx="5" ry="7" fill="#6B3A2A" opacity="0.7"/>
+  <!-- Reflection arc -->
+  <path d="M 190,280 Q 215,265 245,278" fill="none" stroke="white" stroke-width="2" stroke-opacity="0.55" stroke-linecap="round"/>
+  <path d="M 494,280 Q 519,265 549,278" fill="none" stroke="white" stroke-width="2" stroke-opacity="0.55" stroke-linecap="round"/></g>
+</svg>

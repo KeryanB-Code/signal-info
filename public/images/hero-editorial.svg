@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <radialGradient id="bgGrad" cx="60%" cy="25%" r="80%">
+      <stop offset="0%" stop-color="#2A1E14"/>
+      <stop offset="100%" stop-color="#070504"/>
+    </radialGradient>
+    <radialGradient id="studioLight" cx="62%" cy="18%" r="52%">
+      <stop offset="0%" stop-color="#F5E2C0" stop-opacity="0.38"/>
+      <stop offset="60%" stop-color="#C4945A" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#070504" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="skinBase" cx="58%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#F0D0A0"/>
+      <stop offset="45%" stop-color="#D8A868"/>
+      <stop offset="100%" stop-color="#AA7840"/>
+    </radialGradient>
+    <linearGradient id="shadowLeft" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#070504" stop-opacity="0.72"/>
+      <stop offset="45%" stop-color="#070504" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#070504" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="highlight" cx="62%" cy="38%" r="30%">
+      <stop offset="0%" stop-color="#FFF0D8" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#FFF0D8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldRim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8CE7A"/>
+      <stop offset="30%" stop-color="#C9A84C"/>
+      <stop offset="70%" stop-color="#9A7428"/>
+      <stop offset="100%" stop-color="#C0983E"/>
+    </linearGradient>
+    <radialGradient id="lensFill" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#1A2820" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0A1210" stop-opacity="0.96"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#070504" stop-opacity="0"/>
+      <stop offset="75%" stop-color="#070504" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#070504" stop-opacity="0.88"/>
+    </radialGradient>
+    <filter id="softSkin" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+    <filter id="hairSoft" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="2.5"/>
+    </filter>
+    <filter id="glassShadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="1000" fill="url(#bgGrad)"/>
+  <!-- Studio light -->
+  <ellipse cx="500" cy="180" rx="420" ry="320" fill="url(#studioLight)"/>
+
+  <!-- Clothing/shoulders -->
+  <path d="M 0,900 Q 150,790 400,808 Q 650,790 800,900 L 800,1000 L 0,1000 Z" fill="#0E0A07"/>
+  <path d="M 0,940 Q 160,845 400,858 Q 640,845 800,940 L 800,1000 L 0,1000 Z" fill="#070504"/>
+
+  <!-- Neck -->
+  <rect x="348" y="730" width="104" height="120" rx="52" fill="#C8905A" filter="url(#softSkin)"/>
+  <rect x="348" y="730" width="42" height="120" rx="28" fill="#9A6830" opacity="0.5"/>
+
+  <!-- FACE -->
+  <!-- Face shape -->
+  <ellipse cx="408" cy="470" rx="205" ry="262" fill="url(#skinBase)" filter="url(#softSkin)"/>
+  <!-- Shadow left (Rembrandt) -->
+  <ellipse cx="408" cy="470" rx="205" ry="262" fill="url(#shadowLeft)"/>
+  <!-- Cheek highlight right -->
+  <ellipse cx="520" cy="515" rx="75" ry="58" fill="url(#highlight)"/>
+  <!-- Forehead highlight -->
+  <ellipse cx="430" cy="310" rx="90" ry="55" fill="#FFF0D8" opacity="0.08"/>
+
+  <!-- HAIR -->
+  <!-- Back hair layer -->
+  <ellipse cx="408" cy="310" rx="225" ry="200" fill="#12090400" filter="url(#hairSoft)"/>
+  <path d="M 192,380 Q 160,200 408,148 Q 660,200 625,380 Q 598,240 530,190 Q 470,158 408,152 Q 345,158 285,190 Q 215,240 192,380 Z" fill="#120A05" filter="url(#hairSoft)"/>
+  <!-- Left side hair -->
+  <path d="M 185,440 Q 148,360 165,250 Q 195,155 408,148 Q 320,162 268,215 Q 208,278 185,440 Z" fill="#0D0804"/>
+  <!-- Right side hair -->
+  <path d="M 628,440 Q 665,360 648,250 Q 618,155 408,148 Q 495,162 548,215 Q 608,278 628,440 Z" fill="#0D0804"/>
+  <!-- Hair top crown -->
+  <path d="M 192,340 Q 178,200 408,148 Q 638,200 625,340 Q 585,190 520,162 Q 462,142 408,140 Q 352,142 295,162 Q 228,190 192,340 Z" fill="#100806"/>
+
+  <!-- Forehead skin (between hair and glasses) -->
+  <ellipse cx="408" cy="330" rx="165" ry="65" fill="#E0B878" opacity="0.6" filter="url(#softSkin)"/>
+
+  <!-- Nose suggestion -->
+  <path d="M 400,500 Q 395,542 378,560 Q 392,568 408,570 Q 424,568 438,560 Q 420,542 416,500 Z" fill="#A87038" opacity="0.28"/>
+
+  <!-- Lips -->
+  <path d="M 365,632 Q 388,622 408,624 Q 428,622 450,632 Q 435,642 420,646 Q 410,648 400,648 Q 390,648 378,646 Q 362,642 365,632 Z" fill="#C08058" opacity="0.65"/>
+  <!-- Upper lip line -->
+  <path d="M 368,632 Q 388,626 408,628 Q 428,626 448,632" fill="none" stroke="#985030" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- Chin -->
+  <ellipse cx="408" cy="700" rx="105" ry="38" fill="#A07038" opacity="0.2" filter="url(#softSkin)"/>
+
+  <!-- GLASSES — Oval Cartier style, gold, dark lenses -->
+  <g filter="url(#glassShadow)">
+    <!-- Left lens -->
+    <ellipse cx="320" cy="445" rx="110" ry="76" fill="url(#lensFill)" stroke="url(#goldRim)" stroke-width="5"/>
+    <!-- Right lens -->
+    <ellipse cx="495" cy="445" rx="110" ry="76" fill="url(#lensFill)" stroke="url(#goldRim)" stroke-width="5"/>
+    <!-- Bridge -->
+    <path d="M 430,437 Q 407,426 382,437" fill="none" stroke="url(#goldRim)" stroke-width="4.5" stroke-linecap="round"/>
+    <!-- Left temple -->
+    <line x1="212" y1="445" x2="170" y2="455" stroke="url(#goldRim)" stroke-width="4.5" stroke-linecap="round"/>
+    <!-- Right temple -->
+    <line x1="603" y1="445" x2="645" y2="455" stroke="url(#goldRim)" stroke-width="4.5" stroke-linecap="round"/>
+    <!-- Nose pads -->
+    <ellipse cx="384" cy="451" rx="5.5" ry="8" fill="#C9A84C" opacity="0.95"/>
+    <ellipse cx="428" cy="451" rx="5.5" ry="8" fill="#C9A84C" opacity="0.95"/>
+    <!-- Lens reflections -->
+    <path d="M 248,420 Q 278,410 308,420" fill="none" stroke="white" stroke-width="1.5" stroke-opacity="0.2" stroke-linecap="round"/>
+    <path d="M 422,420 Q 452,410 482,420" fill="none" stroke="white" stroke-width="1.5" stroke-opacity="0.2" stroke-linecap="round"/>
+    <!-- Subtle lens inner highlight -->
+    <ellipse cx="300" cy="438" rx="38" ry="22" fill="rgba(255,255,255,0.03)"/>
+    <ellipse cx="475" cy="438" rx="38" ry="22" fill="rgba(255,255,255,0.03)"/>
+    <!-- Top rim highlight (metallic) -->
+    <path d="M 215,425 Q 265,408 375,418" fill="none" stroke="#E8D090" stroke-width="1.8" stroke-opacity="0.5" stroke-linecap="round"/>
+    <path d="M 390,418 Q 500,408 575,425" fill="none" stroke="#E8D090" stroke-width="1.8" stroke-opacity="0.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- VIGNETTE -->
+  <rect width="800" height="1000" fill="url(#vignette)"/>
+
+  <!-- BRAND NAME — large italic serif -->
+  <text x="45" y="938" font-family="Garamond, Georgia, serif" font-style="italic" font-size="118" font-weight="300" fill="white" opacity="0.92" letter-spacing="-1">Cartier</text>
+
+  <!-- CTA -->
+  <line x1="45" y1="960" x2="155" y2="960" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
+  <text x="45" y="975" font-family="'DM Sans', Arial, sans-serif" font-size="10" letter-spacing="0.28em" fill="rgba(255,255,255,0.5)" font-weight="400">DÉCOUVRIR</text>
+</svg>
